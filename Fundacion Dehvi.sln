@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fundacion Dehvi", "Fundacion Dehvi\Fundacion Dehvi.csproj", "{CE1299D7-B8ED-4632-9387-886B9A9DC67E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API Dehvi", "API Dehvi\API Dehvi.csproj", "{9E56691E-DCDF-4B76-BC40-5AFF24BABE39}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CE1299D7-B8ED-4632-9387-886B9A9DC67E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE1299D7-B8ED-4632-9387-886B9A9DC67E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE1299D7-B8ED-4632-9387-886B9A9DC67E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE1299D7-B8ED-4632-9387-886B9A9DC67E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E56691E-DCDF-4B76-BC40-5AFF24BABE39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E56691E-DCDF-4B76-BC40-5AFF24BABE39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E56691E-DCDF-4B76-BC40-5AFF24BABE39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E56691E-DCDF-4B76-BC40-5AFF24BABE39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61BB34C4-4439-455E-8366-41E849B4788D}
+	EndGlobalSection
+EndGlobal
