@@ -15,13 +15,12 @@
     .header-inner,
     #header-wrap {
         height: $header-height;
-        background-color: $background-white;
+        background-color: #ECE9E6;
         /*         backface-visibility: hidden;
         -webkit-backface-visibility: hidden; */
         left: 0;
         right: 0;
         transition: all .4s ease-in-out;
-
         /*logo*/
         #logo {
             float: left;
@@ -32,14 +31,14 @@
             height: $header-height;
 
             a {
-                >img {
+                > img {
                     vertical-align: inherit;
                     transition: all .4s ease-in-out;
                     height: $header-height;
                     width: auto;
                 }
 
-                >img,
+                > img,
                 [class*="logo-"] {
                     display: none;
                 }
@@ -59,7 +58,6 @@
             }
         }
     }
-
     // Header fullwidth
     &[data-fullwidth="true"] {
 
@@ -81,16 +79,15 @@
             border-radius: 4px;
         }
 
-        +.inspiro-slider,
-        +#slider,
-        +.fullscreen,
-        +.halfscreen,
-        +#google-map {
+        + .inspiro-slider,
+        + #slider,
+        + .fullscreen,
+        + .halfscreen,
+        + #google-map {
             top: -(50 + $header-height);
             margin-bottom: -(50 + $header-height);
         }
     }
-
     // Header mini version
     &.header-mini {
         line-height: - 20 + $header-height;
@@ -101,9 +98,9 @@
             height: -20 + $header-height;
 
             #mainMenu {
-                >.container {
-                    nav>ul>li {
-                        >a {
+                > .container {
+                    nav > ul > li {
+                        > a {
                             font-size: 11px;
                         }
 
@@ -118,7 +115,7 @@
                 height: -20 + $header-height;
 
                 a {
-                    >img {
+                    > img {
                         height: -20 + $header-height;
                     }
                 }
@@ -138,7 +135,6 @@
             }
         }
     }
-
     // Header alternative
     &.header-alternative {
         line-height: - 20 + $header-height;
@@ -149,8 +145,8 @@
             height: -20 + $header-height;
 
             #mainMenu {
-                >.container {
-                    nav>ul>li {
+                > .container {
+                    nav > ul > li {
                         .dropdown-submenu:before {
                             top: -6px;
                         }
@@ -162,7 +158,7 @@
                 height: -20 + $header-height;
 
                 a {
-                    >img {
+                    > img {
                         height: -20 + $header-height;
                         padding-top: 10px;
                         padding-bottom: 10px;
@@ -179,7 +175,6 @@
             }
         }
     }
-
     // Header transparent
     &[data-transparent="true"] {
         &:not(.sticky-active) {
@@ -190,16 +185,15 @@
             }
         }
 
-        +.inspiro-slider,
-        +#slider,
-        +.fullscreen,
-        +.halfscreen,
-        +#google-map {
+        + .inspiro-slider,
+        + #slider,
+        + .fullscreen,
+        + .halfscreen,
+        + #google-map {
             top: -$header-height;
             margin-bottom: -$header-height;
         }
     }
-
     // Header logo right
     &.header-logo-right {
 
@@ -218,7 +212,6 @@
             }
         }
     }
-
     // Header shadow
     &.header-shadow {
 
@@ -227,7 +220,6 @@
             box-shadow: 0 0 18px 0 rgba(0, 0, 0, .12) !important;
         }
     }
-
     // Header transparent
     &[data-transparent="true"] {
 
@@ -240,16 +232,15 @@
             }
         }
 
-        +.inspiro-slider,
-        +#slider,
-        +.fullscreen,
-        +.halfscreen,
-        +#google-map {
+        + .inspiro-slider,
+        + #slider,
+        + .fullscreen,
+        + .halfscreen,
+        + #google-map {
             top: -$header-height;
             margin-bottom: -$header-height;
         }
     }
-
     // Header sticky
     &.header-sticky {
 
@@ -268,7 +259,6 @@
             width: 100%;
         }
     }
-
     // Header always fixed
     &.header-always-fixed {
 

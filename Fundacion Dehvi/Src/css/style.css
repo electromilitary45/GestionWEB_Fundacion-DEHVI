@@ -1459,16 +1459,16 @@ Topbar
 #header.dark #header-wrap #logo a .logo-dark {
   display: block;
 }
-    .dark #header .header-inner #logo a,
-    .dark #header .header-inner #logo a span,
-    .dark #header #header-wrap #logo a,
-    .dark #header #header-wrap #logo a span,
-    #header.dark .header-inner #logo a,
-    #header.dark .header-inner #logo a span,
-    #header.dark #header-wrap #logo a,
-    #header.dark #header-wrap #logo a span {
-        color: #ECE9E6;
-    }
+.dark #header .header-inner #logo a,
+.dark #header .header-inner #logo a span,
+.dark #header #header-wrap #logo a,
+.dark #header #header-wrap #logo a span,
+#header.dark .header-inner #logo a,
+#header.dark .header-inner #logo a span,
+#header.dark #header-wrap #logo a,
+#header.dark #header-wrap #logo a span {
+  color: #ffffff;
+}
 .dark #header .header-inner .lines,
 .dark #header .header-inner .lines:before,
 .dark #header .header-inner .lines:after,
