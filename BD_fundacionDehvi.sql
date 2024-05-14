@@ -32,8 +32,10 @@ CREATE TABLE Departamento(
 )
 
 CREATE TABLE Usuario_Departamento(
+    idUsuarioDepartamento bigint NOT NULL IDENTITY(1,1),
     idUsuario bigint NOT NULL,
     idDepartamento bigint NOT NULL,
+    PRIMARY KEY (idUsuarioDepartamento),
     FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario),
     FOREIGN KEY (idDepartamento) REFERENCES Departamento(idDepartamento)
 )
