@@ -49,6 +49,13 @@
           <Property Name="idUsuarioCreador" Type="bigint" Nullable="false" />
           <Property Name="fechaCreacion" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="idRol" />
+          </Key>
+          <Property Name="idRol" Type="tinyint" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="idUsuario" />
@@ -60,18 +67,12 @@
           <Property Name="apellido2" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="correo" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="contrasena" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="rol" Type="tinyint" Nullable="false" />
+          <Property Name="idRol" Type="tinyint" Nullable="false" />
           <Property Name="estado" Type="bit" Nullable="false" />
+          <Property Name="fechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="rutaImg" Type="varchar" MaxLength="255" />
         </EntityType>
-        <EntityType Name="Usuario_Departamento">
-          <Key>
-            <PropertyRef Name="idUsuarioDepartamento" />
-          </Key>
-          <Property Name="idUsuarioDepartamento" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idUsuario" Type="bigint" Nullable="false" />
-          <Property Name="idDepartamento" Type="bigint" Nullable="false" />
-        </EntityType>
-        <Association Name="FK__DocManual__idMan__46E78A0C">
+        <Association Name="FK__DocManual__idMan__49C3F6B7">
           <End Role="Manual" Type="Self.Manual" Multiplicity="1" />
           <End Role="DocManual" Type="Self.DocManual" Multiplicity="*" />
           <ReferentialConstraint>
@@ -83,7 +84,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DocManual__idUsu__47DBAE45">
+        <Association Name="FK__DocManual__idUsu__4AB81AF0">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="DocManual" Type="Self.DocManual" Multiplicity="*" />
           <ReferentialConstraint>
@@ -95,7 +96,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Manual__idProced__440B1D61">
+        <Association Name="FK__Manual__idProced__46E78A0C">
           <End Role="Procedimiento" Type="Self.Procedimiento" Multiplicity="1" />
           <End Role="Manual" Type="Self.Manual" Multiplicity="*" />
           <ReferentialConstraint>
@@ -107,7 +108,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Procedimi__idDep__403A8C7D">
+        <Association Name="FK__Procedimi__idDep__4316F928">
           <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
           <End Role="Procedimiento" Type="Self.Procedimiento" Multiplicity="*" />
           <ReferentialConstraint>
@@ -119,7 +120,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Procedimi__idUsu__412EB0B6">
+        <Association Name="FK__Procedimi__idUsu__440B1D61">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Procedimiento" Type="Self.Procedimiento" Multiplicity="*" />
           <ReferentialConstraint>
@@ -131,27 +132,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Usuario_D__idDep__3D5E1FD2">
-          <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
-          <End Role="Usuario_Departamento" Type="Self.Usuario_Departamento" Multiplicity="*" />
+        <Association Name="FK__Usuario__idRol__3A81B327">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Departamento">
-              <PropertyRef Name="idDepartamento" />
+            <Principal Role="Rol">
+              <PropertyRef Name="idRol" />
             </Principal>
-            <Dependent Role="Usuario_Departamento">
-              <PropertyRef Name="idDepartamento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Usuario_D__idUsu__3C69FB99">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Usuario_Departamento" Type="Self.Usuario_Departamento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="idUsuario" />
-            </Principal>
-            <Dependent Role="Usuario_Departamento">
-              <PropertyRef Name="idUsuario" />
+            <Dependent Role="Usuario">
+              <PropertyRef Name="idRol" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -160,35 +149,31 @@
           <EntitySet Name="DocManual" EntityType="Self.DocManual" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Manual" EntityType="Self.Manual" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Procedimiento" EntityType="Self.Procedimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Usuario_Departamento" EntityType="Self.Usuario_Departamento" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__DocManual__idMan__46E78A0C" Association="Self.FK__DocManual__idMan__46E78A0C">
+          <AssociationSet Name="FK__DocManual__idMan__49C3F6B7" Association="Self.FK__DocManual__idMan__49C3F6B7">
             <End Role="Manual" EntitySet="Manual" />
             <End Role="DocManual" EntitySet="DocManual" />
           </AssociationSet>
-          <AssociationSet Name="FK__DocManual__idUsu__47DBAE45" Association="Self.FK__DocManual__idUsu__47DBAE45">
+          <AssociationSet Name="FK__DocManual__idUsu__4AB81AF0" Association="Self.FK__DocManual__idUsu__4AB81AF0">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="DocManual" EntitySet="DocManual" />
           </AssociationSet>
-          <AssociationSet Name="FK__Manual__idProced__440B1D61" Association="Self.FK__Manual__idProced__440B1D61">
+          <AssociationSet Name="FK__Manual__idProced__46E78A0C" Association="Self.FK__Manual__idProced__46E78A0C">
             <End Role="Procedimiento" EntitySet="Procedimiento" />
             <End Role="Manual" EntitySet="Manual" />
           </AssociationSet>
-          <AssociationSet Name="FK__Procedimi__idDep__403A8C7D" Association="Self.FK__Procedimi__idDep__403A8C7D">
+          <AssociationSet Name="FK__Procedimi__idDep__4316F928" Association="Self.FK__Procedimi__idDep__4316F928">
             <End Role="Departamento" EntitySet="Departamento" />
             <End Role="Procedimiento" EntitySet="Procedimiento" />
           </AssociationSet>
-          <AssociationSet Name="FK__Procedimi__idUsu__412EB0B6" Association="Self.FK__Procedimi__idUsu__412EB0B6">
+          <AssociationSet Name="FK__Procedimi__idUsu__440B1D61" Association="Self.FK__Procedimi__idUsu__440B1D61">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Procedimiento" EntitySet="Procedimiento" />
           </AssociationSet>
-          <AssociationSet Name="FK__Usuario_D__idDep__3D5E1FD2" Association="Self.FK__Usuario_D__idDep__3D5E1FD2">
-            <End Role="Departamento" EntitySet="Departamento" />
-            <End Role="Usuario_Departamento" EntitySet="Usuario_Departamento" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Usuario_D__idUsu__3C69FB99" Association="Self.FK__Usuario_D__idUsu__3C69FB99">
+          <AssociationSet Name="FK__Usuario__idRol__3A81B327" Association="Self.FK__Usuario__idRol__3A81B327">
+            <End Role="Rol" EntitySet="Rol" />
             <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Usuario_Departamento" EntitySet="Usuario_Departamento" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -203,8 +188,7 @@
           <Property Name="idDepartamento" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="estado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Procedimiento" Relationship="Self.FK__Procedimi__idDep__403A8C7D" FromRole="Departamento" ToRole="Procedimiento" />
-          <NavigationProperty Name="Usuario_Departamento" Relationship="Self.FK__Usuario_D__idDep__3D5E1FD2" FromRole="Departamento" ToRole="Usuario_Departamento" />
+          <NavigationProperty Name="Procedimiento" Relationship="Self.FK__Procedimi__idDep__4316F928" FromRole="Departamento" ToRole="Procedimiento" />
         </EntityType>
         <EntityType Name="DocManual">
           <Key>
@@ -217,8 +201,8 @@
           <Property Name="fechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="estado" Type="Boolean" Nullable="false" />
           <Property Name="idUsuarioCreador" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="Manual" Relationship="Self.FK__DocManual__idMan__46E78A0C" FromRole="DocManual" ToRole="Manual" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK__DocManual__idUsu__47DBAE45" FromRole="DocManual" ToRole="Usuario" />
+          <NavigationProperty Name="Manual" Relationship="Self.FK__DocManual__idMan__49C3F6B7" FromRole="DocManual" ToRole="Manual" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__DocManual__idUsu__4AB81AF0" FromRole="DocManual" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Manual">
           <Key>
@@ -229,8 +213,8 @@
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="codReferencia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="estado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="DocManual" Relationship="Self.FK__DocManual__idMan__46E78A0C" FromRole="Manual" ToRole="DocManual" />
-          <NavigationProperty Name="Procedimiento" Relationship="Self.FK__Manual__idProced__440B1D61" FromRole="Manual" ToRole="Procedimiento" />
+          <NavigationProperty Name="DocManual" Relationship="Self.FK__DocManual__idMan__49C3F6B7" FromRole="Manual" ToRole="DocManual" />
+          <NavigationProperty Name="Procedimiento" Relationship="Self.FK__Manual__idProced__46E78A0C" FromRole="Manual" ToRole="Procedimiento" />
         </EntityType>
         <EntityType Name="Procedimiento">
           <Key>
@@ -245,9 +229,17 @@
           <Property Name="estado" Type="Boolean" Nullable="false" />
           <Property Name="idUsuarioCreador" Type="Int64" Nullable="false" />
           <Property Name="fechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Departamento" Relationship="Self.FK__Procedimi__idDep__403A8C7D" FromRole="Procedimiento" ToRole="Departamento" />
-          <NavigationProperty Name="Manual" Relationship="Self.FK__Manual__idProced__440B1D61" FromRole="Procedimiento" ToRole="Manual" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK__Procedimi__idUsu__412EB0B6" FromRole="Procedimiento" ToRole="Usuario" />
+          <NavigationProperty Name="Departamento" Relationship="Self.FK__Procedimi__idDep__4316F928" FromRole="Procedimiento" ToRole="Departamento" />
+          <NavigationProperty Name="Manual" Relationship="Self.FK__Manual__idProced__46E78A0C" FromRole="Procedimiento" ToRole="Manual" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Procedimi__idUsu__440B1D61" FromRole="Procedimiento" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="idRol" />
+          </Key>
+          <Property Name="idRol" Type="Byte" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__idRol__3A81B327" FromRole="Rol" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -260,23 +252,15 @@
           <Property Name="apellido2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="correo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="contrasena" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="rol" Type="Byte" Nullable="false" />
+          <Property Name="idRol" Type="Byte" Nullable="false" />
           <Property Name="estado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="DocManual" Relationship="Self.FK__DocManual__idUsu__47DBAE45" FromRole="Usuario" ToRole="DocManual" />
-          <NavigationProperty Name="Procedimiento" Relationship="Self.FK__Procedimi__idUsu__412EB0B6" FromRole="Usuario" ToRole="Procedimiento" />
-          <NavigationProperty Name="Usuario_Departamento" Relationship="Self.FK__Usuario_D__idUsu__3C69FB99" FromRole="Usuario" ToRole="Usuario_Departamento" />
+          <Property Name="fechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="rutaImg" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DocManual" Relationship="Self.FK__DocManual__idUsu__4AB81AF0" FromRole="Usuario" ToRole="DocManual" />
+          <NavigationProperty Name="Procedimiento" Relationship="Self.FK__Procedimi__idUsu__440B1D61" FromRole="Usuario" ToRole="Procedimiento" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK__Usuario__idRol__3A81B327" FromRole="Usuario" ToRole="Rol" />
         </EntityType>
-        <EntityType Name="Usuario_Departamento">
-          <Key>
-            <PropertyRef Name="idUsuarioDepartamento" />
-          </Key>
-          <Property Name="idUsuarioDepartamento" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idUsuario" Type="Int64" Nullable="false" />
-          <Property Name="idDepartamento" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="Departamento" Relationship="Self.FK__Usuario_D__idDep__3D5E1FD2" FromRole="Usuario_Departamento" ToRole="Departamento" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario_D__idUsu__3C69FB99" FromRole="Usuario_Departamento" ToRole="Usuario" />
-        </EntityType>
-        <Association Name="FK__Procedimi__idDep__403A8C7D">
+        <Association Name="FK__Procedimi__idDep__4316F928">
           <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
           <End Role="Procedimiento" Type="Self.Procedimiento" Multiplicity="*" />
           <ReferentialConstraint>
@@ -288,19 +272,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Usuario_D__idDep__3D5E1FD2">
-          <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
-          <End Role="Usuario_Departamento" Type="Self.Usuario_Departamento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Departamento">
-              <PropertyRef Name="idDepartamento" />
-            </Principal>
-            <Dependent Role="Usuario_Departamento">
-              <PropertyRef Name="idDepartamento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DocManual__idMan__46E78A0C">
+        <Association Name="FK__DocManual__idMan__49C3F6B7">
           <End Role="Manual" Type="Self.Manual" Multiplicity="1" />
           <End Role="DocManual" Type="Self.DocManual" Multiplicity="*" />
           <ReferentialConstraint>
@@ -312,7 +284,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DocManual__idUsu__47DBAE45">
+        <Association Name="FK__DocManual__idUsu__4AB81AF0">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="DocManual" Type="Self.DocManual" Multiplicity="*" />
           <ReferentialConstraint>
@@ -324,7 +296,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Manual__idProced__440B1D61">
+        <Association Name="FK__Manual__idProced__46E78A0C">
           <End Role="Procedimiento" Type="Self.Procedimiento" Multiplicity="1" />
           <End Role="Manual" Type="Self.Manual" Multiplicity="*" />
           <ReferentialConstraint>
@@ -336,7 +308,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Procedimi__idUsu__412EB0B6">
+        <Association Name="FK__Procedimi__idUsu__440B1D61">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Procedimiento" Type="Self.Procedimiento" Multiplicity="*" />
           <ReferentialConstraint>
@@ -348,15 +320,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Usuario_D__idUsu__3C69FB99">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Usuario_Departamento" Type="Self.Usuario_Departamento" Multiplicity="*" />
+        <Association Name="FK__Usuario__idRol__3A81B327">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="idUsuario" />
+            <Principal Role="Rol">
+              <PropertyRef Name="idRol" />
             </Principal>
-            <Dependent Role="Usuario_Departamento">
-              <PropertyRef Name="idUsuario" />
+            <Dependent Role="Usuario">
+              <PropertyRef Name="idRol" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -365,35 +337,31 @@
           <EntitySet Name="DocManual" EntityType="Self.DocManual" />
           <EntitySet Name="Manual" EntityType="Self.Manual" />
           <EntitySet Name="Procedimiento" EntityType="Self.Procedimiento" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
-          <EntitySet Name="Usuario_Departamento" EntityType="Self.Usuario_Departamento" />
-          <AssociationSet Name="FK__Procedimi__idDep__403A8C7D" Association="Self.FK__Procedimi__idDep__403A8C7D">
+          <AssociationSet Name="FK__Procedimi__idDep__4316F928" Association="Self.FK__Procedimi__idDep__4316F928">
             <End Role="Departamento" EntitySet="Departamento" />
             <End Role="Procedimiento" EntitySet="Procedimiento" />
           </AssociationSet>
-          <AssociationSet Name="FK__Usuario_D__idDep__3D5E1FD2" Association="Self.FK__Usuario_D__idDep__3D5E1FD2">
-            <End Role="Departamento" EntitySet="Departamento" />
-            <End Role="Usuario_Departamento" EntitySet="Usuario_Departamento" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DocManual__idMan__46E78A0C" Association="Self.FK__DocManual__idMan__46E78A0C">
+          <AssociationSet Name="FK__DocManual__idMan__49C3F6B7" Association="Self.FK__DocManual__idMan__49C3F6B7">
             <End Role="Manual" EntitySet="Manual" />
             <End Role="DocManual" EntitySet="DocManual" />
           </AssociationSet>
-          <AssociationSet Name="FK__DocManual__idUsu__47DBAE45" Association="Self.FK__DocManual__idUsu__47DBAE45">
+          <AssociationSet Name="FK__DocManual__idUsu__4AB81AF0" Association="Self.FK__DocManual__idUsu__4AB81AF0">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="DocManual" EntitySet="DocManual" />
           </AssociationSet>
-          <AssociationSet Name="FK__Manual__idProced__440B1D61" Association="Self.FK__Manual__idProced__440B1D61">
+          <AssociationSet Name="FK__Manual__idProced__46E78A0C" Association="Self.FK__Manual__idProced__46E78A0C">
             <End Role="Procedimiento" EntitySet="Procedimiento" />
             <End Role="Manual" EntitySet="Manual" />
           </AssociationSet>
-          <AssociationSet Name="FK__Procedimi__idUsu__412EB0B6" Association="Self.FK__Procedimi__idUsu__412EB0B6">
+          <AssociationSet Name="FK__Procedimi__idUsu__440B1D61" Association="Self.FK__Procedimi__idUsu__440B1D61">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Procedimiento" EntitySet="Procedimiento" />
           </AssociationSet>
-          <AssociationSet Name="FK__Usuario_D__idUsu__3C69FB99" Association="Self.FK__Usuario_D__idUsu__3C69FB99">
+          <AssociationSet Name="FK__Usuario__idRol__3A81B327" Association="Self.FK__Usuario__idRol__3A81B327">
+            <End Role="Rol" EntitySet="Rol" />
             <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Usuario_Departamento" EntitySet="Usuario_Departamento" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -450,6 +418,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Rol">
+            <EntityTypeMapping TypeName="BD_fundacionDehviModel.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="BD_fundacionDehviModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
@@ -460,17 +436,10 @@
                 <ScalarProperty Name="apellido2" ColumnName="apellido2" />
                 <ScalarProperty Name="correo" ColumnName="correo" />
                 <ScalarProperty Name="contrasena" ColumnName="contrasena" />
-                <ScalarProperty Name="rol" ColumnName="rol" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Usuario_Departamento">
-            <EntityTypeMapping TypeName="BD_fundacionDehviModel.Usuario_Departamento">
-              <MappingFragment StoreEntitySet="Usuario_Departamento">
-                <ScalarProperty Name="idUsuarioDepartamento" ColumnName="idUsuarioDepartamento" />
-                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-                <ScalarProperty Name="idDepartamento" ColumnName="idDepartamento" />
+                <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
+                <ScalarProperty Name="rutaImg" ColumnName="rutaImg" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

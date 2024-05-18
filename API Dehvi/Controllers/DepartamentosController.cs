@@ -1,0 +1,144 @@
+﻿using API_Dehvi.Areas.HelpPage.ModelDescriptions;
+using API_Dehvi.Entities;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+
+namespace API_Dehvi.Controllers
+{
+    public class DepartamentosController : ApiController
+    {
+
+        //------------------- Crear Departamento -------------------
+        [HttpPost]
+        [Route("CrearDepartamento")]
+        public int CrearDepartamento(DepartamentoEnt departamento)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities()) //conexion a la base de datos
+                {
+                    var d = new Departamento(); // se crea un nuevo departamento
+
+                    d.nombre = departamento.nombre;
+                    d.estado = departamento.estado;
+
+                    con.Departamento.Add(d);
+
+                    con.SaveChanges();
+
+                    return 1; // se realiza exitosamente el registro
+                }
+            }
+            catch (Exception)
+            {
+                return 0; // es un registro fallido
+            }
+        } // fin del crear departamento
+
+        //------------------- Lista de Departamentos -------------------
+        [HttpGet]
+        [Route("ListaDeparta")]
+        public List<DepartamentoEnt> ListaDepartas()
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities()) // utiliza la base de datos =
+                {
+                    var data = (
+                        from d in con.Departamento
+                        orderby d.estado descending
+                        select new DepartamentoEnt
+                        {
+                            idDepartamento = d.idDepartamento,
+                            nombre = d.nombre,
+                            estado = d.estado
+                        }).ToList();
+                    return data; // se muestran todos los departamentos
+                }
+            }
+            catch (Exception)
+            {
+                return null; // error
+            }
+
+        } // fin de la lista de los departamentos
+
+        //------------------- Editar Departamento -------------------
+        [HttpPut]
+        [Route("ActualizarDepa")]
+        public int ActualizarDepartamento(DepartamentoEnt departamento)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities())
+                {
+                    var data = (from d in con.Departamento
+                                where d.idDepartamento == departamento.idDepartamento
+                                select d).FirstOrDefault();
+                    if (data != null)
+                    {
+                        data.nombre = departamento.nombre;
+                        data.estado = departamento.estado;
+
+                        con.SaveChanges(); // se guardan los nuevos datos
+
+                        return 1; // se logra actualizar el departamento
+                    }
+                    return 2; // hay datos nulos
+                }
+            }
+            catch (Exception)
+            {
+                return 0; // error al actualizar el departamento
+            }
+
+        }// fin del actualizar departamento 
+
+        //------------------- Desactivar Departamento -------------------
+        [HttpPut]
+        [Route("EstadoDepartamento")]
+        public int EstadoDeparta(DepartamentoEnt ent)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities()) // conexion a la base de datos
+                {
+                    var data = (from d in con.Departamento
+                                where d.idDepartamento == ent.idDepartamento
+                                select d).FirstOrDefault();
+
+                    if (data != null)
+                    {
+                        if (data.estado == true)
+                        {
+                            data.estado = false; // se cambia el estado de activo a inactivo
+
+                            con.SaveChanges();
+
+                            return 1; // guarda el estado
+                        }
+
+                        data.estado = true; // se cambia el estado de inactivo a activo
+
+                        con.SaveChanges();
+
+                        return 2; // se guarda el estado
+                    }
+
+                    return 3; // departamento no encontrado
+                }
+            }
+            catch (Exception)
+            {
+                return 0; // sucede un error al actualizar
+            }
+
+        }// fin de editar el estado
+
+    } // fin de la clase
+} // fin del namespace
