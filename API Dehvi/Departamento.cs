@@ -18,7 +18,7 @@ namespace API_Dehvi
         public Departamento()
         {
             this.Procedimiento = new HashSet<Procedimiento>();
-            this.Usuario_Departamento = new HashSet<Usuario_Departamento>();
+            this.Usuario = new HashSet<Usuario>();
         }
     
         public long idDepartamento { get; set; }
@@ -28,6 +28,6 @@ namespace API_Dehvi
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Procedimiento> Procedimiento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuario_Departamento> Usuario_Departamento { get; set; }
+        public virtual ICollection<Usuario> Usuario { get; set; }
     }
 }

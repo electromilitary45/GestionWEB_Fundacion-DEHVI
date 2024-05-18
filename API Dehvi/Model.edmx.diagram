@@ -4,20 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5757bdff84424bf88f0e64e9133a10ee" Name="Diagram1">
-        <EntityTypeShape EntityType="BD_fundacionDehviModel.Departamento" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BD_fundacionDehviModel.DocManual" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BD_fundacionDehviModel.Manual" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BD_fundacionDehviModel.Procedimiento" Width="1.5" PointX="6" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BD_fundacionDehviModel.Usuario" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BD_fundacionDehviModel.Usuario_Departamento" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <AssociationConnector Association="BD_fundacionDehviModel.FK__Procedimi__idDep__403A8C7D" ManuallyRouted="false" />
-        <AssociationConnector Association="BD_fundacionDehviModel.FK__Usuario_D__idDep__3D5E1FD2" ManuallyRouted="false" />
-        <AssociationConnector Association="BD_fundacionDehviModel.FK__DocManual__idMan__46E78A0C" ManuallyRouted="false" />
-        <AssociationConnector Association="BD_fundacionDehviModel.FK__DocManual__idUsu__47DBAE45" ManuallyRouted="false" />
-        <AssociationConnector Association="BD_fundacionDehviModel.FK__Manual__idProced__440B1D61" ManuallyRouted="false" />
-        <AssociationConnector Association="BD_fundacionDehviModel.FK__Procedimi__idUsu__412EB0B6" ManuallyRouted="false" />
-        <AssociationConnector Association="BD_fundacionDehviModel.FK__Usuario_D__idUsu__3C69FB99" ManuallyRouted="false" />
+      <Diagram DiagramId="5757bdff84424bf88f0e64e9133a10ee" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="BD_fundacionDehviModel.Departamento" Width="1.5" PointX="9.625" PointY="0.625" />
+        <EntityTypeShape EntityType="BD_fundacionDehviModel.DocManual" Width="1.5" PointX="11.75" PointY="7.25" />
+        <EntityTypeShape EntityType="BD_fundacionDehviModel.Manual" Width="1.5" PointX="11.875" PointY="3.375" />
+        <EntityTypeShape EntityType="BD_fundacionDehviModel.Procedimiento" Width="1.5" PointX="9.625" PointY="3.125" />
+        <EntityTypeShape EntityType="BD_fundacionDehviModel.Rol" Width="1.5" PointX="2.375" PointY="3.625" />
+        <EntityTypeShape EntityType="BD_fundacionDehviModel.Usuario" Width="1.5" PointX="5.125" PointY="3.5" />
+        <AssociationConnector Association="BD_fundacionDehviModel.FK__Procedimi__idDep__403A8C7D" />
+        <AssociationConnector Association="BD_fundacionDehviModel.FK__Usuario__idDepar__3D5E1FD2" />
+        <AssociationConnector Association="BD_fundacionDehviModel.FK__DocManual__idMan__47DBAE45" />
+        <AssociationConnector Association="BD_fundacionDehviModel.FK__DocManual__idUsu__48CFD27E" />
+        <AssociationConnector Association="BD_fundacionDehviModel.FK__Manual__idProced__440B1D61" />
+        <AssociationConnector Association="BD_fundacionDehviModel.FK__Manual__idUsuari__44FF419A" />
+        <AssociationConnector Association="BD_fundacionDehviModel.FK__Procedimi__idUsu__412EB0B6" />
+        <AssociationConnector Association="BD_fundacionDehviModel.FK__Usuario__idRol__3C69FB99" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
