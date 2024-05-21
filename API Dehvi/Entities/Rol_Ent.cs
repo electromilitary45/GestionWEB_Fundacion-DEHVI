@@ -8,7 +8,7 @@ namespace API_Dehvi.Entities
     public class Rol_Ent
     {
         //---- Atributos en Tabla ----
-        public int IdRol { get; set; }
+        public byte idRol { get; set; }
         public string Nombre { get; set; }
     }
 }
