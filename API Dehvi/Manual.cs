@@ -25,9 +25,12 @@ namespace API_Dehvi
         public string nombre { get; set; }
         public string codReferencia { get; set; }
         public bool estado { get; set; }
+        public long idUsuarioCreador { get; set; }
+        public System.DateTime fechaCreacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DocManual> DocManual { get; set; }
         public virtual Procedimiento Procedimiento { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace API_Dehvi
         public Usuario()
         {
             this.DocManual = new HashSet<DocManual>();
+            this.Manual = new HashSet<Manual>();
             this.Procedimiento = new HashSet<Procedimiento>();
         }
     
@@ -29,12 +30,16 @@ namespace API_Dehvi
         public string correo { get; set; }
         public string contrasena { get; set; }
         public byte idRol { get; set; }
+        public long idDepartamento { get; set; }
         public bool estado { get; set; }
         public System.DateTime fechaCreacion { get; set; }
         public string rutaImg { get; set; }
     
+        public virtual Departamento Departamento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DocManual> DocManual { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Manual> Manual { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Procedimiento> Procedimiento { get; set; }
         public virtual Rol Rol { get; set; }
