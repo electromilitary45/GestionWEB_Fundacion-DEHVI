@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.InteropServices;
 using System.Web.Http;
 
 namespace API_Dehvi.Controllers
@@ -18,7 +19,7 @@ namespace API_Dehvi.Controllers
 
         //----Inicio: Obtener Usuarios----
         [HttpGet]
-        [Route("Usuario/ListaUsuarios")]
+        [Route("ListaUsuarios")]
         public List<Usuario_Ent> ListaUsuarios()
         {
             try
@@ -38,6 +39,7 @@ namespace API_Dehvi.Controllers
                             correo = u.correo,
                             contrasena = u.contrasena,
                             idRol = u.idRol,
+                            idDepartamento = u.idDepartamento,
                             estado = u.estado,
                             fechaCreacion = u.fechaCreacion,
                             rutaImg = u.rutaImg
@@ -54,7 +56,7 @@ namespace API_Dehvi.Controllers
 
         //---Inicio: Obtener Usuario por ID---
         [HttpGet]
-        [Route("Usuario/ConsultaUsuarioID")]
+        [Route("ConsultaUsuarioID")]
         public Usuario ConsultaUsuarioID(long q)
         {
             try
@@ -78,7 +80,7 @@ namespace API_Dehvi.Controllers
 
         //---Inicio: ConsultaUsuarioCedula---
         [HttpGet]
-        [Route("Usuario/ConsultaUsuarioCedula")]
+        [Route("ConsultaUsuarioCedula")]
         public Usuario ConsultaUsuarioCedula(string q)
         {
             try
@@ -101,7 +103,7 @@ namespace API_Dehvi.Controllers
 
         //---Inicio: CrearUsuario---
         [HttpPost]
-        [Route("Usuario/CrearUsuario")]
+        [Route("CrearUsuario")]
         public int RegistroUsuario(Usuario_Ent usuario)
         {
             try
@@ -150,7 +152,186 @@ namespace API_Dehvi.Controllers
             }
         }
 
+        //--Inicio: DesactivarUsuario---
+        [HttpDelete]
+        [Route("DesactivarUsuario")]
+        public int DesactivarUsuario(long q)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities())
+                {
+                    var user = (from u in con.Usuario
+                                where u.idUsuario == q
+                                select u).FirstOrDefault();
 
+                    user.estado = false;
+                    con.SaveChanges();
+                    return 1; //Usuario desactivado correctamente
+                }
+            }
+            catch (Exception)
+            {
+                return 0; //Error al desactivar el usuario
+            }
+        }
+
+        //--Inicio: ActivarUsuario---
+        [HttpPut]
+        [Route("ActivarUsuario")]
+        public int ActivarUsuario(long q)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities())
+                {
+                    var user = (from u in con.Usuario
+                                where u.idUsuario == q
+                                select u).FirstOrDefault();
+
+                    user.estado = true;
+                    con.SaveChanges();
+                    return 1; //Usuario activado correctamente
+                }
+            }
+            catch (Exception)
+            {
+                return 0; //Error al activar el usuario
+            }
+        }
+
+
+        /*-------------------- FIN ADMISITRACION DE USUARIOS --------------------*/
+
+
+        //--- INICIO: USUARIOS COMUN -
+        [HttpPost]
+        [Route("InicioSesion")]
+        public Usuario IniciarSesion(Usuario_Ent usuario)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities())
+                {
+                    con.Configuration.LazyLoadingEnabled = false;
+
+                    /*
+                     * Busco el usuario por correo y contraseña
+                     * Encrpto la contraseña para compararla con la de la base de datos
+                     * Verifico que el usuario este activo
+                    */
+                    var user = (from u in con.Usuario
+                                where u.correo == usuario.correo && u.contrasena == util.encrpytar(usuario.contrasena) && u.estado == true
+                                select u).FirstOrDefault();
+
+                    return user;
+                }
+            }
+            catch (Exception)
+            {
+                return null; //error con la base de datos
+            }
+        }
+
+        //--- INICIO: Recuperar Correo ---
+        [HttpPost]
+        [Route("RecuperacionCorreo")]
+        public int RecuperarCorreoUsuario(Usuario_Ent usuario)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities())
+                {
+                    /*
+                     * Este metodo funciona para recuperar el correo de un usuario
+                     * mediante la cedula fisica del mismo
+                     * vericando que el usuario este activo
+                     */
+                    var user = (
+                        from u in con.Usuario
+                        where u.cedulaFisica == usuario.cedulaFisica && u.estado == true
+                        select u).FirstOrDefault();
+
+
+                    /*
+                     * Si el usuario existe se envia un correo con la informacion
+                     */
+                    if (user != null && user.estado == true)
+                    {
+                        /*
+                         * TODO: Aqui se enviar el correo con el correo del usuario encontrado
+                         */
+
+                        /*
+                         * TODO: Crear Templeate de correo
+                         *                         
+                         */
+                        return 1;
+                    }
+                    else if (user != null & user.estado == false)
+                    {
+                        return 2; //Usuario desactivado
+                    }
+                    else
+                    {
+                        return 3; //Usuario no encontrado
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+                return 500;
+            }
+        }
+
+        //--- INICIO: Recuperar Contraseña ---
+        [HttpPost]
+        [Route("RecuperacionContrasena")]
+        public int RecuperarContrasenaUsuario(Usuario_Ent usuario)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities())
+                {
+                    /*
+                     * Este metodo funciona para recuperar la contraseña de un usuario por medio del correo
+                     * Verificando que el usuario este activo
+                     */
+
+                    var user = (from u in con.Usuario
+                                where u.correo == usuario.correo && u.estado == true
+                                select u).FirstOrDefault();
+
+                    if (user != null)
+                    {
+                        /*
+                         * Se genera una nueva contraseña para el usuario
+                         */
+                        var nuevaContrasena = util.randomPassword();
+                        var contrasena = util.encrpytar(nuevaContrasena);
+
+                        /*
+                         * Se actualiza la contraseña del usuario
+                         */
+                        user.contrasena = contrasena;
+                        con.SaveChanges();
+
+                        //TODO: Enviar correo con la contraseña
+
+                        return 1;
+                    }
+                    else
+                    {
+                        return 2; //Usuario no encontrado
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return 500;
+            }
+        }
 
     }//fin de la clase
 }//fin del namespace
