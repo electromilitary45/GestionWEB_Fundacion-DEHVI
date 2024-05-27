@@ -2,12 +2,10 @@
 $layout-boxed-width: 1200px;
 $layout-modern-width: 1500px;
 // Typography
-$font-base: "Poppins",
-sans-serif;
+$font-base: "Multicolore Pro"; 
 $font-body: $font-base;
 $font-headings: $font-base;
-$font-paragraph: "Nunito",
-sans-serif;
+$font-paragraph: "Quicksand";
 $font-menu: $font-base;
 $font-menu-dropdown: $font-base;
 //Icons
@@ -67,12 +65,12 @@ $background-danger: $color-danger;
 $header-height: 80px;
 $header-line-height: 80px;
 // Slider
-$slider-font: $font-base;
+$slider-font: $font-paragraph;
 // Side Panel
 $side-panel-width: 300px;
 $side-panel-width-collapsed: 80px;
 // Page Titile
-$page-title-font: $font-base;
+$page-title-font: $font-paragraph;
 $page-title-background: $background-light;
 // Sidebar
 $sidebar-background: $background-light;

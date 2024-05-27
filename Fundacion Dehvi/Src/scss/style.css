@@ -121,11 +121,12 @@ section.dark,
     text-align: center;
     padding: 0; }
     #page-title .page-title > h1 {
-      font-family: "Poppins", sans-serif;
-      font-size: 2.5rem;
-      line-height: 1.2;
-      font-weight: 400;
-      margin-bottom: 1rem; }
+        font-family: "Multicolore Pro", sans-serif;
+        font-size: 2.5rem;
+        line-height: 1.2;
+        font-weight: 400;
+        margin-bottom: 1rem;
+    }
     #page-title .page-title > span {
       font-weight: 400;
       font-size: 14px; }
@@ -1052,15 +1053,16 @@ Topbar
       #header .header-inner #logo a .logo-default,
       #header #header-wrap #logo a .logo-default {
         display: block; }
-      #header .header-inner #logo a,
-      #header .header-inner #logo a span,
-      #header #header-wrap #logo a,
-      #header #header-wrap #logo a span {
-        font-family: "Poppins", sans-serif;
-        font-size: 40px;
-        color: #1f1f1f;
-        font-weight: 800;
-        letter-spacing: 1.5px; }
+        #header .header-inner #logo a,
+        #header .header-inner #logo a span,
+        #header #header-wrap #logo a,
+        #header #header-wrap #logo a span {
+            font-family: "Multicolore Pro", sans-serif;
+            font-size: 40px;
+            color: #1f1f1f;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
   #header[data-fullwidth="true"] .header-inner .container,
   #header[data-fullwidth="true"] #header-wrap .container {
     max-width: 100%;
@@ -1322,20 +1324,21 @@ Main Menu
         margin-left: 6px;
         position: relative; }
         #mainMenu nav > ul > li > a {
-          position: relative;
-          font-family: "Poppins", sans-serif;
-          padding: 10px 12px;
-          text-transform: uppercase;
-          font-size: 12px;
-          font-weight: 600;
-          letter-spacing: 0.6px;
-          color: #000000;
-          border-radius: 0;
-          border-width: 0;
-          border-style: solid;
-          border-color: transparent;
-          transition: all .3s ease;
-          line-height: normal; }
+            position: relative;
+            font-family: "Multicolore Pro", sans-serif;
+            padding: 10px 12px;
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.6px;
+            color: #000000;
+            border-radius: 0;
+            border-width: 0;
+            border-style: solid;
+            border-color: transparent;
+            transition: all .3s ease;
+            line-height: normal;
+        }
           #mainMenu nav > ul > li > a > i {
             margin-left: 2px;
             margin-right: 6px;
@@ -1387,18 +1390,19 @@ Main Menu
           padding: 10px;
           display: none;
           position: absolute; }
-          #mainMenu nav > ul > li .dropdown-menu > li > a,
-          #mainMenu nav > ul > li .dropdown-menu > li > span,
-          #mainMenu nav > ul > li .dropdown-menu > li [class*="col-"] > ul > li > a {
-            font-size: 12px;
-            line-height: 14px;
-            font-weight: 500;
-            font-style: normal;
-            color: #444;
-            font-family: "Poppins", sans-serif;
-            padding: 12px 20px 12px 18px;
-            display: block;
-            transition: .3s ease; }
+            #mainMenu nav > ul > li .dropdown-menu > li > a,
+            #mainMenu nav > ul > li .dropdown-menu > li > span,
+            #mainMenu nav > ul > li .dropdown-menu > li [class*="col-"] > ul > li > a {
+                font-size: 12px;
+                line-height: 14px;
+                font-weight: 500;
+                font-style: normal;
+                color: #444;
+                font-family: "Multicolore Pro", sans-serif;
+                padding: 12px 20px 12px 18px;
+                display: block;
+                transition: .3s ease;
+            }
             #mainMenu nav > ul > li .dropdown-menu > li > a:focus, #mainMenu nav > ul > li .dropdown-menu > li > a:hover, #mainMenu nav > ul > li .dropdown-menu > li > a:active,
             #mainMenu nav > ul > li .dropdown-menu > li > span:focus,
             #mainMenu nav > ul > li .dropdown-menu > li > span:hover,
@@ -1436,13 +1440,14 @@ Main Menu
           #mainMenu nav > ul > li.mega-menu-item .mega-menu-content {
             padding: 20px; }
             #mainMenu nav > ul > li.mega-menu-item .mega-menu-content .mega-menu-title {
-              font-family: "Poppins", sans-serif;
-              color: #000000;
-              font-size: 13px;
-              line-height: 14px;
-              font-weight: 600;
-              text-transform: uppercase;
-              padding-bottom: 12px; }
+                font-family: "Multicolore Pro", sans-serif;
+                color: #000000;
+                font-size: 13px;
+                line-height: 14px;
+                font-weight: 600;
+                text-transform: uppercase;
+                padding-bottom: 12px;
+            }
             #mainMenu nav > ul > li.mega-menu-item .mega-menu-content li ~ .mega-menu-title {
               margin-top: 12px; }
             #mainMenu nav > ul > li.mega-menu-item .mega-menu-content > a,
@@ -2264,15 +2269,16 @@ Main Menu: Responsive
         font-size: 9px;
         opacity: 1;
         right: -2px; }
-      .header-extras > ul > li > a:not(.btn),
-      .header-extras > ul > li .topbar-dropdown > .title {
-        font-family: "Poppins", sans-serif;
-        font-size: 12px;
-        position: relative;
-        display: block;
-        font-style: normal;
-        text-transform: uppercase;
-        font-weight: 700; }
+        .header-extras > ul > li > a:not(.btn),
+        .header-extras > ul > li .topbar-dropdown > .title {
+            font-family: "Multicolore Pro", sans-serif;
+            font-size: 12px;
+            position: relative;
+            display: block;
+            font-style: normal;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
         .header-extras > ul > li > a:not(.btn) i,
         .header-extras > ul > li .topbar-dropdown > .title i {
           font-size: 14px;
@@ -2833,14 +2839,15 @@ Page Menu
       padding: 0;
       margin: 0;
       position: relative; }
-      .page-menu nav > ul > li {
-        transition: all .3s ease;
-        position: relative;
-        border: 0;
-        display: inline-block;
-        float: none;
-        padding: 0px 2px;
-        font-family: "Poppins", sans-serif; }
+        .page-menu nav > ul > li {
+            transition: all .3s ease;
+            position: relative;
+            border: 0;
+            display: inline-block;
+            float: none;
+            padding: 0px 2px;
+            font-family: "Quicksand", sans-serif;
+        }
         .page-menu nav > ul > li:last-child {
           margin-right: 0; }
         .page-menu nav > ul > li > a {
@@ -2873,21 +2880,22 @@ Page Menu
             position: absolute;
             color: #484848;
             z-index: 2; }
-        .page-menu nav > ul > li .dropdown-menu {
-          position: absolute;
-          text-align: left;
-          list-style: none;
-          font-family: "Poppins", sans-serif;
-          padding: 14px 20px;
-          width: auto;
-          top: 50px;
-          left: 0;
-          margin: 0;
-          border-radius: 4px;
-          background-color: #fff;
-          border: 1px solid #ececec;
-          min-width: 180px;
-          box-shadow: 0 14px 20px rgba(0, 0, 0, 0.1); }
+            .page-menu nav > ul > li .dropdown-menu {
+                position: absolute;
+                text-align: left;
+                list-style: none;
+                font-family: "Quicksand", sans-serif;
+                padding: 14px 20px;
+                width: auto;
+                top: 50px;
+                left: 0;
+                margin: 0;
+                border-radius: 4px;
+                background-color: #fff;
+                border: 1px solid #ececec;
+                min-width: 180px;
+                box-shadow: 0 14px 20px rgba(0, 0, 0, 0.1);
+            }
           .page-menu nav > ul > li .dropdown-menu > li {
             width: 100%; }
             .page-menu nav > ul > li .dropdown-menu > li a,
@@ -3097,7 +3105,8 @@ body:not(.breakpoint-xs):not(.breakpoint-sm):not(.breakpoint-md) .page-menu nav 
   .page-menu.page-menu-active nav {
     display: block; } }
 .sidebar-menu {
-  font-family: "Poppins", sans-serif; }
+    font-family: "Multicolore Pro", sans-serif;
+}
   .sidebar-menu label {
     display: block;
     text-transform: uppercase;
@@ -3160,12 +3169,13 @@ html {
   html {
     font-size: 81.25%; } }
 body {
-  font-size: 1rem;
-  line-height: 1.65714286em;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-family: "Poppins", sans-serif;
-  color: #484848; }
+    font-size: 1rem;
+    line-height: 1.65714286em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: "Quicksand", sans-serif;
+    color: #484848;
+}
 
 h1,
 h2,
@@ -3179,10 +3189,11 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Poppins", sans-serif;
-  color: #1f1f1f;
-  margin: 0;
-  letter-spacing: 0.5px; }
+    font-family: "Multicolore Pro", sans-serif;
+    color: #1f1f1f;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
   h1 small,
   h2 small,
   h3 small,
@@ -3276,14 +3287,15 @@ h6,
   font-weight: 400; }
 
 p {
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 400;
-  text-transform: none;
-  line-height: 1.7;
-  letter-spacing: 0;
-  color: #777777;
-  font-family: "Poppins", sans-serif; }
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    text-transform: none;
+    line-height: 1.7;
+    letter-spacing: 0;
+    color: #777777;
+    font-family: "Quicksand", sans-serif;
+}
 
 ul.bullets {
   list-style: inside; }
@@ -5580,17 +5592,19 @@ Portfolio
     FOOTER
 -----------------------------------------------------------------*/
 #footer {
-  display: block;
-  position: relative;
-  background-color: #f8f9fa;
-  font-size: 14px;
-  line-height: 32px;
-  font-weight: 400;
-  font-family: "Poppins", sans-serif; }
+    display: block;
+    position: relative;
+    background-color: #f8f9fa;
+    font-size: 14px;
+    line-height: 32px;
+    font-weight: 400;
+    font-family: "Quicksand", sans-serif;
+}
   #footer a:not(.btn):not(:hover) {
     color: #484848; }
-  #footer p {
-    font-family: "Poppins", sans-serif; }
+    #footer p {
+        font-family: "Quicksand", sans-serif;
+    }
   #footer a:not(.btn) {
     font-weight: 400; }
   #footer .footer-content {
@@ -5602,10 +5616,11 @@ Portfolio
     font-weight: 600; }
     #footer .widget .widget-title ul li a,
     #footer .widget h4 ul li a {
-      font-family: "Poppins", sans-serif;
-      font-size: 15px;
-      line-height: 32px;
-      color: #999; }
+        font-family: "Quicksand", sans-serif;
+        font-size: 15px;
+        line-height: 32px;
+        color: #999;
+    }
   #footer .copyright-content {
     min-height: 80px;
     padding: 30px 0;
@@ -6815,16 +6830,17 @@ iframe {
   z-index: 0 !important; }
 
 .fc-toolbar .fc-button {
-  font-size: 12px !important;
-  padding: 4px 14px;
-  height: 34px;
-  font-family: "Poppins", sans-serif;
-  background-color: #ffffff !important;
-  border-color: #ebebeb !important;
-  color: #4c5667 !important;
-  text-shadow: none !important;
-  background-image: unset !important;
-  box-shadow: unset !important; }
+    font-size: 12px !important;
+    padding: 4px 14px;
+    height: 34px;
+    font-family: "Quicksand", sans-serif;
+    background-color: #ffffff !important;
+    border-color: #ebebeb !important;
+    color: #4c5667 !important;
+    text-shadow: none !important;
+    background-image: unset !important;
+    box-shadow: unset !important;
+}
   .fc-toolbar .fc-button:hover, .fc-toolbar .fc-button:focus, .fc-toolbar .fc-button:active, .fc-toolbar .fc-button.active {
     border-color: #ebedf2 !important;
     background-color: #f4f5f8 !important;
@@ -9129,26 +9145,27 @@ a:not([href]):not([tabindex]):not(.btn) {
 button.btn,
 .btn:not(.close):not(.mfp-close),
 a.btn:not([href]):not([tabindex]) {
-  font-family: "Poppins", sans-serif;
-  border-radius: 5px 5px 5px 5px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: .5px;
-  text-decoration: none;
-  outline: none;
-  padding: 12px 18px;
-  position: relative;
-  text-transform: uppercase;
-  background-color: #2250fc;
-  border-color: #2250fc;
-  border-width: 1px;
-  border-style: solid;
-  color: #ffffff;
-  transition: all 0.3s;
-  margin-bottom: 6px;
-  outline: none;
-  line-height: 14px;
-  cursor: pointer; }
+    font-family: "Quicksand", sans-serif;
+    border-radius: 5px 5px 5px 5px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    text-decoration: none;
+    outline: none;
+    padding: 12px 18px;
+    position: relative;
+    text-transform: uppercase;
+    background-color: #2250fc;
+    border-color: #2250fc;
+    border-width: 1px;
+    border-style: solid;
+    color: #ffffff;
+    transition: all 0.3s;
+    margin-bottom: 6px;
+    outline: none;
+    line-height: 14px;
+    cursor: pointer;
+}
   button.btn:after,
   .btn:not(.close):not(.mfp-close):after,
   a.btn:not([href]):not([tabindex]):after {

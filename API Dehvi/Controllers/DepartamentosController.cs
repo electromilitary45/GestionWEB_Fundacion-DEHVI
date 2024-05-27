@@ -68,10 +68,41 @@ namespace API_Dehvi.Controllers
 
         } // fin de la lista de los departamentos
 
+        //------------------- Consulta Departamento -------------------
+        [HttpGet]
+        [Route("PerfilDepa")]
+        public Departamento PerfilDepa(long q)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities())
+                {
+                    con.Configuration.LazyLoadingEnabled = false;
+                    var datos = (from x in con.Departamento
+                                 where x.idDepartamento == q
+                                 select x).FirstOrDefault();
+
+                    if (datos != null)
+                    {
+                        return datos; //Departamento encontrado
+                    }
+
+                    return null; // No encontrado
+
+                }
+
+            }
+            catch (Exception)
+            {
+                return null; // Error al consultar
+            }
+        } // fin perfil depa
+
+
         //------------------- Editar Departamento -------------------
         [HttpPut]
         [Route("ActualizarDepa")]
-        public int ActualizarDepartamento(DepartamentoEnt departamento)
+        public int ActualizarDepa(DepartamentoEnt departamento)
         {
             try
             {

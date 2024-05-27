@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Fundacion_Dehvi.Entities.DepartamentoEnt>
+
+@{
+    ViewBag.Title = "IndexCliente";
+
+    if (Session["idUsuario"] != null)
+    {
+        switch (Session["tipoVista"])
+        {
+            case 1:
+                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+                break;
+            case 2:
+                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+                break;
+            case 3:
+                Layout = "~/Views/Shared/_Layout.cshtml";
+                break;
+        }
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<div style="background-color:white">
+    <div class="main-container">
+        <div class="main-container-txt">
+            <h3 class="main-title" style="font-size: 25px">Portal de Documentos Dehvi</h3>
+            <p class="main-info" style="font-size:19px">
+                Aquí en DEHVI, hemos desarrollado un Sistema de
+                Gestión de Documentos exclusivo para nuestra
+                fundación. Esta plataforma está diseñada para facilitar
+                la organización y acceso a nuestros documentos
+                internos de manera segura y eficiente. Simplifica tu
+                trabajo diario con nuestra herramienta diseñada
+                especialmente para ti.
+        </div>
+        <img src="~/Src/image/1.png" class="img" alt="Imagen" />
+    </div>
+</div>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 text-center">
+                <div class="counter bold" style="color: #C69AD1 "> <span data-speed="1500" data-refresh-interval="50" data-to="1300" data-from="1000" data-seperator="true"></span> </div>
+                <p>Años En El País</p>
+            </div>
+          
+
+            <div class="col-lg-4 text-center">
+                <div class="vertical"></div>
+                <div class="counter bold" style="color: #C69AD1"> <span data-speed="2500" data-refresh-interval="50" data-to="50" data-from="5000" data-seperator="true"></span> </div>
+                <p>Centros Educativos</p>
+            </div>
+            <div class="col-lg-4 text-center">
+                <div class="vertical"></div>
+                <div class="counter bold" style="color: #C69AD1"> <span data-speed="2500" data-refresh-interval="50" data-to="3889" data-from="2000" data-seperator="true"></span> </div>
+                <p>Proyectos Activos</p>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <h3 class="title" style="text-align:center">Directorio de Procedimientos</h3>
+
+        <div class="row team-members m-b-40">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3">
+                    <div class="team-member" style="padding:10px">
+                        <div class="team-image">
+                            <img src="~/Src/image/1.png" style="object-fit: cover; height: 300px; width: 90%; border-top-right-radius: 130px;">
+                        </div>
+
+                        <div class="team-desc">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h6 style="font-size:12px; text-align:left">@item.nombre</h6>
+                                </div>
+                                <div class="col-md-3">
+                                    <a class="btn btn-xs btn-round" style="background-color: #89C4E9; border:none" href="@Url.Action("ListaDepartas", "Departamento", new { q = item.idDepartamento })">
+                                        <i class="icon-arrow-right" style="font-size:15px; margin-top:10px"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

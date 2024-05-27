@@ -1,8 +1,98 @@
-/* 
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 
-1. Add your custom Css styles below
-2. Place the this code in your template: 
+body {
+    margin: 0;
+}
 
- <link href="css/custom.css" rel="stylesheet">
+/* Sections */
+.white-sec {
+}
 
-*/
+.blue-sect {
+    background: rgb(255,255,255);
+    background: linear-gradient(333deg, rgba(255,255,255,1) 0%, rgba(150,176,189,1) 0%, rgba(50,100,126,1) 100%);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+
+/* First Section */
+.main-container {
+    padding: 10%;
+    margin: auto;
+    display: flex;
+}
+
+
+.img {
+    height: 400px;
+    width: 70%;
+    margin-right: 5%;
+    margin-left: 5%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-top-left-radius: 100px; /* Aquí ajustas el radio del borde */
+}
+
+.img1 {
+    height: 200px;
+    width: 100%;
+    margin-right: 5%;
+    object-fit: cover;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-top-right-radius: 150px; /* Aquí ajustas el radio del borde */
+}
+
+.main-container-txt {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-title {
+    font-size: 2.5rem;
+    width: 90%;
+    font-face
+
+{
+    font-family: "Multicolore Pro";
+    src: url('../webfonts/Multicolore.otf');
+}
+
+}
+
+.title {
+    font-size: 25px;
+    padding-bottom: 45px;
+    font-face
+
+{
+    font-family: "Multicolore Pro";
+    src: url('../webfonts/Multicolore.otf');
+}
+
+}
+
+.main-info {
+    font-family: "Quicksand";
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 2.5;
+    text-align: justify;
+    width: 90%;
+}
+
+.counter bold {
+    font-family: "Quicksand";
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 2.5;
+    text-align: justify;
+    width: 90%;
+}
+
+.vertical {
+    border-left: 2px solid #C69AD1;
+    height: 90px;
+    position: absolute;
+}
