@@ -138,7 +138,15 @@ namespace API_Dehvi.Controllers
                         //----FIN: Creacion de usuario----
 
                         //----INICIO: Envio de correo----
-                        //TODO
+                        string urlHtml = AppDomain.CurrentDomain.BaseDirectory + "TemplatesCorreos\\NuevaCuenta.html";
+                        string html = System.IO.File.ReadAllText(urlHtml);
+
+                        html = html.Replace("@@nombre",usuario.nombre);
+                        html = html.Replace("@@apellido1", usuario.apellido1);
+                        html = html.Replace("@@apellido2", usuario.apellido2);
+                        html = html.Replace("@@correo", usuario.correo);
+                        html = html.Replace("@@contrasena", usuario.cedulaFisica);
+                        util.enviarCorreo(usuario.correo, "Nueva Cuenta DEHVI", html);
                         //----FIN: Envio de correo----
 
                         return 2; //Usuario creado correctamente
@@ -221,7 +229,7 @@ namespace API_Dehvi.Controllers
                      * Verifico que el usuario este activo
                     */
                     var user = (from u in con.Usuario
-                                where u.correo == usuario.correo && u.contrasena == util.encrpytar(usuario.contrasena) && u.estado == true
+                                where u.correo == usuario.correo && u.contrasena == usuario.contrasena && u.estado == true
                                 select u).FirstOrDefault();
 
                     return user;
@@ -300,7 +308,7 @@ namespace API_Dehvi.Controllers
                      */
 
                     var user = (from u in con.Usuario
-                                where u.correo == usuario.correo && u.estado == true
+                                where u.correo == usuario.correo && u.cedulaFisica == usuario.cedulaFisica && u.estado == true
                                 select u).FirstOrDefault();
 
                     if (user != null)
@@ -317,8 +325,14 @@ namespace API_Dehvi.Controllers
                         user.contrasena = contrasena;
                         con.SaveChanges();
 
-                        //TODO: Enviar correo con la contraseña
-
+                        //INICIO: Envio de correo
+                        string urlHtml = AppDomain.CurrentDomain.BaseDirectory + "TemplatesCorreos\\RecuperarContrasena.html";
+                        string html = System.IO.File.ReadAllText(urlHtml);
+                        html = html.Replace("@@nombre", user.nombre);
+                        html = html.Replace("@@apellido1", user.apellido1);
+                        html = html.Replace("@@apellido2", user.apellido2);
+                        html = html.Replace("@@contrasena", nuevaContrasena);
+                        util.enviarCorreo(user.correo, "Recuperacion de Contraseña", html);
                         return 1;
                     }
                     else

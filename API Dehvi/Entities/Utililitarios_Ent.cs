@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Web;
+using System.Web.WebPages;
 
 namespace API_Dehvi.Entities
 {
@@ -28,5 +31,25 @@ namespace API_Dehvi.Entities
                 return BitConverter.ToString(hashBytes).Replace("-", "").ToLower(); //Convierte el hash a string y lo retorna
             }
         }//fin de metodo encrpytar
+
+        //---------Metodo para enviar un correo de manera generica---------
+        public void enviarCorreo(string correo, string asunto, string contenido)
+        {
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(ConfigurationManager.AppSettings["Correo"]);
+            message.To.Add(new MailAddress(correo));
+            message.Subject = asunto;
+            message.IsBodyHtml = true;
+            message.Body = contenido;
+
+            SmtpClient smtp = new SmtpClient();
+            smtp.Port = Convert.ToInt32(ConfigurationManager.AppSettings["Puerto"]);
+            smtp.Host = ConfigurationManager.AppSettings["Host"];
+            smtp.EnableSsl = true;
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["Correo"], ConfigurationManager.AppSettings["Contrasena"]);
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.Send(message);
+        }
     }
 }
