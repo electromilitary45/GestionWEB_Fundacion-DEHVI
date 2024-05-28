@@ -143,12 +143,16 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DepartamentoController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Entities\DepartamentoEnt.cs" />
+    <Compile Include="Entities\UsuarioEnt.cs" />
+    <Compile Include="Entities\UtililitariosEnt.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DepartamentoModel.cs" />
+    <Compile Include="Models\UsuarioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +202,7 @@
     <Content Include="Src\image\1.png" />
     <Content Include="Src\image\icons\2.png" />
     <Content Include="Src\image\icons\ico-fundacion_v1.png" />
+    <Content Include="Src\image\icons\logo-horizontal.png" />
     <Content Include="Src\image\icons\logotipo Fundación DEHVI-03.png" />
     <Content Include="Src\image\index.jpg" />
     <Content Include="Src\js\custom.js" />
@@ -211,6 +216,7 @@
     <Content Include="Src\scss\plugins\ion-range-slider.css" />
     <Content Include="Src\scss\plugins\pageloader.css" />
     <Content Include="Src\scss\style.css" />
+    <Content Include="Src\video\backgroundninos.mp4" />
     <Content Include="Src\webfonts\fa-brands-400.svg" />
     <Content Include="Src\webfonts\fa-regular-400.svg" />
     <Content Include="Src\webfonts\fa-solid-900.svg" />
@@ -348,13 +354,15 @@
     <Content Include="Views\Departamento\CrearDepartamento.cshtml" />
     <Content Include="Views\Departamento\ListaDepartas.cshtml" />
     <Content Include="Views\Departamento\ActualizarDepa.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\InicioSesion.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Login\RecuperarContrasena.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Src\funciones\" />
     <Folder Include="Src\plugins\" />
-    <Folder Include="Src\video\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

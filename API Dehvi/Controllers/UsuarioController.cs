@@ -33,6 +33,7 @@ namespace API_Dehvi.Controllers
                         select new Usuario_Ent
                         {
                             idUsuario = u.idUsuario,
+                            cedulaFisica = u.cedulaFisica,
                             nombre = u.nombre,
                             apellido1 = u.apellido1,
                             apellido2 = u.apellido2,

@@ -1,0 +1,46 @@
+﻿@model Fundacion_Dehvi.Entities.UsuarioEnt
+
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    ViewBag.Title = "InicioSesion";
+}
+
+<!-- Section -->
+<section class="fullscreen" data-bg-video="/Src/video/backgroundninos.mp4">
+    <div class="container">
+        <div>
+
+            <div class="row">
+                <div class="col-lg-5 center p-50 b-r-6" style="background-color:#ECE9E6;">
+                    <div class="text-center m-b-30">
+                        <a href="index.html" class="logo">
+                            <img src="~/Src/image/icons/logo-horizontal.png" alt="Logo Fundacion DEHVI" width="300">
+                        </a>
+                    </div>
+                    <h4>Inicie sesion en su cuenta.</h4>
+                    <hr />
+                    <br />
+
+                    @using (Html.BeginForm("InicioSesion", "Login", FormMethod.Post, new { @class = "pt-3" }))
+                    {
+                        <div class="form-group">
+                            <label class="sr-only">Correo Electronico</label>
+                            @Html.TextBoxFor(model => model.correo, new { @class = "form-control", placeholder = "Correo", required="required"})
+                        </div>
+                        <div class="form-group m-b-5">
+                            <label class="sr-only">Contraseña</label>
+                            @Html.PasswordFor(model => model.contrasena, new { @class = "form-control", placeholder = "Contraseña", required = "required" })
+                        </div>
+                        <div class="text-center form-group">
+                            <button type="submit" class="btn">Iniciar sesion</button>
+                        </div>
+                    }
+                    <p class="small">
+                        Olvidaste tu contraseña? <a href="@Url.Action("RecuperarContrasena","Login")">Recuperar contraseña.</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end: Section -->

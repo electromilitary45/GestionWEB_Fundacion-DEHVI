@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fundacion_Dehvi.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +9,16 @@ namespace Fundacion_Dehvi.Controllers
 {
     public class HomeController : Controller
     {
+        //--- INSTANCIAS ---
+        private readonly DepartamentoModel d = new DepartamentoModel();
+
+        //--- INDEX SIN SESION ---
+        [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            var datos = d.ListaDeparta();
+            return View(datos);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }
