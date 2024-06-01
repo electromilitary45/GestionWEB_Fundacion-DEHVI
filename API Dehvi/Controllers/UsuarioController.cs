@@ -13,7 +13,7 @@ namespace API_Dehvi.Controllers
     public class UsuarioController : ApiController
     {
         //---Instancias---
-        Utililitarios_Ent util = new Utililitarios_Ent();
+        private readonly Utililitarios_Ent util = new Utililitarios_Ent();
 
         //-------------------- ADMISITRACION DE USUARIOS --------------------
 
@@ -211,7 +211,8 @@ namespace API_Dehvi.Controllers
 
 
         /*-------------------- FIN ADMISITRACION DE USUARIOS --------------------*/
-
+        
+        /*-------------------- INICIO: USUARIOS COMUNES -------------------------*/
 
         //--- INICIO: USUARIOS COMUN -
         [HttpPost]
@@ -347,6 +348,8 @@ namespace API_Dehvi.Controllers
                 return 500;
             }
         }
+
+        /*-------------------- FIN USUARIOS COMUNES --------------------*/
 
     }//fin de la clase
 }//fin del namespace

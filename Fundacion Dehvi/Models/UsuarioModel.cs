@@ -1,4 +1,4 @@
-﻿using Fundacion_Dehvi.Entities;
+﻿﻿using Fundacion_Dehvi.Entities;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -38,6 +38,18 @@ namespace Fundacion_Dehvi.Models
                 return resp.Content.ReadFromJsonAsync<List<UsuarioEnt>>().Result;
             }
         }
+
+        //---INICIO: CONSULTAR USUARIO POR ID---
+        public UsuarioEnt ConsultaUsuariosID(long q)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlAPI + "ConsultarUsuarioID?q=" + q;
+                var resp = client.GetAsync(url).Result;
+                return resp.Content.ReadFromJsonAsync<UsuarioEnt>().Result;
+            }
+        }
+
 
         /*----------------------USUARIOS COMUNES--------------------------*/
 
