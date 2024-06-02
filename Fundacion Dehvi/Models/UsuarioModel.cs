@@ -44,7 +44,7 @@ namespace Fundacion_Dehvi.Models
         {
             using (var client = new HttpClient())
             {
-                string url = urlAPI + "ConsultarUsuarioID?q=" + q;
+                string url = urlAPI + "ConsultaUsuarioID?q=" + q;
                 var resp = client.GetAsync(url).Result;
                 return resp.Content.ReadFromJsonAsync<UsuarioEnt>().Result;
             }

@@ -206,6 +206,7 @@
     <Content Include="Src\image\icons\logo-horizontal.png" />
     <Content Include="Src\image\icons\logotipo Fundación DEHVI-03.png" />
     <Content Include="Src\image\index.jpg" />
+    <Content Include="Src\image\usuario\foto-perfil.jpg" />
     <Content Include="Src\js\custom.js" />
     <Content Include="Src\js\functions.js" />
     <Content Include="Src\js\jquery.js" />
