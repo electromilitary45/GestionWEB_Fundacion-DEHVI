@@ -5,14 +5,185 @@
 }
 
 <!-- Page title -->
-<section id="page-title" class="text-light" style="background-image:url(images/parallax/5.jpg); background-size: cover; background-position: center center;">
-    <div class="container">
-        <div class="page-title">
-            <h1>[nombre]</h1>
+<section id="page-title" class="text-light" style="background-image:url(../../Src/image/usuario/background.jpg); background-size: cover; background-position: center center;">
+    @*<div class="container">
+            <div class="page-title">
+                <h1>@Session["nombre"] @Session["apellido1"] @Session["apellido2"]</h1>
+            </div>
         </div>
-    </div>
-    <div class="container">
-        
-    </div>
+        <div style="">
+            <img src="~/Src/image/usuario/foto-perfil.jpg" width="200" />
+        </div>*@
 </section>
 <!-- end: Page title -->
+<!-- Page Content -->
+<section id="page-content" class="sidebar-left">
+    <div class="container">
+        <div class="row">
+            <!-- content -->
+            <div class="content col-lg-9">
+                <!--Inicio: Informacion Personal-->
+                <div>
+                    <div class="container">
+                        <div class="row">
+                            <h3>@Session["nombre"] @Session["apellido1"] @Session["apellido2"]</h3>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p>[Tiempo empresa]</p>
+                                <span>Tiempo en la empresa</span>
+                            </div>
+                            <div class="col-md-4">
+                                <p>[Procedimientos]</p>
+                                <span>Procedimientos Creados</span>
+                            </div>
+                            <div class="col-md-4">
+                                <p>[Manuales]</p>
+                                <span>Manuales Creados</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <span>Correo Electronico</span>
+                                <p>@Session["correo"]</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <span>Correo Electronico</span>
+                                <p>@Session["correo"]</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <span>Empleado Del Departamento:</span>
+                                <p>[Departamento]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---->
+
+                <hr />
+                <!--Inicio: Tabs-->
+                <div>
+                    <div class="container">
+                        <div class="tabs">
+                            <ul class="nav nav-tabs nav-fill" id="tabs-posts" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#procedimientos" role="tab" aria-controls="procedimientos" aria-selected="true">Procedimientos Creados  <span class="badge badge-info">Cantidad: 1</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#manuales" role="tab" aria-controls="manuales" aria-selected="false">Manuales Creados  <span class="badge badge-info">Cantidad: 1</span></a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="tabs-posts-content">
+                                <!--Inicio: Procedimientos Creados-->
+                                <div class="tab-pane fade active show" id="procedimientos" role="tabpanel" aria-labelledby="procedimientos-tab">
+
+                                    <!--MENSAJE-->
+                                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                        No hay informacion para mostrar.
+                                    </div>
+
+                                    <!--CAROUSEL-->
+                                    <div class="carousel" data-items="3">
+                                        <div class="post-item border">
+                                            <div class="post-item-wrap">
+                                                <div class="post-image">
+                                                    <a href="#">
+                                                        <img alt="predeterminada" src="~/Src/image/Archivos/archivo-predeterminado.png" />
+                                                    </a>
+                                                </div>
+                                                <div class="post-item-description">
+                                                    <span class="post-meta-date"><i class="fa fa-calendar-o"></i>[Fecha Creacion]</span>
+                                                    <span class="post-meta-comments"><i class="fa fa-comments-o"></i>[Codigo]</span>
+                                                    <h6><a href="#">Lighthouse, standard post with a single image</a></h6>
+
+                                                    <a href="#" class="item-link">Leer mas<i class="icon-chevron-right"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Fin carousel-->
+                                </div>
+                                <!--Fin: Procedimientos Creados-->
+                                <!--Inicio: Manuales Creados-->
+                                <div class="tab-pane fade" id="manuales" role="tabpanel" aria-labelledby="manuales-tab">
+
+                                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                        No hay informacion para mostrara.
+                                    </div>
+
+                                    <!--CAROUSEL-->
+                                    <div class="carousel" data-items="3">
+                                        <div class="post-item border">
+                                            <div class="post-item-wrap">
+                                                <div class="post-image">
+                                                    <a href="#">
+                                                        <img alt="predeterminada" src="~/Src/image/Archivos/archivo-predeterminado.png" />
+                                                    </a>
+                                                </div>
+                                                <div class="post-item-description">
+                                                    <span class="post-meta-date"><i class="fa fa-calendar-o"></i>[Fecha Creacion]</span>
+                                                    <span class="post-meta-comments"><i class="fa fa-comments-o"></i>[Codigo]</span>
+                                                    <h6><a href="#">Lighthouse, standard post with a single image</a></h6>
+
+                                                    <a href="#" class="item-link">Leer mas<i class="icon-chevron-right"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Fin carousel-->
+
+                                </div>
+                                <!--Fin: Manuales-->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--Fin TABS-->
+
+            </div>
+            <!-- end: content -->
+            <!-- Sidebar-->
+            <div class="sidebar col-lg-3">
+                <div class="widget widget-myaccount p-cb">
+                    <div class="d-block">
+                        @if (Session["rutaImg"] != null)
+                        {
+                            <img class="" src="~/Src/image/usuario/foto-perfil.jpg" width="150">
+                        }
+                        else
+                        {
+                            <img class="" src="~/Src/image/usuario/foto-perfil.jpg" width="150">
+                        }
+                    </div>
+                    <br />
+
+                    <ul class="text-left">
+                        <li><a href="#"><i class="icon-camera"></i>Editar mi avatar</a></li>
+                        <li><a href="#"><i class="icon-edit-3"></i>Editar mis datos</a></li>
+                        <li><a href="#"><i class="icon-shield"></i>Cambiar mi contraseña.</a></li>
+                        <li><a href="#"><i class="icon-settings"></i>Settings</a></li>
+                        <li><a href="@Url.Action("CerrarSesion","Login")"><i class="icon-log-out"></i>Cerrar Sesion</a></li>
+                    </ul>
+                </div>
+
+
+            </div>
+            <!-- end: sidebar-->
+
+        </div>
+    </div>
+</section>
+<!-- end: Page Content -->

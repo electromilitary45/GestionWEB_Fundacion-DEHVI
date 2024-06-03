@@ -62,6 +62,7 @@ namespace Fundacion_Dehvi.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult RecuperarContrasena(UsuarioEnt usuario)
         {
@@ -92,8 +93,6 @@ namespace Fundacion_Dehvi.Controllers
             Session.Clear();
             return RedirectToAction("InicioSesion","Login");
         }
-
-        
 
     }//Fin de la clase
 }//Fin del namespace
