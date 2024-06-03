@@ -111,5 +111,5 @@ INSERT INTO Usuario (nombre, apellido1, apellido2, cedulaFisica, correo, contras
 VALUES ('Derek Sebastian', 'Leiva', 'Villalobos', '305400042', 'dleiva00042@ufide.ac.cr', 'c9a9899fdd99ae5fb9a3f2e15bbef7df69bcb0b603811ad246316086f89f366f', 1, 1, 1, GETDATE())
 
 INSERT INTO Usuario (nombre, apellido1, apellido2, cedulaFisica, correo, contrasena, idRol, idDepartamento, estado, fechaCreacion) 
-VALUES ('Marianne', 'von Herold', 'Hering', '118870134', 'hvon0134@ufide.ac.cr', 'd1901ca699a6eec6b2086c101f18702aca87a4475efbc81c0662f436bcf13e12', 1, 1, 1, GETDATE())
+VALUES ('Marianne', 'von Herold', 'Hering', '118870134', 'hvon70134@ufide.ac.cr', 'd1901ca699a6eec6b2086c101f18702aca87a4475efbc81c0662f436bcf13e12', 1, 1, 1, GETDATE())
 
