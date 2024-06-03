@@ -19,6 +19,13 @@ namespace Fundacion_Dehvi.Controllers
             var datos = d.ListaDeparta();
             return View(datos);
         }
+        //--- Navbar ---
+        [ChildActionOnly]
+        public PartialViewResult NavBar()
+        {
+            var departamentos = d.ListaDeparta();
+            return PartialView("_NavBar", departamentos);
+        }
 
     }
 }

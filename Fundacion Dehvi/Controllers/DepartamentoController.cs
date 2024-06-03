@@ -16,14 +16,14 @@ namespace Fundacion_Dehvi.Controllers
         [HttpGet]
         public ActionResult CrearDepartamento()
         {
-            //if (Session["idUsuario"] != null)
-            //{
-            //    return RedirectToAction("IniciarSesion, Login");
-            //}
-            //else
-            //{
+            if (Session["idusuario"] != null)
+            {
+                return RedirectToAction("InicioSesion, Login");
+            }
+            else
+            {
                 return View();
-            //}
+            }
         }
 
         [HttpPost]
@@ -56,17 +56,17 @@ namespace Fundacion_Dehvi.Controllers
         {
             try
             {
-                //if (Session["idUsuario"] == null)
-                //{
-                //    return RedirectToAction("IniciarSesion", "Login");
-                //}
-                //else
-                //{
+                if (Session["idUsuario"] == null)
+                {
+                    return RedirectToAction("InicioSesion", "Login");
+                }
+                else
+                {
                     var datos = d.ListaDeparta();
-                    // Muestra los mensajes referentes a empresas agregadas correctamente y al cambio de estado de estas cuando sea pertinente
+                    //Muestra los mensajes referentes a empresas agregadas correctamente y al cambio de estado de estas cuando sea pertinente
                     ViewBag.Mensaje = TempData["Mensaje"];
                     return View(datos);
-                //}
+                }
             }
             catch (Exception e)
             {
@@ -75,19 +75,33 @@ namespace Fundacion_Dehvi.Controllers
 
         }
 
+        //------------------- Perfil Departamento -------------------
+        [HttpGet]
+        public ActionResult PerfilDepa(long q)
+        {
+
+            var datos = d.PerfilDepa(q);
+            if (Session["mensaje"] != null)
+            {
+                ViewBag.MensajeAcc = Session["mensaje"].ToString();
+            }
+
+            return View(datos); // muestra el perfil del accesorio en especifico
+        }
+
         //------------------- Actualizar Departamento -------------------
         [HttpGet]
         public ActionResult ActualizarDepa(long q)
         {
-        //    if (Session["idUsuario"] == null)
-        //    {
-        //        return RedirectToAction("IniciarSesion", "Login");
-        //    }
-        //    else
-        //    {
+            if (Session["idUsuario"] == null)
+            {
+                return RedirectToAction("InicioSesion", "Login");
+            }
+            else
+            {
                 var datos = d.PerfilDepa(q);
                 return View(datos);
-            //}
+            }
         }
 
         [HttpPost]

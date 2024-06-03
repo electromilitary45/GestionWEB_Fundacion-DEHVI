@@ -23,11 +23,11 @@
     <link href='~/Src/plugins/datatables/datatables.min.css' rel='stylesheet' />
 </head>
 
-<body >
+<body>
     <!-- Body Inner -->
     <div class="body-inner">
         <!-- Header -->
-        <header id="header" data-fullwidth="true" class="header-alternative light" data-responsive-fixed="true">
+        <header id="header" data-fullwidth="true" class="header-alternative light" data-responsive-fixed="true" >
             <div class="header-inner">
                 <div class="container">
                     <!--Logo-->
@@ -84,11 +84,50 @@
                     </div>
                     <!--end: Navigation Resposnive Trigger-->
                     <!--Navigation-->
-                    <div id="mainMenu" class="menu-center menu-lowercase">
+                    <div id="mainMenu" class="menu-center menu-lowercase" >
                         <div class="container">
                             <nav>
                                 <ul>
                                     <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                                    @if (Session["idUsuario"] != null)
+                                    {
+                                        <li class="dropdown">
+                                            <a href="#">Mi Departamento</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="@Url.Action("ListaTicketsUsuario", "Soporte")">Procedimientos</a></li>
+                                                <li><a href="@Url.Action("ListaTicketsUsuario", "Soporte")">Manuales</a></li>
+                                            </ul>
+                                        </li>
+                                        @Html.Action("NavBar", "Home")
+
+                                        <!-- Renderiza la lista de departamentos aquí -->
+
+
+                                        <li class="dropdown">
+                                            <a href="#">Usuarios</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="page-services.html">Lista de Usuarios</a></li>
+                                                @*@if ((int)Session["idRol"] != 1)
+        {*@
+                                                <li><a href="page-services.html">Agregar Usuarios</a></li>
+                                                @* } *@
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="#">Procedimientos</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="@Url.Action("ListaTicketsUsuario", "Soporte")">Todos los Procedimientos</a></li>
+                                                <li><a href="@Url.Action("RegistrarTicket", "Soporte")">Agregar Procedimiento</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="#">Manuales</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="@Url.Action("ListaTicketsUsuario", "Soporte")">Todos los Manuales</a></li>
+                                                <li><a href="@Url.Action("RegistrarTicket", "Soporte")">Agregar Manual</a></li>
+                                            </ul>
+                                        </li>
+                                    }
                                 </ul>
                             </nav>
                         </div>

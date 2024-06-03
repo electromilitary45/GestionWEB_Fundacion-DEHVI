@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Fundacion_Dehvi.Entities.DepartamentoEnt>
+
+<li class="dropdown">
+    <a href="#">Departamentos</a>
+    <ul class="dropdown-menu">
+        <li><a href="page-services.html">Todos los Departamentos</a></li>
+        <li><a href="page-services.html">Agregar Departamento</a></li>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <li class="dropdown-submenu">
+                    <span class="dropdown-menu-title-only">@item.nombre</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="page-about-basic.html">Procedimientos</a></li>
+                        <li><a href="page-about-extended.html">Manuales</a></li>
+                        <li><a href="page-about-extended.html">Usuarios del Sector</a></li>
+                    </ul>
+                </li>
+            }
+        }
+    </ul>
+</li>

@@ -2,26 +2,8 @@
 
 @{
     ViewBag.Title = "IndexPrincipal";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 
-    if (Session["idUsuario"] != null)
-    {
-        switch (Session["tipoVista"])
-        {
-            case 1:
-                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-                break;
-            case 2:
-                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-                break;
-            case 3:
-                Layout = "~/Views/Shared/_Layout.cshtml";
-                break;
-        }
-    }
-    else
-    {
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
 }
 
 <div style="background-color:white">
@@ -62,7 +44,6 @@
             </div>
         </div>
     </div>
-    </div>
 </section>
 
 <section>
@@ -86,9 +67,12 @@
                                         <h6 style="font-size:12px; text-align:left">@item.nombre</h6>
                                     </div>
                                     <div class="col-md-3">
-                                        <a class="btn btn-xs btn-round" style="background-color: #89C4E9; border:none" href="@Url.Action("ListaDepartas", "Departamento", new { q = item.idDepartamento })">
-                                            <i class="icon-arrow-right" style="font-size:15px; margin-top:10px"></i>
-                                        </a>
+                                        @if (Session["idUsuario"] != null)
+                                        {
+                                            <a class="btn btn-xs btn-round" style="background-color: #89C4E9; border:none" href="@Url.Action("ListaDepartas", "Departamento", new { q = item.idDepartamento })">
+                                                <i class="icon-arrow-right" style="font-size:15px; margin-top:10px"></i>
+                                            </a>
+                                        }
                                     </div>
                                 </div>
 
