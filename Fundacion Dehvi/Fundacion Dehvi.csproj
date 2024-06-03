@@ -201,11 +201,13 @@
     <Content Include="Src\css\theme.css" />
     <Content Include="Src\image\1.jpg" />
     <Content Include="Src\image\1.png" />
+    <Content Include="Src\image\Archivos\archivo-predeterminado.png" />
     <Content Include="Src\image\icons\2.png" />
     <Content Include="Src\image\icons\ico-fundacion_v1.png" />
     <Content Include="Src\image\icons\logo-horizontal.png" />
     <Content Include="Src\image\icons\logotipo Fundación DEHVI-03.png" />
     <Content Include="Src\image\index.jpg" />
+    <Content Include="Src\image\usuario\background.jpg" />
     <Content Include="Src\image\usuario\foto-perfil.jpg" />
     <Content Include="Src\js\custom.js" />
     <Content Include="Src\js\functions.js" />
