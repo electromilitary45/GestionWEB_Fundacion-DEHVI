@@ -1,0 +1,75 @@
+﻿@model Fundacion_Dehvi.Entities.UsuarioEnt
+
+@{
+    ViewBag.Title = "Cambio de Contrasena";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!--INICIO: Page Tittle-->
+<section id="page-title" class="text-light" style="background-image:url(../../Src/image/usuario/background.jpg); background-size: cover; background-position: center center;"></section>
+<!--FIN: Page Tittle-->
+
+<section id="page-content">
+    <div class="container">
+        <a class="btn btn-rounded" href="@Url.Action("PerfilUsuario","Usuario")"><i class="icon-arrow-left"></i> Mi Perfil </a>
+        <div class="card">
+            <div class="card-header">
+                <span class="h4">Cambia tu contraseña.</span>
+                <p class="text-muted">Cambia la contraseña de tu cuenta.</p>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("", "", FormMethod.Post, new { @class = "form-validate", @novalidate = "novalidate" }))
+                {
+                    @*@Html.HiddenFor(m => m.idUsuario)*@
+                    <input type="hidden" name="idUsuario" value="@Session["idUsuario"].ToString()"/>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label">Contraseña Actual</label>
+                                <div class="input-group show-hide-password">
+                                    @Html.TextBoxFor(m => m.contrasena, new { @class = "form-control", @required = "required", @placeholder = "Contraseña Actual", @type = "password" })
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="icon-eye-off" aria-hidden="true" style="cursor: pointer;"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!--NUEVA CONTRASEÑA-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label">Nueva Contraseña</label>
+                                <div class="input-group show-hide-password">
+                                    @Html.TextBoxFor(m => m.contrasena, new { @class = "form-control", @required = "required", @placeholder = "Nueva Contraseña", @type = "password" })
+
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="icon-eye-off" aria-hidden="true" style="cursor: pointer;"></i></span>
+                                    </div>
+                                </div>
+                                @*<input class="form-control" type="password">*@
+                            </div>
+                        </div>
+                        <!--CONFIRMAR CONTRASEÑA-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label">Confirmar Contraseña</label>
+                                <div class="input-group show-hide-password">
+                                    @Html.TextBoxFor(m => m.contrasena, new { @class = "form-control", @required = "required", @placeholder = "Confirmar Contraseña", @type = "password" })
+
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="icon-eye-off" aria-hidden="true" style="cursor: pointer;"></i></span>
+                                    </div>
+                                </div>
+                                @*<input class="form-control" type="password">*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <button type="button" class="btn btn-md">Actualizar Contraseña <i class="icon-check"></i></button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

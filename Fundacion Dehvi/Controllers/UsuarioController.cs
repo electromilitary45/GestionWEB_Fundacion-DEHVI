@@ -21,7 +21,10 @@ namespace Fundacion_Dehvi.Controllers
 
 
 
-        //------------------USUARIO COMUN-------------------------------
+        /*----------------------USUARIO COMUN-------------------------------*/
+
+
+        //-----Perfil de Usuario
         [HttpGet]
         public ActionResult PerfilUsuario ()
         {
@@ -38,6 +41,23 @@ namespace Fundacion_Dehvi.Controllers
             
         }//fin perfil usuario
 
-        
+
+        //-----INICIO: Cambio de contraseña
+        [HttpGet]
+        public ActionResult CambioContrasena()
+        {
+            if (Session["idUsuario"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("InicioSesion", "Login");
+            }
+            
+        }//fin cambio contraseña
+
+
+
     }//fin de clase
 }//fin de namespace

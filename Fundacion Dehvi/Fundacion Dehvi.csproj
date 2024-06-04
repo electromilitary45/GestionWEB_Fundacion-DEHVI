@@ -367,6 +367,7 @@
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Departamento\PerfilDepa.cshtml" />
+    <Content Include="Views\Usuario\CambioContrasena.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

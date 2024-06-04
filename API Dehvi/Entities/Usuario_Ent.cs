@@ -25,6 +25,11 @@ namespace API_Dehvi.Entities
         public DateTime fechaCreacion { get; set; }
         public string rutaImg { get; set; }
 
+        //-------- Atributos genericos-------
+        public string contrasenaNueva { get; set; }
+
+
+
 
     }
 }
