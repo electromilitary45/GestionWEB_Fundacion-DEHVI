@@ -20,7 +20,7 @@ namespace API_Dehvi
             this.Manual = new HashSet<Manual>();
         }
     
-        public long idPrcoedimiento { get; set; }
+        public long idProcedimiento { get; set; }
         public long idDepartamento { get; set; }
         public string codProcedimiento { get; set; }
         public string nombre { get; set; }

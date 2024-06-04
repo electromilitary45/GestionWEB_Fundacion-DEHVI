@@ -47,7 +47,7 @@ CREATE TABLE Usuario(
 )
 
 CREATE TABLE Procedimiento(
-    idPrcoedimiento bigint NOT NULL IDENTITY(1,1),
+    idProcedimiento bigint NOT NULL IDENTITY(1,1),
     idDepartamento bigint NOT NULL,
     codProcedimiento varchar(50) NOT NULL,
 
@@ -58,7 +58,7 @@ CREATE TABLE Procedimiento(
 
     idUsuarioCreador bigint NOT NULL,
     fechaCreacion datetime NOT NULL,
-    PRIMARY KEY (idPrcoedimiento),
+    PRIMARY KEY (idProcedimiento),
     FOREIGN KEY (idDepartamento) REFERENCES Departamento(idDepartamento),
     FOREIGN KEY (idUsuarioCreador) REFERENCES Usuario(idUsuario)
 )
@@ -72,7 +72,7 @@ CREATE TABLE Manual (
     idUsuarioCreador bigint NOT NULL,
     fechaCreacion datetime NOT NULL,
     PRIMARY KEY (idManual),
-    FOREIGN KEY (idProcedimiento) REFERENCES Procedimiento(idPrcoedimiento),
+    FOREIGN KEY (idProcedimiento) REFERENCES Procedimiento(idProcedimiento),
     FOREIGN KEY (idUsuarioCreador) REFERENCES Usuario(idUsuario)
 )
 

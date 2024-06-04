@@ -47,7 +47,7 @@ namespace API_Dehvi.Controllers
         {
             try
             {
-                using (var con = new BD_fundacionDehviEntities()) // utiliza la base de datos =
+                using (var con = new BD_fundacionDehviEntities()) //conexion a la base de datos
                 {
                     var data = (
                         from d in con.Departamento
@@ -75,7 +75,7 @@ namespace API_Dehvi.Controllers
         {
             try
             {
-                using (var con = new BD_fundacionDehviEntities())
+                using (var con = new BD_fundacionDehviEntities())//conexion a la base de datos
                 {
                     con.Configuration.LazyLoadingEnabled = false;
                     var datos = (from x in con.Departamento
@@ -170,6 +170,38 @@ namespace API_Dehvi.Controllers
             }
 
         }// fin de editar el estado
+
+        //------------------- DropDown Departamento -------------------
+        [HttpGet]
+        [Route("DropDownDeparta")]
+        public List<System.Web.Mvc.SelectListItem> DropDownDeparta()
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities()) //conexion a la base de datos
+                {
+                    var data = (from d in con.Departamento
+                                select d).ToList();
+
+                    var result = new List<System.Web.Mvc.SelectListItem>();
+                    foreach(var item in data) 
+                    {
+                        result.Add(new System.Web.Mvc.SelectListItem
+                        {
+                            Value = item.idDepartamento.ToString(),
+                            Text = item.nombre
+                        });
+                    }
+                    return result;
+                }
+
+            }// fin del try
+            catch (Exception)
+            {
+                return null;
+            }// fin del catch 
+
+        }// fin del DropDown de departamentos
 
     } // fin de la clase
 } // fin del namespace

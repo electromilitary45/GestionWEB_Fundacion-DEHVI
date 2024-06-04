@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BD_fundacionDehviModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BD_fundacionDehviModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Departamento">
           <Key>
             <PropertyRef Name="idDepartamento" />
@@ -39,9 +39,9 @@
         </EntityType>
         <EntityType Name="Procedimiento">
           <Key>
-            <PropertyRef Name="idPrcoedimiento" />
+            <PropertyRef Name="idProcedimiento" />
           </Key>
-          <Property Name="idPrcoedimiento" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idProcedimiento" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idDepartamento" Type="bigint" Nullable="false" />
           <Property Name="codProcedimiento" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
@@ -57,6 +57,16 @@
           </Key>
           <Property Name="idRol" Type="tinyint" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -104,7 +114,7 @@
           <End Role="Manual" Type="Self.Manual" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Procedimiento">
-              <PropertyRef Name="idPrcoedimiento" />
+              <PropertyRef Name="idProcedimiento" />
             </Principal>
             <Dependent Role="Manual">
               <PropertyRef Name="idProcedimiento" />
@@ -177,6 +187,7 @@
           <EntitySet Name="Manual" EntityType="Self.Manual" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Procedimiento" EntityType="Self.Procedimiento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__DocManual__idMan__47DBAE45" Association="Self.FK__DocManual__idMan__47DBAE45">
             <End Role="Manual" EntitySet="Manual" />
@@ -211,20 +222,60 @@
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BD_fundacionDehviModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BD_fundacionDehviEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departamento" EntityType="BD_fundacionDehviModel.Departamento" />
+          <EntitySet Name="DocManual" EntityType="BD_fundacionDehviModel.DocManual" />
+          <EntitySet Name="Manual" EntityType="BD_fundacionDehviModel.Manual" />
+          <EntitySet Name="Procedimiento" EntityType="BD_fundacionDehviModel.Procedimiento" />
+          <EntitySet Name="Rol" EntityType="BD_fundacionDehviModel.Rol" />
+          <EntitySet Name="sysdiagrams" EntityType="BD_fundacionDehviModel.sysdiagrams" />
+          <EntitySet Name="Usuario" EntityType="BD_fundacionDehviModel.Usuario" />
+          <AssociationSet Name="FK__Procedimi__idDep__403A8C7D" Association="BD_fundacionDehviModel.FK__Procedimi__idDep__403A8C7D">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Procedimiento" EntitySet="Procedimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__idDepar__3D5E1FD2" Association="BD_fundacionDehviModel.FK__Usuario__idDepar__3D5E1FD2">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DocManual__idMan__47DBAE45" Association="BD_fundacionDehviModel.FK__DocManual__idMan__47DBAE45">
+            <End Role="Manual" EntitySet="Manual" />
+            <End Role="DocManual" EntitySet="DocManual" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DocManual__idUsu__48CFD27E" Association="BD_fundacionDehviModel.FK__DocManual__idUsu__48CFD27E">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="DocManual" EntitySet="DocManual" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Manual__idProced__440B1D61" Association="BD_fundacionDehviModel.FK__Manual__idProced__440B1D61">
+            <End Role="Procedimiento" EntitySet="Procedimiento" />
+            <End Role="Manual" EntitySet="Manual" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Manual__idUsuari__44FF419A" Association="BD_fundacionDehviModel.FK__Manual__idUsuari__44FF419A">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Manual" EntitySet="Manual" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Procedimi__idUsu__412EB0B6" Association="BD_fundacionDehviModel.FK__Procedimi__idUsu__412EB0B6">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Procedimiento" EntitySet="Procedimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__idRol__3C69FB99" Association="BD_fundacionDehviModel.FK__Usuario__idRol__3C69FB99">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Departamento">
           <Key>
             <PropertyRef Name="idDepartamento" />
           </Key>
           <Property Name="idDepartamento" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Procedimiento" Relationship="Self.FK__Procedimi__idDep__403A8C7D" FromRole="Departamento" ToRole="Procedimiento" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__idDepar__3D5E1FD2" FromRole="Departamento" ToRole="Usuario" />
+          <NavigationProperty Name="Procedimiento" Relationship="BD_fundacionDehviModel.FK__Procedimi__idDep__403A8C7D" FromRole="Departamento" ToRole="Procedimiento" />
+          <NavigationProperty Name="Usuario" Relationship="BD_fundacionDehviModel.FK__Usuario__idDepar__3D5E1FD2" FromRole="Departamento" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="DocManual">
           <Key>
@@ -233,12 +284,12 @@
           <Property Name="idDocManual" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idManual" Type="Int64" Nullable="false" />
           <Property Name="versionDoc" Type="Int64" Nullable="false" />
-          <Property Name="ruta" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ruta" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="fechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="estado" Type="Boolean" Nullable="false" />
           <Property Name="idUsuarioCreador" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="Manual" Relationship="Self.FK__DocManual__idMan__47DBAE45" FromRole="DocManual" ToRole="Manual" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK__DocManual__idUsu__48CFD27E" FromRole="DocManual" ToRole="Usuario" />
+          <NavigationProperty Name="Manual" Relationship="BD_fundacionDehviModel.FK__DocManual__idMan__47DBAE45" FromRole="DocManual" ToRole="Manual" />
+          <NavigationProperty Name="Usuario" Relationship="BD_fundacionDehviModel.FK__DocManual__idUsu__48CFD27E" FromRole="DocManual" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Manual">
           <Key>
@@ -246,65 +297,75 @@
           </Key>
           <Property Name="idManual" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idProcedimiento" Type="Int64" Nullable="false" />
-          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="codReferencia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="codReferencia" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="Boolean" Nullable="false" />
           <Property Name="idUsuarioCreador" Type="Int64" Nullable="false" />
           <Property Name="fechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="DocManual" Relationship="Self.FK__DocManual__idMan__47DBAE45" FromRole="Manual" ToRole="DocManual" />
-          <NavigationProperty Name="Procedimiento" Relationship="Self.FK__Manual__idProced__440B1D61" FromRole="Manual" ToRole="Procedimiento" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK__Manual__idUsuari__44FF419A" FromRole="Manual" ToRole="Usuario" />
+          <NavigationProperty Name="DocManual" Relationship="BD_fundacionDehviModel.FK__DocManual__idMan__47DBAE45" FromRole="Manual" ToRole="DocManual" />
+          <NavigationProperty Name="Procedimiento" Relationship="BD_fundacionDehviModel.FK__Manual__idProced__440B1D61" FromRole="Manual" ToRole="Procedimiento" />
+          <NavigationProperty Name="Usuario" Relationship="BD_fundacionDehviModel.FK__Manual__idUsuari__44FF419A" FromRole="Manual" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Procedimiento">
           <Key>
-            <PropertyRef Name="idPrcoedimiento" />
+            <PropertyRef Name="idProcedimiento" />
           </Key>
-          <Property Name="idPrcoedimiento" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idProcedimiento" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idDepartamento" Type="Int64" Nullable="false" />
-          <Property Name="codProcedimiento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="objetivo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="codProcedimiento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="objetivo" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="Boolean" Nullable="false" />
           <Property Name="idUsuarioCreador" Type="Int64" Nullable="false" />
           <Property Name="fechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Departamento" Relationship="Self.FK__Procedimi__idDep__403A8C7D" FromRole="Procedimiento" ToRole="Departamento" />
-          <NavigationProperty Name="Manual" Relationship="Self.FK__Manual__idProced__440B1D61" FromRole="Procedimiento" ToRole="Manual" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK__Procedimi__idUsu__412EB0B6" FromRole="Procedimiento" ToRole="Usuario" />
+          <NavigationProperty Name="Departamento" Relationship="BD_fundacionDehviModel.FK__Procedimi__idDep__403A8C7D" FromRole="Procedimiento" ToRole="Departamento" />
+          <NavigationProperty Name="Manual" Relationship="BD_fundacionDehviModel.FK__Manual__idProced__440B1D61" FromRole="Procedimiento" ToRole="Manual" />
+          <NavigationProperty Name="Usuario" Relationship="BD_fundacionDehviModel.FK__Procedimi__idUsu__412EB0B6" FromRole="Procedimiento" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Rol">
           <Key>
             <PropertyRef Name="idRol" />
           </Key>
           <Property Name="idRol" Type="Byte" Nullable="false" />
-          <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__idRol__3C69FB99" FromRole="Rol" ToRole="Usuario" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuario" Relationship="BD_fundacionDehviModel.FK__Usuario__idRol__3C69FB99" FromRole="Rol" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="idUsuario" />
           </Key>
           <Property Name="idUsuario" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cedulaFisica" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="apellido1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="apellido2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="correo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="contrasena" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cedulaFisica" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="apellido1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="apellido2" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="correo" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="contrasena" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="idRol" Type="Byte" Nullable="false" />
           <Property Name="idDepartamento" Type="Int64" Nullable="false" />
           <Property Name="estado" Type="Boolean" Nullable="false" />
           <Property Name="fechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="rutaImg" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Departamento" Relationship="Self.FK__Usuario__idDepar__3D5E1FD2" FromRole="Usuario" ToRole="Departamento" />
-          <NavigationProperty Name="DocManual" Relationship="Self.FK__DocManual__idUsu__48CFD27E" FromRole="Usuario" ToRole="DocManual" />
-          <NavigationProperty Name="Manual" Relationship="Self.FK__Manual__idUsuari__44FF419A" FromRole="Usuario" ToRole="Manual" />
-          <NavigationProperty Name="Procedimiento" Relationship="Self.FK__Procedimi__idUsu__412EB0B6" FromRole="Usuario" ToRole="Procedimiento" />
-          <NavigationProperty Name="Rol" Relationship="Self.FK__Usuario__idRol__3C69FB99" FromRole="Usuario" ToRole="Rol" />
+          <NavigationProperty Name="Departamento" Relationship="BD_fundacionDehviModel.FK__Usuario__idDepar__3D5E1FD2" FromRole="Usuario" ToRole="Departamento" />
+          <NavigationProperty Name="DocManual" Relationship="BD_fundacionDehviModel.FK__DocManual__idUsu__48CFD27E" FromRole="Usuario" ToRole="DocManual" />
+          <NavigationProperty Name="Manual" Relationship="BD_fundacionDehviModel.FK__Manual__idUsuari__44FF419A" FromRole="Usuario" ToRole="Manual" />
+          <NavigationProperty Name="Procedimiento" Relationship="BD_fundacionDehviModel.FK__Procedimi__idUsu__412EB0B6" FromRole="Usuario" ToRole="Procedimiento" />
+          <NavigationProperty Name="Rol" Relationship="BD_fundacionDehviModel.FK__Usuario__idRol__3C69FB99" FromRole="Usuario" ToRole="Rol" />
         </EntityType>
         <Association Name="FK__Procedimi__idDep__403A8C7D">
-          <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
-          <End Role="Procedimiento" Type="Self.Procedimiento" Multiplicity="*" />
+          <End Type="BD_fundacionDehviModel.Departamento" Role="Departamento" Multiplicity="1" />
+          <End Type="BD_fundacionDehviModel.Procedimiento" Role="Procedimiento" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Departamento">
               <PropertyRef Name="idDepartamento" />
@@ -315,8 +376,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Usuario__idDepar__3D5E1FD2">
-          <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <End Type="BD_fundacionDehviModel.Departamento" Role="Departamento" Multiplicity="1" />
+          <End Type="BD_fundacionDehviModel.Usuario" Role="Usuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Departamento">
               <PropertyRef Name="idDepartamento" />
@@ -327,8 +388,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__DocManual__idMan__47DBAE45">
-          <End Role="Manual" Type="Self.Manual" Multiplicity="1" />
-          <End Role="DocManual" Type="Self.DocManual" Multiplicity="*" />
+          <End Type="BD_fundacionDehviModel.Manual" Role="Manual" Multiplicity="1" />
+          <End Type="BD_fundacionDehviModel.DocManual" Role="DocManual" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Manual">
               <PropertyRef Name="idManual" />
@@ -339,8 +400,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__DocManual__idUsu__48CFD27E">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="DocManual" Type="Self.DocManual" Multiplicity="*" />
+          <End Type="BD_fundacionDehviModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="BD_fundacionDehviModel.DocManual" Role="DocManual" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="idUsuario" />
@@ -351,11 +412,11 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Manual__idProced__440B1D61">
-          <End Role="Procedimiento" Type="Self.Procedimiento" Multiplicity="1" />
-          <End Role="Manual" Type="Self.Manual" Multiplicity="*" />
+          <End Type="BD_fundacionDehviModel.Procedimiento" Role="Procedimiento" Multiplicity="1" />
+          <End Type="BD_fundacionDehviModel.Manual" Role="Manual" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Procedimiento">
-              <PropertyRef Name="idPrcoedimiento" />
+              <PropertyRef Name="idProcedimiento" />
             </Principal>
             <Dependent Role="Manual">
               <PropertyRef Name="idProcedimiento" />
@@ -363,8 +424,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Manual__idUsuari__44FF419A">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Manual" Type="Self.Manual" Multiplicity="*" />
+          <End Type="BD_fundacionDehviModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="BD_fundacionDehviModel.Manual" Role="Manual" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="idUsuario" />
@@ -375,8 +436,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Procedimi__idUsu__412EB0B6">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Procedimiento" Type="Self.Procedimiento" Multiplicity="*" />
+          <End Type="BD_fundacionDehviModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="BD_fundacionDehviModel.Procedimiento" Role="Procedimiento" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="idUsuario" />
@@ -387,8 +448,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Usuario__idRol__3C69FB99">
-          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <End Type="BD_fundacionDehviModel.Rol" Role="Rol" Multiplicity="1" />
+          <End Type="BD_fundacionDehviModel.Usuario" Role="Usuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Rol">
               <PropertyRef Name="idRol" />
@@ -398,47 +459,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BD_fundacionDehviEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Departamento" EntityType="Self.Departamento" />
-          <EntitySet Name="DocManual" EntityType="Self.DocManual" />
-          <EntitySet Name="Manual" EntityType="Self.Manual" />
-          <EntitySet Name="Procedimiento" EntityType="Self.Procedimiento" />
-          <EntitySet Name="Rol" EntityType="Self.Rol" />
-          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
-          <AssociationSet Name="FK__Procedimi__idDep__403A8C7D" Association="Self.FK__Procedimi__idDep__403A8C7D">
-            <End Role="Departamento" EntitySet="Departamento" />
-            <End Role="Procedimiento" EntitySet="Procedimiento" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Usuario__idDepar__3D5E1FD2" Association="Self.FK__Usuario__idDepar__3D5E1FD2">
-            <End Role="Departamento" EntitySet="Departamento" />
-            <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DocManual__idMan__47DBAE45" Association="Self.FK__DocManual__idMan__47DBAE45">
-            <End Role="Manual" EntitySet="Manual" />
-            <End Role="DocManual" EntitySet="DocManual" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DocManual__idUsu__48CFD27E" Association="Self.FK__DocManual__idUsu__48CFD27E">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="DocManual" EntitySet="DocManual" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Manual__idProced__440B1D61" Association="Self.FK__Manual__idProced__440B1D61">
-            <End Role="Procedimiento" EntitySet="Procedimiento" />
-            <End Role="Manual" EntitySet="Manual" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Manual__idUsuari__44FF419A" Association="Self.FK__Manual__idUsuari__44FF419A">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Manual" EntitySet="Manual" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Procedimi__idUsu__412EB0B6" Association="Self.FK__Procedimi__idUsu__412EB0B6">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Procedimiento" EntitySet="Procedimiento" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Usuario__idRol__3C69FB99" Association="Self.FK__Usuario__idRol__3C69FB99">
-            <End Role="Rol" EntitySet="Rol" />
-            <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -447,76 +468,87 @@
           <EntitySetMapping Name="Departamento">
             <EntityTypeMapping TypeName="BD_fundacionDehviModel.Departamento">
               <MappingFragment StoreEntitySet="Departamento">
-                <ScalarProperty Name="idDepartamento" ColumnName="idDepartamento" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idDepartamento" ColumnName="idDepartamento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DocManual">
             <EntityTypeMapping TypeName="BD_fundacionDehviModel.DocManual">
               <MappingFragment StoreEntitySet="DocManual">
-                <ScalarProperty Name="idDocManual" ColumnName="idDocManual" />
-                <ScalarProperty Name="idManual" ColumnName="idManual" />
-                <ScalarProperty Name="versionDoc" ColumnName="versionDoc" />
-                <ScalarProperty Name="ruta" ColumnName="ruta" />
-                <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="idUsuarioCreador" ColumnName="idUsuarioCreador" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
+                <ScalarProperty Name="ruta" ColumnName="ruta" />
+                <ScalarProperty Name="versionDoc" ColumnName="versionDoc" />
+                <ScalarProperty Name="idManual" ColumnName="idManual" />
+                <ScalarProperty Name="idDocManual" ColumnName="idDocManual" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Manual">
             <EntityTypeMapping TypeName="BD_fundacionDehviModel.Manual">
               <MappingFragment StoreEntitySet="Manual">
-                <ScalarProperty Name="idManual" ColumnName="idManual" />
-                <ScalarProperty Name="idProcedimiento" ColumnName="idProcedimiento" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="codReferencia" ColumnName="codReferencia" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="idUsuarioCreador" ColumnName="idUsuarioCreador" />
                 <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
+                <ScalarProperty Name="idUsuarioCreador" ColumnName="idUsuarioCreador" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="codReferencia" ColumnName="codReferencia" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idProcedimiento" ColumnName="idProcedimiento" />
+                <ScalarProperty Name="idManual" ColumnName="idManual" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Procedimiento">
             <EntityTypeMapping TypeName="BD_fundacionDehviModel.Procedimiento">
               <MappingFragment StoreEntitySet="Procedimiento">
-                <ScalarProperty Name="idPrcoedimiento" ColumnName="idPrcoedimiento" />
-                <ScalarProperty Name="idDepartamento" ColumnName="idDepartamento" />
-                <ScalarProperty Name="codProcedimiento" ColumnName="codProcedimiento" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="objetivo" ColumnName="objetivo" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="idUsuarioCreador" ColumnName="idUsuarioCreador" />
                 <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
+                <ScalarProperty Name="idUsuarioCreador" ColumnName="idUsuarioCreador" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="objetivo" ColumnName="objetivo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="codProcedimiento" ColumnName="codProcedimiento" />
+                <ScalarProperty Name="idDepartamento" ColumnName="idDepartamento" />
+                <ScalarProperty Name="idProcedimiento" ColumnName="idProcedimiento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Rol">
             <EntityTypeMapping TypeName="BD_fundacionDehviModel.Rol">
               <MappingFragment StoreEntitySet="Rol">
-                <ScalarProperty Name="idRol" ColumnName="idRol" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BD_fundacionDehviModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="BD_fundacionDehviModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-                <ScalarProperty Name="cedulaFisica" ColumnName="cedulaFisica" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="apellido1" ColumnName="apellido1" />
-                <ScalarProperty Name="apellido2" ColumnName="apellido2" />
-                <ScalarProperty Name="correo" ColumnName="correo" />
-                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
-                <ScalarProperty Name="idRol" ColumnName="idRol" />
-                <ScalarProperty Name="idDepartamento" ColumnName="idDepartamento" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
                 <ScalarProperty Name="rutaImg" ColumnName="rutaImg" />
+                <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="idDepartamento" ColumnName="idDepartamento" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="apellido2" ColumnName="apellido2" />
+                <ScalarProperty Name="apellido1" ColumnName="apellido1" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="cedulaFisica" ColumnName="cedulaFisica" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

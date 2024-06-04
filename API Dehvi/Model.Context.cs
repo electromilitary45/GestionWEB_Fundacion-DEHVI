@@ -30,6 +30,7 @@ namespace API_Dehvi
         public virtual DbSet<Manual> Manual { get; set; }
         public virtual DbSet<Procedimiento> Procedimiento { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
     }
 }

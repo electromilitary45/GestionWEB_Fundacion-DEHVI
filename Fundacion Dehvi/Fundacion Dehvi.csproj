@@ -147,6 +147,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Entities\DepartamentoEnt.cs" />
+    <Compile Include="Entities\ProcedimientosEnt.cs" />
     <Compile Include="Entities\UsuarioEnt.cs" />
     <Compile Include="Entities\UtililitariosEnt.cs" />
     <Compile Include="Global.asax.cs">
