@@ -362,19 +362,24 @@ namespace API_Dehvi.Controllers
                                 where u.idUsuario == usuario.idUsuario
                                 select u).FirstOrDefault();
 
-                    if (user.contrasena.Equals(usuario.contrasena)) //pregunto si la contraseña del usuario buscado y la contraseña actual que viene desde el front son iguales
+                    if (user.contrasena.Equals(usuario.contrasenaActual) && usuario.contrasenaNueva.Equals(usuario.contrasenaRepetida)) //pregunto si la contraseña del usuario buscado y la contraseña actual que viene desde el front son iguales
                     {//son iguales
                         user.contrasena = usuario.contrasenaNueva;//cambio la actual por la nueva
                         con.SaveChanges();
                         return 1; //mensaje de exito
                     }
 
+                    if (!usuario.contrasenaNueva.Equals(usuario.contrasenaRepetida))
+                    {
+                        return 2;
+                    }
 
-                    return 2;// las contraseñas no eran iguales
+                    return 3;// las contraseñas actual no era la misma a la que esta registrada
                 }
             }
             catch { return 500; }
         }
+
         /*-------------------- FIN USUARIOS COMUNES --------------------*/
 
     }//fin de la clase

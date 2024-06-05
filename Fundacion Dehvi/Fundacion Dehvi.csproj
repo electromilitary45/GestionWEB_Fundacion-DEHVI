@@ -200,6 +200,7 @@
     <Content Include="Src\css\rtl.css" />
     <Content Include="Src\css\style.css" />
     <Content Include="Src\css\theme.css" />
+    <Content Include="Src\funciones\FuncionesUsuarios.js" />
     <Content Include="Src\image\1.jpg" />
     <Content Include="Src\image\1.png" />
     <Content Include="Src\image\Archivos\archivo-predeterminado.png" />
@@ -371,8 +372,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Src\funciones\" />
     <Folder Include="Src\plugins\" />
+    <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

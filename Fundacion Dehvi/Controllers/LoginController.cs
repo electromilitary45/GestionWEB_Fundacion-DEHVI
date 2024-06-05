@@ -72,7 +72,7 @@ namespace Fundacion_Dehvi.Controllers
                 if (resp != null)
                 {
                     ViewBag.mensaje = "Se ha enviado un correo con su nueva contraseña";
-                    return View();
+                    return RedirectToAction("InicioSesion", "Login");
                 }
                 else
                 {

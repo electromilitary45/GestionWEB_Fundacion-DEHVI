@@ -14,20 +14,20 @@
         <a class="btn btn-rounded" href="@Url.Action("PerfilUsuario","Usuario")"><i class="icon-arrow-left"></i> Mi Perfil </a>
         <div class="card">
             <div class="card-header">
-                <span class="h4">Cambia tu contraseña.</span>
+                <span class="h4">Cambia tu contraseña. @Html.DisplayTextFor(m => m.nombre)</span>
                 <p class="text-muted">Cambia la contraseña de tu cuenta.</p>
             </div>
             <div class="card-body">
-                @using (Html.BeginForm("", "", FormMethod.Post, new { @class = "form-validate", @novalidate = "novalidate" }))
-                {
-                    @*@Html.HiddenFor(m => m.idUsuario)*@
-                    <input type="hidden" name="idUsuario" value="@Session["idUsuario"].ToString()"/>
+                <!--INICIO: formulario-->
+                <form method="post" asp-controller="Usuario" asp-action="CambioContrasena">
+                    <input type="hidden" name="idUsuario" value="@Session["idUsuario"].ToString()" />
+                    <!--INICIO: Contraseña Actual-->
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label">Contraseña Actual</label>
                                 <div class="input-group show-hide-password">
-                                    @Html.TextBoxFor(m => m.contrasena, new { @class = "form-control", @required = "required", @placeholder = "Contraseña Actual", @type = "password" })
+                                    <input class="form-control" required placeholder="Contraseña Actual" type="password" name="contrasenaActual" />
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="icon-eye-off" aria-hidden="true" style="cursor: pointer;"></i></span>
                                     </div>
@@ -35,41 +35,97 @@
                             </div>
                         </div>
                     </div>
+                    <!--FIN: Contraseña Actual-->
+
+
                     <div class="row">
-                        <!--NUEVA CONTRASEÑA-->
+                        <!--INICIO: Nueva Contraseña-->
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-control-label">Nueva Contraseña</label>
                                 <div class="input-group show-hide-password">
-                                    @Html.TextBoxFor(m => m.contrasena, new { @class = "form-control", @required = "required", @placeholder = "Nueva Contraseña", @type = "password" })
-
+                                    <input class="form-control" required placeholder="Nueva Contraseña" type="password" name="contrasenaNueva" />
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="icon-eye-off" aria-hidden="true" style="cursor: pointer;"></i></span>
                                     </div>
                                 </div>
-                                @*<input class="form-control" type="password">*@
                             </div>
                         </div>
-                        <!--CONFIRMAR CONTRASEÑA-->
+                        <!--FIN: Nueva Contraseña-->
+                        <!--INICIO: Repetir Contraseña-->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-control-label">Confirmar Contraseña</label>
+                                <label class="form-control-label">Repetir Contraseña</label>
                                 <div class="input-group show-hide-password">
-                                    @Html.TextBoxFor(m => m.contrasena, new { @class = "form-control", @required = "required", @placeholder = "Confirmar Contraseña", @type = "password" })
-
+                                    <input class="form-control" required placeholder="Repetir Contraseña" type="password" name="contrasenaRepetida" onkeyup="revisarContrasenas()" />
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="icon-eye-off" aria-hidden="true" style="cursor: pointer;"></i></span>
                                     </div>
                                 </div>
-                                @*<input class="form-control" type="password">*@
                             </div>
                         </div>
+                        <!--FIN: Repetir Contraseña-->
                     </div>
                     <div class="mt-4 text-center">
-                        <button type="button" class="btn btn-md">Actualizar Contraseña <i class="icon-check"></i></button>
+                        <button type="submit" class="btn btn-md" name="btnSubmit">Actualizar Contraseña <i class="icon-check"></i></button>
                     </div>
-                }
+                </form>
+                <!--FIN: Formulario-->
             </div>
         </div>
     </div>
 </section>
+
+<script>
+    function revisarContrasenas() {
+        //alert("asd");
+        //let contrasenaActual = document.getElementsByName('contrasenaActual').value;
+        //let contrasenaActual = document.getElementsByName('contrasenaNueva').value;
+        //let contrasenaActual = document.getElementsByName('contrasenaRepetida').value;
+        //let btnSubmit = document.getElementsByName('btnSubmit');
+
+
+        //if (contrasenaActual != null && (contrasenaNueva == contrasenaRepetida)) {
+
+        //} else {
+        //    btnSubmit.disabled = false;
+        //    alert("asd");
+
+        //    $.notify({
+        //        icon: "add_alert",
+        //        message: "Welcome to <b>Material Dashboard</b> - a beautiful freebie for every web developer."
+
+        //    }, {
+        //        type: 'success',
+        //        timer: 4000,
+        //        placement: {
+        //            from: from,
+        //            align: align
+        //        }
+        //    });
+        //}
+
+        //return bandera;
+
+        let mensaje = @ViewBag.mensaje;
+
+        if (mensaje != null) {
+            $.notify({
+                icon: "add_alert",
+                message: mensaje
+
+                }, {
+                    type: 'success',
+                    timer: 4000,
+                    placement: {
+                        from: from,
+                        align: align
+                    }
+            });
+
+            mensaje = "";
+        }
+
+
+    }
+</script>
