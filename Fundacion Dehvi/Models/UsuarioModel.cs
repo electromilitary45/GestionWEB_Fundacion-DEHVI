@@ -77,5 +77,17 @@ namespace Fundacion_Dehvi.Models
             }
         }
 
+        //---INICIO: Cambiar la contraseña
+        public int CambiarContrasena(UsuarioEnt usuario)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlAPI + "CambioContrasena";
+                JsonContent cont = JsonContent.Create(usuario);
+                var resp = client.PutAsync(url, cont).Result;
+                return resp.Content.ReadFromJsonAsync<int>().Result;
+            }
+        }
+
     }//fin de la clase
 }//fin del namespace

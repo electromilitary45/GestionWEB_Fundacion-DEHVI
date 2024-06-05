@@ -142,7 +142,7 @@ namespace API_Dehvi.Controllers
                         string urlHtml = AppDomain.CurrentDomain.BaseDirectory + "TemplatesCorreos\\NuevaCuenta.html";
                         string html = System.IO.File.ReadAllText(urlHtml);
 
-                        html = html.Replace("@@nombre",usuario.nombre);
+                        html = html.Replace("@@nombre", usuario.nombre);
                         html = html.Replace("@@apellido1", usuario.apellido1);
                         html = html.Replace("@@apellido2", usuario.apellido2);
                         html = html.Replace("@@correo", usuario.correo);
@@ -211,7 +211,7 @@ namespace API_Dehvi.Controllers
 
 
         /*-------------------- FIN ADMISITRACION DE USUARIOS --------------------*/
-        
+
         /*-------------------- INICIO: USUARIOS COMUNES -------------------------*/
 
         //--- INICIO: USUARIOS COMUN -
@@ -347,6 +347,37 @@ namespace API_Dehvi.Controllers
             {
                 return 500;
             }
+        }
+
+        //--- INICIO: Cambiar Contraseña
+        [HttpPut]
+        [Route("CambioContrasena")]
+        public int CambiarContrasenaUsuario(Usuario_Ent usuario)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities())
+                {
+                    var user = (from u in con.Usuario
+                                where u.idUsuario == usuario.idUsuario
+                                select u).FirstOrDefault();
+
+                    if (user.contrasena.Equals(usuario.contrasenaActual) && usuario.contrasenaNueva.Equals(usuario.contrasenaRepetida)) //pregunto si la contraseña del usuario buscado y la contraseña actual que viene desde el front son iguales
+                    {//son iguales
+                        user.contrasena = usuario.contrasenaNueva;//cambio la actual por la nueva
+                        con.SaveChanges();
+                        return 1; //mensaje de exito
+                    }
+
+                    if (!usuario.contrasenaNueva.Equals(usuario.contrasenaRepetida))
+                    {
+                        return 2;
+                    }
+
+                    return 3;// las contraseñas actual no era la misma a la que esta registrada
+                }
+            }
+            catch { return 500; }
         }
 
         /*-------------------- FIN USUARIOS COMUNES --------------------*/

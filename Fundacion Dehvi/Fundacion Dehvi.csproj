@@ -202,6 +202,7 @@
     <Content Include="Src\css\rtl.css" />
     <Content Include="Src\css\style.css" />
     <Content Include="Src\css\theme.css" />
+    <Content Include="Src\funciones\FuncionesUsuarios.js" />
     <Content Include="Src\image\1.jpg" />
     <Content Include="Src\image\1.png" />
     <Content Include="Src\image\2.png" />
@@ -375,11 +376,13 @@
     <Content Include="Views\Procedimiento\ActualizarProce.cshtml" />
     <Content Include="Views\Departamento\ListaDepartasAdmin.cshtml" />
     <Content Include="Views\Departamento\ListaDeparta.cshtml" />
+    <Content Include="Views\Departamento\PerfilDepa.cshtml" />
+    <Content Include="Views\Usuario\CambioContrasena.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Src\funciones\" />
     <Folder Include="Src\plugins\" />
+    <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
