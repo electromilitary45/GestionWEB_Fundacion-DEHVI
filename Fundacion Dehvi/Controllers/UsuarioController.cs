@@ -104,6 +104,41 @@ namespace Fundacion_Dehvi.Controllers
 
         }
 
+        //-----INICIO: EDITAR DATOS PERSONALES
+        [HttpGet]
+        public ActionResult EditarMisDatos()
+        {
+            if (Session["idUsuario"] != null)
+            {
+                var datos = UM.ConsultaUsuariosID(long.Parse(Session["idUsuario"].ToString()));
+                return View(datos);
+            }
+            else
+            {
+                return RedirectToAction("InicioSesion", "Login");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditarMisDatos(UsuarioEnt usuario)
+        {
+            try
+            {
+                var user = UM.EditarMisDatos(usuario);
+                switch (user)
+                {
+                    case 1:
+                        return RedirectToAction("PerfilUsuario", "Usuario");
+                    default:
+                        ViewBag.mensaje = "Error al actualizar su informacion.";
+                        return View();
+                }
+            }
+            catch (Exception e)
+            {
+                return View(e);
+            }
+        }
 
     }//fin de clase
 }//fin de namespace

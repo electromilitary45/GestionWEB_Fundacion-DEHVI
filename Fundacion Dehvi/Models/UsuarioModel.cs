@@ -89,5 +89,17 @@ namespace Fundacion_Dehvi.Models
             }
         }
 
+        //---INICIO: EditMisDatos
+        public int EditarMisDatos(UsuarioEnt usuario)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlAPI + "EditarMisDatos";
+                JsonContent cont = JsonContent.Create(usuario);
+                var resp = client.PutAsync(url, cont).Result;
+                return resp.Content.ReadFromJsonAsync<int>().Result;
+            }
+        }
+
     }//fin de la clase
 }//fin del namespace

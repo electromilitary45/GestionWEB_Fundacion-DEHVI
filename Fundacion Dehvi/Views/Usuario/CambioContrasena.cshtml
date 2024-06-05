@@ -11,12 +11,28 @@
 
 <section id="page-content">
     <div class="container">
+        <!--BTN retroceder-->
         <a class="btn btn-rounded" href="@Url.Action("PerfilUsuario","Usuario")"><i class="icon-arrow-left"></i> Mi Perfil </a>
+        
+        <!--INICIO: Alertas-->
+        @if (ViewBag.mensaje != null)
+        {
+            <div class="container">
+                <div role="alert" class="alert alert-info alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
+                    <strong><i class="fa fa-check-circle"></i> Warning!</strong> @ViewBag.mensaje
+                </div>
+            </div>
+        }
+        <!--FIN: Alertas-->
+
         <div class="card">
             <div class="card-header">
                 <span class="h4">Cambia tu contraseña. @Html.DisplayTextFor(m => m.nombre)</span>
                 <p class="text-muted">Cambia la contraseña de tu cuenta.</p>
             </div>
+
+
             <div class="card-body">
                 <!--INICIO: formulario-->
                 <form method="post" asp-controller="Usuario" asp-action="CambioContrasena">
@@ -57,7 +73,7 @@
                             <div class="form-group">
                                 <label class="form-control-label">Repetir Contraseña</label>
                                 <div class="input-group show-hide-password">
-                                    <input class="form-control" required placeholder="Repetir Contraseña" type="password" name="contrasenaRepetida" onkeyup="revisarContrasenas()" />
+                                    <input class="form-control" required placeholder="Repetir Contraseña" type="password" name="contrasenaRepetida" />
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="icon-eye-off" aria-hidden="true" style="cursor: pointer;"></i></span>
                                     </div>
@@ -70,6 +86,7 @@
                         <button type="submit" class="btn btn-md" name="btnSubmit">Actualizar Contraseña <i class="icon-check"></i></button>
                     </div>
                 </form>
+                <button type="button" class="btn btn-md" name="btnSubmit" onclick="revisarContrasenas()">Actualizar Contraseña <i class="icon-check"></i></button>
                 <!--FIN: Formulario-->
             </div>
         </div>
@@ -78,54 +95,5 @@
 
 <script>
     function revisarContrasenas() {
-        //alert("asd");
-        //let contrasenaActual = document.getElementsByName('contrasenaActual').value;
-        //let contrasenaActual = document.getElementsByName('contrasenaNueva').value;
-        //let contrasenaActual = document.getElementsByName('contrasenaRepetida').value;
-        //let btnSubmit = document.getElementsByName('btnSubmit');
-
-
-        //if (contrasenaActual != null && (contrasenaNueva == contrasenaRepetida)) {
-
-        //} else {
-        //    btnSubmit.disabled = false;
-        //    alert("asd");
-
-        //    $.notify({
-        //        icon: "add_alert",
-        //        message: "Welcome to <b>Material Dashboard</b> - a beautiful freebie for every web developer."
-
-        //    }, {
-        //        type: 'success',
-        //        timer: 4000,
-        //        placement: {
-        //            from: from,
-        //            align: align
-        //        }
-        //    });
-        //}
-
-        //return bandera;
-
-        let mensaje = @ViewBag.mensaje;
-
-        if (mensaje != null) {
-            $.notify({
-                icon: "add_alert",
-                message: mensaje
-
-                }, {
-                    type: 'success',
-                    timer: 4000,
-                    placement: {
-                        from: from,
-                        align: align
-                    }
-            });
-
-            mensaje = "";
-        }
-
-
     }
 </script>

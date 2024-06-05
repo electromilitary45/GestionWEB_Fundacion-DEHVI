@@ -1,0 +1,208 @@
+﻿@model Fundacion_Dehvi.Entities.UsuarioEnt
+
+@{
+    ViewBag.Title = "Editando mis Datos";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!--INICIO: Page Tittle-->
+<section id="page-title" class="text-light" style="background-image:url(../../Src/image/usuario/background.jpg); background-size: cover; background-position: center center;"></section>
+<!--FIN: Page Tittle-->
+
+<section id="page-content">
+    <div class="container">
+        <!--BTN retroceder-->
+        <a class="btn btn-rounded" href="@Url.Action("PerfilUsuario","Usuario")"><i class="icon-arrow-left"></i> Mi Perfil </a>
+        
+        <!--INICIO: Alertas-->
+        @if (ViewBag.mensaje != null)
+        {
+            <div class="container">
+                <div role="alert" class="alert alert-info alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
+                    <strong><i class="fa fa-check-circle"></i> Warning!</strong> @ViewBag.mensaje
+                </div>
+            </div>
+        }
+        <!--FIN: Alertas-->
+
+        <!--Datos de cuenta-->
+        <div class="card">
+            <div class="card-header">
+                <span class="h4">Detalles de mi Cuenta.</span>
+                <p class="text-muted">
+                    Recibiras una notificacion en caso de realizar un cambio en esta seccion.
+                </p>
+            </div>
+
+            <div class="card-body">
+                @using (Html.BeginForm("EditarMisDatos", "Usuario", FormMethod.Post, new { @class = "form-validate pt-3" }))
+                {
+                    @Html.TextBoxFor(m => m.idUsuario, new { @type = "hidden" })
+                    <div class="h5 mb-4">Informacion Personal</div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Cedula Fisica</label>
+                            @Html.TextBoxFor(m => m.cedulaFisica, new { @class = "form-control", @readonly = "readonly", @required = "required", @placeholder = "Cedula Fisica" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>Nombre</label>
+                            @Html.TextBoxFor(m => m.nombre, new { @class = "form-control", @readonly = "readonly", @required = "required", @placeholder = "Nombre" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Primer Apellido</label>
+                            @Html.TextBoxFor(m => m.apellido1, new { @class = "form-control", @readonly = "readonly", @required = "required", @placeholder = "Primer Apellido" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Segundo Apellido</label>
+                            @Html.TextBoxFor(m => m.apellido2, new { @class = "form-control", @readonly = "readonly", @required = "required", @placeholder = "Segundo Apellido" })
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Correo Electronico</label>
+                            @Html.TextBoxFor(m => m.correo, new { @class = "form-control", @readonly = "readonly", @required = "required", @placeholder = "Cedula Fisica" })
+
+                        </div>
+                    </div>
+
+                    <div class="text-center form-group" style="margin:20px;">
+                        <button type="submit" class="btn" disabled >Actualizar mis datos</button>
+                    </div>
+                }
+
+                @*<form id="form1" class="form-validate" novalidate="novalidate">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" name="username" placeholder="Enter username" required="">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control" name="email" placeholder="Enter your email" required="">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="password">Password</label>
+                            <div class="input-group show-hide-password">
+                                <input class="form-control" name="password" placeholder="Enter password" type="password" required="">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="icon-eye-off" aria-hidden="true" style="cursor: pointer;"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="password2">Confirm Password</label>
+                            <div class="input-group show-hide-password">
+                                <input class="form-control" name="password2" placeholder="Enter password" type="password" required="">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="icon-eye-off" aria-hidden="true" style="cursor: pointer;"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" name="name" placeholder="Enter your Name" required="">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="surname">Surname</label>
+                            <input type="text" class="form-control" name="surname" placeholder="Enter your Surname" required="">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="gender">Gender</label>
+                            <select class="form-control" name="gender" required="">
+                                <option value="">Select your gender</option>
+                                <option>Female</option>
+                                <option>Male</option>
+                                <option>Rather not say</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="gender">Date of Birth</label>
+                            <input class="form-control" type="date" name="dateofbirth" required="">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="telephone">Telephone</label>
+                            <input class="form-control" type="tel" name="telephone" placeholder="Enter your Telephone number" required="">
+                        </div>
+                    </div>
+                    <div class="h5 mb-4">Mailing Address</div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="address">Address</label>
+                            <input type="text" class="form-control" name="address" placeholder="Enter your Street Address" required="">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="address2">Address 2</label>
+                            <input type="text" class="form-control" name="address2" placeholder="Enter your Apartment, studio, or floor" required="">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="city">City</label>
+                            <input type="text" class="form-control" name="city" placeholder="Enter your City" required="">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Zip Code:</label>
+                            <input type="number" class="form-control" name="zip" placeholder="Enter Zip Code" required="">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="state">State</label>
+                            <select name="state" class="form-control" required="">
+                                <option value="">Australia</option>
+                                <option>Option 1</option>
+                                <option>Option 2</option>
+                                <option>Option 3</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="country">Country</label>
+                            <select name="country" class="form-control" required="">
+                                <option value="">United States</option>
+                                <option>Option 1</option>
+                                <option>Option 2</option>
+                                <option>Option 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group mb-1 mt-5">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" name="reminders" id="reminders" class="custom-control-input" value="1" required="">
+                            <label class="custom-control-label" for="reminders">
+                                Send me occasional
+                                reminders
+                                about these settings
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" name="terms_conditions" id="terms_conditions" class="custom-control-input" value="1" required="">
+                            <label class="custom-control-label" for="terms_conditions">
+                                By checking
+                                this
+                                option, you agree to acceot with the <a href="#">
+                                    Terms and
+                                    Conditions
+                                </a>.
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn m-t-30 mt-3">Submit</button>
+                </form>*@
+            </div>
+        </div>
+    </div>
+</section>

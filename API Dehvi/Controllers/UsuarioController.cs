@@ -334,7 +334,7 @@ namespace API_Dehvi.Controllers
                         html = html.Replace("@@apellido1", user.apellido1);
                         html = html.Replace("@@apellido2", user.apellido2);
                         html = html.Replace("@@contrasena", nuevaContrasena);
-                        util.enviarCorreo(user.correo, "Recuperacion de Contraseña", html);
+                        util.enviarCorreo(user.correo, "Credenciales Recuperadas", html);
                         return 1;
                     }
                     else
@@ -366,6 +366,15 @@ namespace API_Dehvi.Controllers
                     {//son iguales
                         user.contrasena = usuario.contrasenaNueva;//cambio la actual por la nueva
                         con.SaveChanges();
+
+                        //INICIO: Envio de correo
+                        string urlHtml = AppDomain.CurrentDomain.BaseDirectory + "TemplatesCorreos\\CambioContrasena.html";
+                        string html = System.IO.File.ReadAllText(urlHtml);
+                        html = html.Replace("@@nombre", user.nombre);
+                        html = html.Replace("@@apellido1", user.apellido1);
+                        html = html.Replace("@@apellido2", user.apellido2);
+                        util.enviarCorreo(user.correo, "Credenciales Cambiadas", html);
+
                         return 1; //mensaje de exito
                     }
 
@@ -380,8 +389,45 @@ namespace API_Dehvi.Controllers
             catch { return 500; }
         }
 
-        /*-------------------- FIN USUARIOS COMUNES --------------------*/
+        [HttpPut]
+        [Route("EditarMisDatos")]
+        public int EditDatosPersonales(Usuario_Ent usuario)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities())
+                {
+                    var user = (from u in con.Usuario
+                                where u.idUsuario == usuario.idUsuario
+                                select u).FirstOrDefault();
 
-    }//fin de la clase
-}//fin del namespace
+                    user.nombre = usuario.nombre;
+                    user.apellido1 = usuario.apellido1;
+                    user.apellido2 = usuario.apellido2;
+                    user.correo = usuario.correo;
+
+                    con.SaveChanges();
+
+                    //INICIO: Envio de correo
+                    string urlHtml = AppDomain.CurrentDomain.BaseDirectory + "TemplatesCorreos\\EditMisDatos.html";
+                    string html = System.IO.File.ReadAllText(urlHtml);
+                    html = html.Replace("@@nombre", user.nombre);
+                    html = html.Replace("@@apellido1", user.apellido1);
+                    html = html.Replace("@@apellido2", user.apellido2);
+                    util.enviarCorreo(user.correo, "Datos Personales Actualizados", html);
+
+                    return 1;
+                }
+            }
+            catch
+            {
+                return 500;
+            }
+        }
+
+
+            /*-------------------- FIN USUARIOS COMUNES --------------------*/
+
+        }//fin de la clase
+    }//fin del namespace
 

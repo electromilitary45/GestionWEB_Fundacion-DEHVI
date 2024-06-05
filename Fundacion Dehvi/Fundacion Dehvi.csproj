@@ -378,6 +378,7 @@
     <Content Include="Views\Departamento\ListaDeparta.cshtml" />
     <Content Include="Views\Departamento\PerfilDepa.cshtml" />
     <Content Include="Views\Usuario\CambioContrasena.cshtml" />
+    <Content Include="Views\Usuario\EditarMisDatos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
