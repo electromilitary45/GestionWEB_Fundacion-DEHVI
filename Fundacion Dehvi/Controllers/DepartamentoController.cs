@@ -63,7 +63,32 @@ namespace Fundacion_Dehvi.Controllers
                 else
                 {
                     var datos = d.ListaDeparta();
-                    //Muestra los mensajes referentes a empresas agregadas correctamente y al cambio de estado de estas cuando sea pertinente
+                    //Muestra los mensajes referentes a departmentos agregadas correctamente y al cambio de estado de estas cuando sea pertinente
+                    ViewBag.Mensaje = TempData["Mensaje"];
+                    return View(datos);
+                }
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("InternalServer", "Error");
+            }
+
+        }
+
+        //------------------- Lista de Departamentos -------------------
+        [HttpGet]
+        public ActionResult ListaDepartasAdmin()
+        {
+            try
+            {
+                if (Session["idUsuario"] == null)
+                {
+                    return RedirectToAction("InicioSesion", "Login");
+                }
+                else
+                {
+                    var datos = d.ListaDepartasAdmin();
+                    //Muestra los mensajes referentes a departmentos agregadas correctamente y al cambio de estado de estas cuando sea pertinente
                     ViewBag.Mensaje = TempData["Mensaje"];
                     return View(datos);
                 }
@@ -86,7 +111,7 @@ namespace Fundacion_Dehvi.Controllers
                 ViewBag.MensajeAcc = Session["mensaje"].ToString();
             }
 
-            return View(datos); // muestra el perfil del accesorio en especifico
+            return View(datos); // muestra el perfil del Departamento en especifico
         }
 
         //------------------- Actualizar Departamento -------------------

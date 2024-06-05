@@ -33,7 +33,17 @@ namespace Fundacion_Dehvi.Models
                 return resp.Content.ReadFromJsonAsync<List<DepartamentoEnt>>().Result;
             }
         }// fin de la lista de departamentos
-
+        
+        //------------ Lista de Departamentos ------------
+        public List<DepartamentoEnt> ListaDepartasAdmin()
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlApi + "ListaDepartasAdmin";
+                var resp = client.GetAsync(url).Result;
+                return resp.Content.ReadFromJsonAsync<List<DepartamentoEnt>>().Result;
+            }
+        }// fin de la lista de departamentos
 
         //------------ Perfil de Departamento ------------
         public DepartamentoEnt PerfilDepa(long q)

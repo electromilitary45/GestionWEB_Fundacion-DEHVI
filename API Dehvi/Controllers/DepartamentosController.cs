@@ -68,6 +68,34 @@ namespace API_Dehvi.Controllers
 
         } // fin de la lista de los departamentos
 
+        //------------------- Lista de Departamentos Admin-------------------
+        [HttpGet]
+        [Route("ListaDepartasAdmin")]
+        public List<DepartamentoEnt> ListaDepartasAdmin()
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities()) //conexion a la base de datos
+                {
+                    var data = (
+                        from d in con.Departamento
+                        orderby d.estado descending
+                        select new DepartamentoEnt
+                        {
+                            idDepartamento = d.idDepartamento,
+                            nombre = d.nombre,
+                            estado = d.estado
+                        }).ToList();
+                    return data; // se muestran todos los departamentos
+                }
+            }
+            catch (Exception)
+            {
+                return null; // error
+            }
+
+        } // fin de la lista de los departamentos
+
         //------------------- Consulta Departamento -------------------
         [HttpGet]
         [Route("PerfilDepa")]

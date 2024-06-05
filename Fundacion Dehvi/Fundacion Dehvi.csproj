@@ -145,6 +145,7 @@
     <Compile Include="Controllers\DepartamentoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ProcedimientoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Entities\DepartamentoEnt.cs" />
     <Compile Include="Entities\ProcedimientosEnt.cs" />
@@ -154,6 +155,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DepartamentoModel.cs" />
+    <Compile Include="Models\ProcedimientoModel.cs" />
     <Compile Include="Models\UsuarioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -202,6 +204,7 @@
     <Content Include="Src\css\theme.css" />
     <Content Include="Src\image\1.jpg" />
     <Content Include="Src\image\1.png" />
+    <Content Include="Src\image\2.png" />
     <Content Include="Src\image\Archivos\archivo-predeterminado.png" />
     <Content Include="Src\image\icons\2.png" />
     <Content Include="Src\image\icons\ico-fundacion_v1.png" />
@@ -357,7 +360,6 @@
     <Content Include="Src\webfonts\Quicksand-SemiBold.ttf" />
     <Content Include="Src\webfonts\Quicksand-VariableFont_wght.ttf" />
     <Content Include="Views\Departamento\CrearDepartamento.cshtml" />
-    <Content Include="Views\Departamento\ListaDepartas.cshtml" />
     <Content Include="Views\Departamento\ActualizarDepa.cshtml" />
     <Content Include="Views\Login\InicioSesion.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
@@ -366,7 +368,13 @@
     <Content Include="Views\Usuario\PerfilUsuario.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
-    <Content Include="Views\Departamento\PerfilDepa.cshtml" />
+    <Content Include="Views\Procedimiento\CrearProce.cshtml" />
+    <Content Include="Views\Procedimiento\ListaProces.cshtml" />
+    <Content Include="Views\Procedimiento\ListaProcesSector.cshtml" />
+    <Content Include="Views\Procedimiento\PerfilProce.cshtml" />
+    <Content Include="Views\Procedimiento\ActualizarProce.cshtml" />
+    <Content Include="Views\Departamento\ListaDepartasAdmin.cshtml" />
+    <Content Include="Views\Departamento\ListaDeparta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
