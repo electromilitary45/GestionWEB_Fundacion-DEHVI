@@ -140,5 +140,16 @@ namespace Fundacion_Dehvi.Controllers
             }
         }
 
+        //----INICIO: EDITAR MI FOTO
+        [HttpGet]
+        public ActionResult EditarMiAvatar(UsuarioEnt usuario)
+        {
+            if (Session["idUsuario"] != null)
+            {
+                return View(UM.ConsultaUsuariosID(long.Parse(Session["idUsuario"].ToString())));
+            }
+            return RedirectToAction("InicioSesion", "Login");
+        }
+
     }//fin de clase
 }//fin de namespace

@@ -1,0 +1,98 @@
+﻿@model Fundacion_Dehvi.Entities.UsuarioEnt
+@{
+    ViewBag.Title = "EditarMiAvatar";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!--INICIO: Page Tittle-->
+<section id="page-title" class="text-light" style="background-image:url(../../Src/image/usuario/background.jpg); background-size: cover; background-position: center center;"></section>
+<!--FIN: Page Tittle-->
+
+<section id="page-content">
+    <div class="container">
+
+        <!--BTN retroceder-->
+        <a class="btn btn-rounded" href="@Url.Action("PerfilUsuario","Usuario")"><i class="icon-arrow-left"></i> Mi Perfil </a>
+
+
+        <!--INICIO: Alertas-->
+        @if (ViewBag.mensaje != null)
+        {
+            <div class="container">
+                <div role="alert" class="alert alert-info alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
+                    <strong><i class="fa fa-check-circle"></i> Warning!</strong> @ViewBag.mensaje
+                </div>
+            </div>
+        }
+        <!--FIN: Alertas-->
+
+        <div class="card">
+            <div class="card-header">
+                <span class="h4">Contact</span>
+                <p class="text-muted">Get in touch with us</p>
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                        <div class="group text-center">
+                            <!--ESPACIO PARA MOSTRAR LA IMAGEN DEL USUARIO-->
+                            @if (Session["rutaImg"] != null)
+                            {
+                                <img src="@Session["rutaImg"]" height="200" />
+                            }
+                            else
+                            {
+                                <img src="~/Src/image/usuario/foto-perfil.jpg" height="200" />
+                            }
+
+                            <!--BTN Eliminar fotografia-->
+                            @if (Session["rutaImg"] != null)
+                            {
+                                <div class="form-group">
+                                    <label class="form-control-label">Eliminar mi avatar.</label>
+                                    <a href="#" class="btn btn-danger btn-sm"><i class="icon-trash"></i> Eliminar Avatar</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="form-group">
+                                    <label class="form-control-label">Eliminar mi avatar.</label>
+                                    <a href="#" class="btn disabled btn-danger btn-sm"><i class="icon-trash"></i> Eliminar Avatar</a>
+                                </div>
+
+                            }
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-4">
+                        <h6><i class="icon-list"></i> Opciones</h6>
+                        <hr />
+                        @if (Session["rutaImg"] != null)
+                        {
+                            <div class="form-group">
+                                <label class="form-control-label">Actualizar mi Avatar</label>
+                                <input type="file" />
+                                <a href="#" class="btn btn-warning btn-sm"> <i class="icon-image"></i> Actualizar</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-group">
+                                <label class="form-control-label">Agregar un Avatar</label>
+                                <input type="file" />
+                                <a href="#" class="btn btn-success btn-sm"> <i class="icon-image"></i> Agregar</a>
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
