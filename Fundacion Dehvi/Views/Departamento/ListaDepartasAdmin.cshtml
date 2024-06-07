@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Fundacion_Dehvi.Entities.DepartamentoEnt>
 @{
-    ViewBag.Title = "ListaDepartasAdmin";
+    ViewBag.Title = "Lista Administrativa";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <link href="~/Src/css/custom.css" rel="stylesheet">
@@ -32,21 +32,21 @@
                         <div id="datatable1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <table id="datatable1" class="table table-bordered table-striped table-hover dataTable" style="width: 100%;" role="grid" aria-describedby="datatable_info">
+                                    <table class="table table-hover" style="width: 120%;">
                                         <thead>
-                                            <tr role="row">
-                                                <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Nombre del Sector: activar para ordenar columnas ascendente" style="width: 200px;">Nombre del Sector</th>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Cantidad de Procedimientos: activar para ordenar columnas ascendente" style="width: 250px;">Cantidad de Procedimientos</th>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Cantidad de Empleados: activar para ordenar columnas ascendente" style="width: 250px; ">Cantidad de Empleados</th>
-                                                <th class="sorting center" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Estado: activar para ordenar columnas ascendente" style="width: 100px;">Estado</th>
-                                                <th class="noExport sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Acciones: activar para ordenar columnas ascendente" style="width: 100px;">Acciones</th>
+                                            <tr class="table-secondary">
+                                                <th scope="row">Nombre del Sector</th>
+                                                <th scope="row">Cantidad de Procedimientos</th>
+                                                <th scope="row">Cantidad de Empleados</th>
+                                                <th scope="row">Estado</th>
+                                                <th scope="row">Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
 
                                             @foreach (var item in Model)
                                             {
-                                                <tr role="row" class="odd">
+                                                <tr role="row" class="odd" style="background-color: #F9F7F6;">
                                                     <td> @item.nombre</td>
                                                     <td> @item.nombre</td>
                                                     <td> @item.nombre</td>
@@ -61,14 +61,14 @@
                                                         }
                                                     </td>
                                                     <td>
-                                                        <a class="ml-2" href="@Url.Action("ActualizarDepa", "Departamento", new { q = item.idDepartamento })" data-toggle="tooltip" data-original-title="Editar"><i class="icon-edit" style="font-size: 18px;"></i></a>
+                                                        <a class="ml-2" href="@Url.Action("ActualizarDepa", "Departamento", new { q = item.idDepartamento })" data-toggle="tooltip" data-original-title="Editar"><i class="icon-eye"></i></a>
                                                         @if (item.estado == true)
                                                         {
-                                                            <a class="ml-2" href="@Url.Action("EstadoDepartamento", "Departamento", new { q = item.idDepartamento })" data-toggle="tooltip" data-original-title="Desactivar"><i class="icon-toggle-right" style="font-size: 18px;"></i></a>
+                                                            <a class="ml-2" href="@Url.Action("EstadoDepartamento", "Departamento", new { q = item.idDepartamento })" data-toggle="tooltip" data-original-title="Desactivar"><i class="icon-toggle-right"></i></a>
                                                         }
                                                         else
                                                         {
-                                                            <a class="ml-2" href="@Url.Action("EstadoDepartamento", "Departamento", new { q = item.idDepartamento })" data-toggle="tooltip" data-original-title="Activar"><i class="icon-toggle-left" style="font-size: 18px;"></i></a>
+                                                            <a class="ml-2" href="@Url.Action("EstadoDepartamento", "Departamento", new { q = item.idDepartamento })" data-toggle="tooltip" data-original-title="Activar"><i class="icon-toggle-left"></i></a>
                                                         }
                                                     </td>
                                                 </tr>
@@ -88,26 +88,26 @@
                                     </div>
                                 </div>
                             </div>
-                            </div>
-                            </div>
-                            </div>
-
                         </div>
-                        <!-- end: post content -->
-                        <!-- Sidebar-->
-                        <div class="sidebar col-lg-3">
-                            <!--Tabs with Posts-->
-                            <div class="widget ">
-                                <div class="row mb-3">
-                                    <div class="col-lg-12 text-left">
-                                        <a href="@Url.Action("CrearDepartamento", "Departamento")" class="btn btn-light">Agregar Departamento</a>
-                                    </div>
-                                    <div id="export_buttons" class="col-lg-12 text-left"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--End: Tabs with Posts-->
                     </div>
-                    <!-- end: Sidebar-->
                 </div>
+
+            </div>
+            <!-- end: post content -->
+            <!-- Sidebar-->
+            <div class="sidebar col-lg-3">
+                <!--Tabs with Posts-->
+                <div class="widget ">
+                    <div class="row mb-3">
+                        <div class="col-lg-12 text-left">
+                            <a href="@Url.Action("CrearDepartamento", "Departamento")" class="btn" style="background-color: #59B2E9; border-color: #59B2E9 ">Agregar Departamento</a>
+                        </div>
+                        <div id="export_buttons" class="col-lg-12 text-left"></div>
+                    </div>
+                </div>
+            </div>
+            <!--End: Tabs with Posts-->
+        </div>
+        <!-- end: Sidebar-->
+    </div>
 </section> <!-- end: Content -->

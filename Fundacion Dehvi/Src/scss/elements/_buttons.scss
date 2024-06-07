@@ -19,8 +19,7 @@ a.btn:not([href]):not([tabindex]) {
     padding: 12px 18px;
     position: relative;
     text-transform: uppercase;
-    background-color: $color-theme;
-    border-color: $color-theme;
+    background-color: #59B2E9;
     border-width: 1px;
     border-style: solid;
     color: $color-white;
@@ -74,7 +73,6 @@ a.btn:not([href]):not([tabindex]) {
         color: $color-white;
         text-decoration: none;
     }
-
     //Outline button
     &.btn-outline {
         background-color: transparent;
@@ -94,18 +92,15 @@ a.btn:not([href]):not([tabindex]) {
             color: #fff;
         }
     }
-
     //Rounded button
     &.btn-rounded {
-        border-radius: 2em ! important;
+        border-radius: 2em !important;
     }
-
     //Rounded button
     &.btn-block {
         width: 100%;
         display: block;
     }
-
     //Light button
     &.btn-white,
     &.btn-light {
@@ -136,6 +131,7 @@ a.btn:not([href]):not([tabindex]) {
                 color: #4c5667;
             }
         }
+
         &.btn-white-hover,
         &.btn-light-hover {
 
@@ -248,7 +244,6 @@ a.btn:not([href]):not([tabindex]) {
             color: $color-white;
         }
     }
-
     //Dark button
     &.btn-dark {
         background-color: $color-black;
@@ -295,15 +290,14 @@ a.btn:not([href]):not([tabindex]) {
 
     &.btn-round {
         border-radius: 50%;
-            padding: 0 10px !important;
-    height: 36px !important;
-    line-height: 36px !important;
+        padding: 0 10px !important;
+        height: 36px !important;
+        line-height: 36px !important;
 
-        >i {
+        > i {
             font-size: 14px;
         }
     }
-
     //Sliding buttons
     &.btn-slide {
         border-radius: 50px;
@@ -316,7 +310,7 @@ a.btn:not([href]):not([tabindex]) {
         width: 46px;
         line-height: 18px;
 
-        &>i {
+        & > i {
             float: left;
             left: 17px;
             position: absolute;
@@ -324,7 +318,7 @@ a.btn:not([href]):not([tabindex]) {
             transition: all 0.8s ease 0s;
         }
 
-        &>span {
+        & > span {
             left: 40px;
             position: absolute;
             text-align: left;
@@ -338,11 +332,11 @@ a.btn:not([href]):not([tabindex]) {
             width: 140px;
             text-align: left;
 
-            >i {
+            > i {
                 transform: rotate(360deg);
             }
 
-            >span {
+            > span {
                 opacity: 1;
             }
         }
@@ -352,12 +346,12 @@ a.btn:not([href]):not([tabindex]) {
             width: 30px;
             line-height: 26px;
 
-            >i {
+            > i {
                 left: 9px;
                 top: 8px;
             }
 
-            >span {
+            > span {
                 left: 28px;
                 top: 0px;
             }
@@ -372,12 +366,12 @@ a.btn:not([href]):not([tabindex]) {
             width: 36px;
             line-height: 36px;
 
-            >i {
+            > i {
                 left: 13px;
                 top: 13px;
             }
 
-            >span {
+            > span {
                 left: 36px;
                 top: 0px;
             }
@@ -391,12 +385,12 @@ a.btn:not([href]):not([tabindex]) {
             padding: 30px;
             line-height: 52px;
 
-            >i {
+            > i {
                 left: 23px;
                 top: 23px;
             }
 
-            >span {
+            > span {
                 left: 54px;
                 top: 3px;
             }
@@ -406,7 +400,6 @@ a.btn:not([href]):not([tabindex]) {
             }
         }
     }
-
     //Reval buttons
     &.btn-reveal {
         padding: 12px 34px;
@@ -477,7 +470,6 @@ a.btn:not([href]):not([tabindex]) {
             }
         }
     }
-
     //Button shadows
     &.btn-shadow {
         -webkit-box-shadow: 0 4px 16px #efefef;
@@ -493,7 +485,6 @@ a.btn:not([href]):not([tabindex]) {
             box-shadow: 4px 8px 16px #dedede
         }
     }
-
     //Button icon holder
     &.btn-icon-holder {
         padding-right: 16px;
@@ -587,87 +578,86 @@ a.btn:not([href]):not([tabindex]) {
             margin-right: -16px;
         }
     }
-
     //Social buttons
     &.btn-facebook {
-        background-color: #3b5998 ! important;
-        color: #ffffff ! important;
+        background-color: #3b5998 !important;
+        color: #ffffff !important;
         border-width: 0;
     }
 
     &.btn-twitter {
-        background-color: #00aced ! important;
-        color: #ffffff ! important;
+        background-color: #00aced !important;
+        color: #ffffff !important;
         border-width: 0;
     }
 
     &.btn-linkedin {
-        background-color: #007bb6 ! important;
-        color: #ffffff ! important;
+        background-color: #007bb6 !important;
+        color: #ffffff !important;
         border-width: 0;
     }
 
     &.btn-dribbble {
-        background-color: #ea4c89 ! important;
-        color: #ffffff ! important;
+        background-color: #ea4c89 !important;
+        color: #ffffff !important;
         border-width: 0;
     }
 
     &.btn-googleplus {
-        background-color: #dd4b39 ! important;
-        color: #ffffff ! important;
+        background-color: #dd4b39 !important;
+        color: #ffffff !important;
         border-width: 0;
     }
 
     &.btn-instagram {
-        background-color: #517fa4 ! important;
-        color: #ffffff ! important;
+        background-color: #517fa4 !important;
+        color: #ffffff !important;
         border-width: 0;
     }
 
     &.btn-pinterest {
-        background-color: #cb2027 ! important;
-        color: #ffffff ! important;
+        background-color: #cb2027 !important;
+        color: #ffffff !important;
         border-width: 0;
     }
 
     &.btn-dropbox {
-        background-color: #007ee5 ! important;
-        color: #ffffff ! important;
+        background-color: #007ee5 !important;
+        color: #ffffff !important;
         border-width: 0;
     }
 
     &.btn-flickr {
-        background-color: #ff0084 ! important;
-        color: #ffffff ! important;
+        background-color: #ff0084 !important;
+        color: #ffffff !important;
         border-width: 0;
     }
 
     &.btn-tumblr {
-        background-color: #32506d ! important;
-        color: #ffffff ! important;
+        background-color: #32506d !important;
+        color: #ffffff !important;
         border-width: 0;
     }
 
     &.btn-skype {
-        background-color: #00aff0 ! important;
-        color: #ffffff ! important;
+        background-color: #00aff0 !important;
+        color: #ffffff !important;
         border-width: 0;
     }
 
     &.btn-youtube {
-        background-color: #bb0000 ! important;
-        color: #ffffff ! important;
+        background-color: #bb0000 !important;
+        color: #ffffff !important;
         border-width: 0;
     }
 
     &.btn-github {
-        background-color: #171515 ! important;
-        color: #ffffff ! important;
+        background-color: #171515 !important;
+        color: #ffffff !important;
         border-width: 0;
     }
 
-    +.btn {
+    + .btn {
         margin-left: 4px;
     }
 

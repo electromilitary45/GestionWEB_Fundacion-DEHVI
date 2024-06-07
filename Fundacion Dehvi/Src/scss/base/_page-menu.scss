@@ -491,7 +491,11 @@ body:not(.breakpoint-xs):not(.breakpoint-sm):not(.breakpoint-md) {
                         &:hover,
                         &.active {
                             >a {
-                                color: $color-theme;
+                                color:
+                                    
+                                    
+                                    
+                                    ;
                                 background-color: initial;
                                 border: 0;
 

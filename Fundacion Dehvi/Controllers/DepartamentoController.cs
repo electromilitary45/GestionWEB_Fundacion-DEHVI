@@ -165,13 +165,13 @@ namespace Fundacion_Dehvi.Controllers
             {
                 case 1:
                     TempData["Mensaje"] = "Se ha inactivado el departamento correctamente";
-                    return RedirectToAction("ListaDeparta", "Departamento");
+                    return RedirectToAction("ListaDepartasAdmin", "Departamento");
                 case 2:
                     TempData["Mensaje"] = "Se ha activado el departamento correctamente";
-                    return RedirectToAction("ListaDeparta", "Departamento");
+                    return RedirectToAction("ListaDepartasAdmin", "Departamento");
                 default:
                     TempData["Mensaje"] = "¡Lo sentimos! No se pudo actualizar el estado del departamento";
-                    return RedirectToAction("ListaDeparta", "Departamento");
+                    return RedirectToAction("ListaDepartasAdmin", "Departamento");
             }
 
         }
