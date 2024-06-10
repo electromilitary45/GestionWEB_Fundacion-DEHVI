@@ -3,6 +3,7 @@ using Fundacion_Dehvi.Entities;
 using Fundacion_Dehvi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -16,12 +17,24 @@ namespace Fundacion_Dehvi.Controllers
         private readonly UtililitariosEnt Util = new UtililitariosEnt();
 
         //------------------ADMINISTRACION DE USUARIOS------------------
-
-
-
-
-
-
+        [HttpGet]
+        public ActionResult ListaUsuarios()
+        {
+            if (Session["idUsuario"] != null)
+            {
+                if (long.Parse(Session["idUsuario"].ToString()) != 1)
+                {
+                    return RedirectToAction("AccesoNoAuthorizado","Shared");
+                }
+                var datos = UM.ListaCompletaUsuarios();
+                return View(datos);
+            }
+            else
+            {
+                return RedirectToAction("InicioSesion", "Login");
+            }
+            
+        }
 
         /*----------------------USUARIO COMUN-------------------------------*/
 
@@ -151,5 +164,132 @@ namespace Fundacion_Dehvi.Controllers
             return RedirectToAction("InicioSesion", "Login");
         }
 
+        [HttpPost]
+        public ActionResult SubirAvatar(HttpPostedFileBase inputArchivo, UsuarioEnt usuario)
+        {
+            try
+            {
+                if(inputArchivo == null && usuario.idUsuario == 0)
+                {
+                    ViewBag.mensaje = "¡Lo sentimos! Debe agregar una imagen!";
+                    return RedirectToAction("EditarMiAvatar");
+                }
+
+                //se guardar la extension del archivo temporalmente
+                string extension= Path.GetExtension(Path.GetFileName(inputArchivo.FileName));
+
+                /*comprobar que la carpeta donde se guardan las cosas este creada*/
+                string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UserImages");
+
+                if (!Directory.Exists(directorio))
+                {
+                    Directory.CreateDirectory(directorio);
+                }
+
+                //Se crea la ruta donde se guarda el archivo y se guarda el archivo
+                string ruta = Path.Combine(directorio, usuario.idUsuario + extension);
+                inputArchivo.SaveAs(ruta);
+
+                //actualizar ruta en la base de datos
+                usuario.rutaImg = "/UserImages/"+usuario.idUsuario + extension;
+
+                UM.ActualizarImgUsuario(usuario);
+
+                @Session["rutaImg"]=usuario.rutaImg;
+
+                return RedirectToAction("EditarMiAvatar");
+
+            }
+            catch (Exception e)
+            {
+                return View(e);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ActualizarAvatar(HttpPostedFileBase inputArchivo, UsuarioEnt usuario)
+        {
+            try
+            {
+                if (inputArchivo == null && usuario.idUsuario == 0)
+                {
+                    ViewBag.mensaje = "¡Lo sentimos! Debe agregar una imagen!";
+                    return RedirectToAction("EditarMiAvatar");
+                }
+
+                //se guardar la extension del archivo temporalmente
+                string extension = Path.GetExtension(Path.GetFileName(inputArchivo.FileName));
+
+                /*comprobar que la carpeta donde se guardan las cosas este creada*/
+                string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UserImages");
+
+                if (!Directory.Exists(directorio))
+                {
+                    Directory.CreateDirectory(directorio);
+                }
+
+                //Se crea la ruta donde se guarda el archivo y se guarda el archivo
+                string ruta = Path.Combine(directorio, usuario.idUsuario + extension);
+
+                // Eliminar la imagen existente si ya existe
+                if (System.IO.File.Exists(ruta))
+                {
+                    System.IO.File.Delete(ruta);
+                }
+
+
+                inputArchivo.SaveAs(ruta);
+
+                //actualizar ruta en la base de datos
+                usuario.rutaImg = "/UserImages/" + usuario.idUsuario + extension;
+
+                UM.ActualizarImgUsuario(usuario);
+
+                @Session["rutaImg"] = usuario.rutaImg;
+
+                return RedirectToAction("EditarMiAvatar");
+            }
+            catch (Exception e)
+            {
+                return View(e);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult EliminarAvatar(long q)
+        {
+            try
+            {
+                var usuarioDb = UM.ConsultaUsuariosID(q); // Método para obtener el usuario por ID
+                string rutaImg = usuarioDb?.rutaImg;
+
+                if (!string.IsNullOrEmpty(rutaImg))
+                {
+                    // Obtener la ruta completa del archivo
+                    string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UserImages");
+                    string ruta = Path.Combine(directorio, Path.GetFileName(rutaImg));
+
+                    // Eliminar la imagen existente si ya existe
+                    if (System.IO.File.Exists(ruta))
+                    {
+                        System.IO.File.Delete(ruta);
+                    }
+                }
+
+                // Llamada al método para eliminar la referencia del avatar en la base de datos
+                UM.EliminarAvatar(usuarioDb);
+
+                // Actualizar la sesión para reflejar que no hay avatar
+                Session["rutaImg"] = null;
+                return RedirectToAction("EditarMiAvatar");
+            }
+            catch (Exception e)
+            {
+                return View(e);
+            }
+
+        }
+
+        
     }//fin de clase
 }//fin de namespace

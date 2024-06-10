@@ -10,7 +10,6 @@
         <EntityTypeShape EntityType="BD_fundacionDehviModel.Manual" Width="1.5" PointX="7.5" PointY="4" />
         <EntityTypeShape EntityType="BD_fundacionDehviModel.Procedimiento" Width="1.5" PointX="5.25" PointY="3.75" />
         <EntityTypeShape EntityType="BD_fundacionDehviModel.Rol" Width="1.5" PointX="0.75" PointY="1.625" />
-        <EntityTypeShape EntityType="BD_fundacionDehviModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" />
         <EntityTypeShape EntityType="BD_fundacionDehviModel.Usuario" Width="1.5" PointX="3" PointY="3.25" />
         <AssociationConnector Association="BD_fundacionDehviModel.FK__Procedimi__idDep__403A8C7D" />
         <AssociationConnector Association="BD_fundacionDehviModel.FK__Usuario__idDepar__3D5E1FD2" />

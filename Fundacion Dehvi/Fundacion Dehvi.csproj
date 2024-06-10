@@ -146,6 +146,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProcedimientoController.cs" />
+    <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Entities\DepartamentoEnt.cs" />
     <Compile Include="Entities\ProcedimientosEnt.cs" />
@@ -380,6 +381,8 @@
     <Content Include="Views\Usuario\CambioContrasena.cshtml" />
     <Content Include="Views\Usuario\EditarMisDatos.cshtml" />
     <Content Include="Views\Usuario\EditarMiAvatar.cshtml" />
+    <Content Include="Views\Shared\AccesoNoAuthorizado.cshtml" />
+    <Content Include="Views\Usuario\ListaUsuarios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

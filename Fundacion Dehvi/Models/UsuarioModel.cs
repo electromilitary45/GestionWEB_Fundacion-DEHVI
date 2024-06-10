@@ -101,5 +101,28 @@ namespace Fundacion_Dehvi.Models
             }
         }
 
+        //---INICIO: subir imagen
+        public int ActualizarImgUsuario(UsuarioEnt usuario) 
+        {
+            using (var client = new HttpClient()) {
+                string url = urlAPI + "SubirAvatar";
+                JsonContent cont = JsonContent.Create(usuario);
+                var resp = client.PutAsync(url,cont).Result;
+                return resp.Content.ReadFromJsonAsync<int>().Result;
+            }
+        }
+
+        //---INICIO: EliminarImgUsuario
+        public int EliminarAvatar(UsuarioEnt usuario)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlAPI + "EliminarAvatar";
+                JsonContent cont = JsonContent.Create(usuario);
+                var resp = client.PutAsync(url, cont).Result;
+                return resp.Content.ReadFromJsonAsync<int>().Result;
+            }
+        }
+
     }//fin de la clase
 }//fin del namespace

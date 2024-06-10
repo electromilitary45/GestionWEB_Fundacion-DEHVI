@@ -30,6 +30,7 @@ namespace API_Dehvi.Controllers
 
                     var data = (
                         from u in con.Usuario
+                        join d in con.Departamento on u.idDepartamento equals d.idDepartamento
                         select new Usuario_Ent
                         {
                             idUsuario = u.idUsuario,
@@ -41,6 +42,7 @@ namespace API_Dehvi.Controllers
                             contrasena = u.contrasena,
                             idRol = u.idRol,
                             idDepartamento = u.idDepartamento,
+                            nombreDepartamento = d.nombre,
                             estado = u.estado,
                             fechaCreacion = u.fechaCreacion,
                             rutaImg = u.rutaImg
@@ -217,7 +219,7 @@ namespace API_Dehvi.Controllers
         //--- INICIO: USUARIOS COMUN -
         [HttpPost]
         [Route("InicioSesion")]
-        public Usuario IniciarSesion(Usuario_Ent usuario)
+        public Usuario_Ent IniciarSesion(Usuario_Ent usuario)
         {
             try
             {
@@ -230,9 +232,23 @@ namespace API_Dehvi.Controllers
                      * Encrpto la contraseña para compararla con la de la base de datos
                      * Verifico que el usuario este activo
                     */
-                    var user = (from u in con.Usuario
-                                where u.correo == usuario.correo && u.contrasena == usuario.contrasena && u.estado == true
-                                select u).FirstOrDefault();
+                    
+                    var user= (from u in con.Usuario
+                               join d in con.Departamento on u.idDepartamento equals d.idDepartamento
+                               where u.correo == usuario.correo && u.contrasena == usuario.contrasena && u.estado == true
+                               select new Usuario_Ent
+                               {
+                                   idUsuario = u.idUsuario,
+                                   cedulaFisica = u.cedulaFisica,
+                                   correo = u.correo,
+                                   nombre=u.nombre,
+                                   apellido1 = u.apellido1,
+                                   apellido2 = u.apellido2,
+                                   idDepartamento = u.idDepartamento,
+                                   idRol = u.idRol,
+                                   nombreDepartamento= d.nombre,
+                                   rutaImg = u.rutaImg
+                               }).FirstOrDefault();
 
                     return user;
                 }
@@ -426,8 +442,59 @@ namespace API_Dehvi.Controllers
         }
 
 
-            /*-------------------- FIN USUARIOS COMUNES --------------------*/
+        //--- INICIO: Avatar (imagen de perfil)
+        [HttpPut]
+        [Route("SubirAvatar")]
+        public int SubirAvatar(Usuario usuario)
+        {
+            try
+            {
+                using(var con = new BD_fundacionDehviEntities())
+                {
+                    var user = (from u in con.Usuario
+                                where u.idUsuario == usuario.idUsuario
+                                select u).FirstOrDefault();
 
-        }//fin de la clase
+                    user.rutaImg = usuario.rutaImg;
+
+                    con.SaveChanges();
+                    return 1;
+                }
+            }
+            catch
+            {
+                return 500;
+            }
+
+        }
+
+        [HttpPut]
+        [Route("EliminarAvatar")]
+        public int EliminarAvatar(Usuario usuario)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities())
+                {
+                    var user = (from u in con.Usuario
+                                where u.idUsuario == usuario.idUsuario
+                                select u).FirstOrDefault();
+
+                    user.rutaImg = null;
+
+                    con.SaveChanges();
+                    return 1;
+                }
+            }
+            catch
+            {
+                return 500;
+            }
+
+        }
+
+        /*-------------------- FIN USUARIOS COMUNES --------------------*/
+
+    }//fin de la clase
     }//fin del namespace
 

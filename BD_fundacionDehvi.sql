@@ -51,9 +51,9 @@ CREATE TABLE Procedimiento(
     idDepartamento bigint NOT NULL,
     codProcedimiento varchar(50) NOT NULL,
 
-    nombre varchar(50) NOT NULL,
-    descripcion varchar(255) NOT NULL,
-    objetivo varchar(255) NOT NULL,
+    nombre varchar(max) NOT NULL,
+    descripcion varchar(max) NOT NULL,
+    objetivo varchar(max) NOT NULL,
     estado bit NOT NULL,
 
     idUsuarioCreador bigint NOT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE Procedimiento(
 CREATE TABLE Manual (
     idManual bigint NOT NULL IDENTITY(1,1),
     idProcedimiento bigint NOT NULL,
-    nombre varchar(50) NOT NULL,
+    nombre varchar(max) NOT NULL,
     codReferencia varchar(50) NOT NULL,
     estado bit NOT NULL,
     idUsuarioCreador bigint NOT NULL,

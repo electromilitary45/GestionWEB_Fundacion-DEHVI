@@ -65,7 +65,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <span>Empleado Del Departamento:</span>
-                                <p>[Departamento]</p>
+                                <p>@Session["nomDepartamento"]</p>
                             </div>
                         </div>
                     </div>
@@ -161,7 +161,7 @@
                     <div class="d-block">
                         @if (Session["rutaImg"] != null)
                         {
-                            <img class="" src="~/Src/image/usuario/foto-perfil.jpg" width="150">
+                            <img class="" src="@Session["rutaImg"]" width="150">
                         }
                         else
                         {
@@ -174,7 +174,7 @@
                         <li><a href="@Url.Action("EditarMiAvatar","Usuario")"><i class="icon-camera"></i>Editar mi avatar</a></li>
                         <li><a href="@Url.Action("EditarMisDatos","Usuario")"><i class="icon-edit-3"></i>Editar mis datos</a></li>
                         <li><a href="@Url.Action("CambioContrasena","Usuario")"><i class="icon-shield"></i>Cambiar mi contraseña.</a></li>
-                        <li><a href="#"><i class="icon-settings"></i>Settings</a></li>
+                        <li class="disabled"><a href="#"><i class="icon-settings"></i>Settings</a></li>
                         <li><a href="@Url.Action("CerrarSesion","Login")"><i class="icon-log-out"></i>Cerrar Sesion</a></li>
                     </ul>
                 </div>

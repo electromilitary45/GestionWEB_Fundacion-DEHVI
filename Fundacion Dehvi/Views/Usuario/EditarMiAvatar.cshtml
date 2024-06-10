@@ -51,9 +51,10 @@
                             <!--BTN Eliminar fotografia-->
                             @if (Session["rutaImg"] != null)
                             {
+
                                 <div class="form-group">
                                     <label class="form-control-label">Eliminar mi avatar.</label>
-                                    <a href="#" class="btn btn-danger btn-sm"><i class="icon-trash"></i> Eliminar Avatar</a>
+                                    <a href="@Url.Action("EliminarAvatar", "Usuario", new { q = Session["idUsuario"] })" class="btn btn-danger btn-sm"><i class="icon-trash"></i> Eliminar Avatar</a>
                                 </div>
                             }
                             else
@@ -73,19 +74,38 @@
                         <hr />
                         @if (Session["rutaImg"] != null)
                         {
-                            <div class="form-group">
-                                <label class="form-control-label">Actualizar mi Avatar</label>
-                                <input type="file" />
-                                <a href="#" class="btn btn-warning btn-sm"> <i class="icon-image"></i> Actualizar</a>
-                            </div>
+                            using (Html.BeginForm("ActualizarAvatar", "Usuario", FormMethod.Post, new { @class = "form-validate", @novalidate = "novalidate", @enctype = "multipart/form-data" }))
+                            {
+                                @Html.TextBoxFor(m => m.idUsuario, new { @type = "hidden" });
+                                <div class="form-group">
+                                    <label class="form-control-label">Actualizar mi Avatar</label>
+                                    <input type="file" id="inputArchivo" name="inputArchivo" accept=".jpg" required onchange="tipoArchivo()" />
+                                    <p id="alertInput" style="color:red;"></p>
+                                    
+                                </div>
+                                <button type="submit" class="btn btn-warning btn-sm" disabled id="btnAgregar"><i class="icon-image"></i> Actualizar</button>
+                            }
+
                         }
                         else
                         {
-                            <div class="form-group">
-                                <label class="form-control-label">Agregar un Avatar</label>
-                                <input type="file" />
-                                <a href="#" class="btn btn-success btn-sm"> <i class="icon-image"></i> Agregar</a>
-                            </div>
+
+
+                            using (Html.BeginForm("SubirAvatar", "Usuario", FormMethod.Post, new { @class = "form-validate", @novalidate = "novalidate", @enctype = "multipart/form-data" }))
+                            {
+                                @Html.TextBoxFor(m => m.idUsuario, new { @type = "hidden" });
+                                <div class="form-group">
+                                    <label class="form-control-label">Agregar un Avatar</label>
+                                    <input type="file" id="inputArchivo" name="inputArchivo" accept=".jpg" required onchange="tipoArchivo()" />
+                                    <p id="alertInput" style="color:red;"></p>
+                                </div>
+
+                                <button type="submit" class="btn btn-success btn-sm" disabled id="btnAgregar"><i class="icon-image"></i> Agregar</button>
+                            }
+
+
+
+
                         }
                     </div>
                     <div class="col-md-2"></div>
@@ -96,3 +116,33 @@
 
     </div>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const fileInput = document.getElementById('inputArchivo');
+        const alertInput = document.getElementById('alertInput');
+        const btnAgregar = document.getElementById('btnAgregar');
+
+        function tipoArchivo() {
+            if (fileInput.files.length > 0) {
+                const filePath = fileInput.value;
+                const allowedExtension = /\.jpg$/i;
+
+                if (!allowedExtension.test(filePath)) {
+                    btnAgregar.disabled = true;
+                    alertInput.innerText = "Por favor, sube un archivo con la extensión .jpg";
+                    fileInput.value = ''; // Limpiar el valor del input
+                } else {
+                    btnAgregar.disabled = false;
+                    alertInput.innerText = ''; // Limpiar cualquier mensaje de alerta previo
+                }
+            } else {
+                btnAgregar.disabled = true;
+            }
+        }
+
+        // Inicializar el estado del botón y configurar el evento change
+        tipoArchivo();
+        fileInput.addEventListener('change', tipoArchivo);
+    });
+</script>

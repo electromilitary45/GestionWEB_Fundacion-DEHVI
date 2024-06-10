@@ -105,11 +105,10 @@
                                         <li class="dropdown">
                                             <a href="#">Usuarios</a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="page-services.html">Lista de Usuarios</a></li>
-                                                @*@if ((int)Session["idRol"] != 1)
-                    {*@
-                                                <li><a href="page-services.html">Agregar Usuarios</a></li>
-                                                @* } *@
+                                                <li><a href="@Url.Action("ListaUsuarios","Usuario")">Lista de Usuarios</a></li>
+                                                
+                                                <li><a href="#">Agregar Usuarios</a></li>
+                                                
                                             </ul>
                                         </li>
                                         <li class="dropdown">

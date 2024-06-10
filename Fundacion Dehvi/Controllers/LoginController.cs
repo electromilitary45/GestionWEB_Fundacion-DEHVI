@@ -40,6 +40,7 @@ namespace Fundacion_Dehvi.Controllers
                     Session["correo"] = user.correo;
                     Session["idRol"] = user.idRol;
                     Session["idDepartamento"] = user.idDepartamento;
+                    Session["nomDepartamento"] = user.nombreDepartamento;
                     Session["rutaImg"] = user.rutaImg;
 
                     return RedirectToAction("Index", "Home");
