@@ -37,13 +37,13 @@ namespace Fundacion_Dehvi.Models
         }// fin de la lista de todos los procedimientos
 
         //------------ Lista Procedimientos Sector ------------
-        public ProcedimientosEnt ListaProcesSector(long q)
+        public List<ProcedimientosEnt> ListaProcesSector(long q)
         {
             using (var client = new HttpClient())
             {
                 var url = urlApi + "ListaProcesSector?q=" + q;
                 var resp = client.GetAsync(url).Result;
-                return resp.Content.ReadFromJsonAsync<ProcedimientosEnt>().Result;
+                return resp.Content.ReadFromJsonAsync<List<ProcedimientosEnt>>().Result;
             }
         }//fin lista de procedimientos por sector
 

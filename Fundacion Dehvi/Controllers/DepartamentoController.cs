@@ -11,12 +11,13 @@ namespace Fundacion_Dehvi.Controllers
     public class DepartamentoController : Controller
     {
         DepartamentoModel d = new DepartamentoModel();
+        ProcedimientoModel p = new ProcedimientoModel();
 
         //------------------- Crear Departamento -------------------
         [HttpGet]
         public ActionResult CrearDepartamento()
         {
-            if (Session["idusuario"] != null)
+            if (Session["idUsuario"] == null)
             {
                 return RedirectToAction("InicioSesion, Login");
             }
@@ -36,7 +37,7 @@ namespace Fundacion_Dehvi.Controllers
                 if (resp == 1)
                 {
                     TempData["Mensaje"] = "El Departamento fue registrada exitosamente";
-                    return RedirectToAction("ListaDeparta");
+                    return RedirectToAction("ListaDepartasAdmin");
 
                 }
                 else
@@ -106,12 +107,15 @@ namespace Fundacion_Dehvi.Controllers
         {
 
             var datos = d.PerfilDepa(q);
+            var datos2 = p.ListaProcesSector(q);
+
+            var model = new Tuple<DepartamentoEnt, IEnumerable<ProcedimientosEnt>>(datos, (IEnumerable<ProcedimientosEnt>)datos2);
             if (Session["mensaje"] != null)
             {
                 ViewBag.MensajeAcc = Session["mensaje"].ToString();
             }
 
-            return View(datos); // muestra el perfil del Departamento en especifico
+            return View(model); // muestra el perfil del Departamento en especifico
         }
 
         //------------------- Actualizar Departamento -------------------
@@ -139,7 +143,7 @@ namespace Fundacion_Dehvi.Controllers
                 if (resp == 1)
                 {
                     TempData["Mensaje"] = "El departamento fue actualizada exitosamente";
-                    return RedirectToAction("ListaDeparta", "Departamento");
+                    return RedirectToAction("ListaDepartasAdmin", "Departamento");
                 }
                 else
                 {

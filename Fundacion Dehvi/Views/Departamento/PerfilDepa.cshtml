@@ -1,0 +1,100 @@
+﻿@model Tuple<Fundacion_Dehvi.Entities.DepartamentoEnt, IEnumerable<Fundacion_Dehvi.Entities.ProcedimientosEnt>>
+
+@{
+    ViewBag.Title = "Perfil del Departamento";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<link href="~/Src/css/custom.css" rel="stylesheet">
+
+<section id="page-title" class="text-light" style="background-image: url(../../Src/image/1.png); background-size: cover; background-position: center center;">
+    <div class="container">
+        <div class="breadcrumb">
+            <ul>
+                <li><a href="@Url.Action("Index","Home")">Home</a> </li>
+                <li><a href="@Url.Action("ListaDeparta","Departamento")">Departamentos</a> </li>
+                <li class="active"><a href="#">Listado Admin</a> </li>
+            </ul>
+        </div>
+        <div class="page-title">
+            <h2 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); padding: 12px; text-align: center;">@Html.DisplayFor(m => m.Item1.nombre)</h2>
+        </div>
+    </div>
+</section>
+
+
+
+<section id="page-content" class="sidebar-left">
+
+    <section class="d-flex justify-content-center" style="padding: 10px 0;">
+        <div>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" data-mask="" placeholder="">
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="icon-search"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- post content -->
+            <div class="content col-lg-9">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- Grid de los Procedimientos -->
+
+                        <div class="row team-members team-members-shadow m-b-40">
+                            @if (Model != null)
+                            {
+                                foreach (var item in Model.Item2)
+                                {
+                                    if (item.idDepartamento == Model.Item1.idDepartamento)
+                                    {
+                                        <div class="col-lg-4">
+                                            <div class="team-member">
+                                                <div class="team-image">
+                                                    <img src="~/Src/image/1.png" style="object-fit: cover; height: 16s0px; width: 100%;">
+                                                </div>
+                                                <div class="team-desc">
+                                                    <span>@item.codProcedimiento</span>
+                                                    <h3>@item.nombre</h3>
+                                                    <p>@item.descripcion</p>
+
+                                                    <span>Fecha de Creación</span>
+                                                    <p>@item.fechaCreacion.ToString("dd/MM/yyyy")</p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+
+
+                        <!-- Fin del Grid -->
+                    </div>
+                </div>
+            </div>
+            <!-- end: post content -->
+            <!-- Sidebar-->
+            <div class="sidebar col-lg-3">
+                <!--Tabs with Posts-->
+                <div class="widget">
+                    <div class="row mb-3">
+                        <div class="col-lg-12 text-left">
+                            <a href="@Url.Action("", "")" class="btn" style="background-color: #59B2E9; border-color: #59B2E9">Agregar Procedimiento</a>
+                        </div>
+                        <div id="export_buttons" class="col-lg-12 text-left"></div>
+                    </div>
+                </div>
+            </div>
+            <!--End: Tabs with Posts-->
+        </div>
+        <!-- end: Sidebar-->
+    </div>
+</section> <!-- end: Content -->

@@ -108,6 +108,7 @@ namespace API_Dehvi.Controllers
                         join d in con.Departamento on p.idDepartamento equals d.idDepartamento
                         join u in con.Usuario on p.idUsuarioCreador equals u.idUsuario
                         orderby p.nombre descending
+                        where p.idDepartamento == q
                         select new ProcedimientosEnt
                         {
                             idProcedimiento = p.idProcedimiento,
@@ -118,7 +119,7 @@ namespace API_Dehvi.Controllers
                             estado = p.estado,
                             fechaCreacion = p.fechaCreacion,
 
-                            idDepartamento = q,
+                            idDepartamento = p.idDepartamento,
                             nombreDeparta = d.nombre,
 
                             idUsuario = p.idUsuarioCreador,

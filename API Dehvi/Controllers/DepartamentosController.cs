@@ -25,7 +25,7 @@ namespace API_Dehvi.Controllers
                     var d = new Departamento(); // se crea un nuevo departamento
 
                     d.nombre = departamento.nombre;
-                    d.estado = departamento.estado;
+                    d.estado = true;
 
                     con.Departamento.Add(d);
 
