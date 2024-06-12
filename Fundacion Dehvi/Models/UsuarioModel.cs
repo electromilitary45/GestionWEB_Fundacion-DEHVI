@@ -17,14 +17,14 @@ namespace Fundacion_Dehvi.Models
         /*----------------------ADMINISTRACION DE USUARIOS--------------------------*/
 
         //---INICIO: RESGISTRAR USUARIO---
-        public UsuarioEnt registrarUsuario(UsuarioEnt usuario)
+        public int registrarUsuario(UsuarioEnt usuario)
         {
             using (var client = new HttpClient())
             {
                 string url = urlAPI + "CrearUsuario";
                 JsonContent cont = JsonContent.Create(usuario);
                 var resp = client.PostAsync(url, cont).Result;
-                return resp.Content.ReadFromJsonAsync<UsuarioEnt>().Result;
+                return resp.Content.ReadFromJsonAsync<int>().Result;
             }
         }
 

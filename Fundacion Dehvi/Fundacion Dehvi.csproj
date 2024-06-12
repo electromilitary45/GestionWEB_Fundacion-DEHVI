@@ -381,8 +381,9 @@
     <Content Include="Views\Usuario\EditarMisDatos.cshtml" />
     <Content Include="Views\Usuario\EditarMiAvatar.cshtml" />
     <Content Include="Views\Shared\AccesoNoAuthorizado.cshtml" />
-    <Content Include="Views\Usuario\ListaUsuarios.cshtml" />
     <Content Include="Views\Departamento\PerfilDepa.cshtml" />
+    <Content Include="Views\Usuario\NuevoUsuarioAdmin.cshtml" />
+    <Content Include="Views\Usuario\ListaUsuariosAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

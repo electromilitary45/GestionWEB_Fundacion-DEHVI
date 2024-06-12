@@ -17,14 +17,16 @@ namespace Fundacion_Dehvi.Controllers
         private readonly UtililitariosEnt Util = new UtililitariosEnt();
 
         //------------------ADMINISTRACION DE USUARIOS------------------
+
+        //----- Lista Usuarios Admin
         [HttpGet]
-        public ActionResult ListaUsuarios()
+        public ActionResult ListaUsuariosAdmin()
         {
             if (Session["idUsuario"] != null)
             {
-                if (long.Parse(Session["idUsuario"].ToString()) != 1)
+                if (long.Parse(Session["idRol"].ToString()) != 1)
                 {
-                    return RedirectToAction("AccesoNoAuthorizado","Shared");
+                    return RedirectToAction("AccesoNoAuthorizado", "Shared");
                 }
                 var datos = UM.ListaCompletaUsuarios();
                 return View(datos);
@@ -33,7 +35,58 @@ namespace Fundacion_Dehvi.Controllers
             {
                 return RedirectToAction("InicioSesion", "Login");
             }
-            
+
+        }
+
+        //----- Nuevo Usuario Admin
+        [HttpGet]
+        public ActionResult NuevoUsuarioAdmin()
+        {
+            if (Session["idUsuario"] != null)
+            {
+                if (long.Parse(Session["idRol"].ToString()) != 1)
+                {
+                    return RedirectToAction("AccesoNoAuthorizado", "Shared");
+                }
+
+
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("InicioSesion", "Login");
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult NuevoUsuarioAdmin(UsuarioEnt usuario)
+        {
+            try
+            {
+                if (usuario.cedulaFisica != null && usuario.nombre != null && usuario.apellido1 != null && usuario.apellido2 != null && usuario.idDepartamento != 0 && usuario.idRol != 0)
+                {
+                    var user = UM.registrarUsuario(usuario);
+
+                    switch (user)
+                    {
+                        case 1:
+                            ViewBag.mensaje = "Ya existe un usuario con la cedula fisica digitada!";
+                            return View();
+                        default:
+                            return View();
+                    }
+                }
+                else
+                {
+                    ViewBag.mensaje = "Debe rellenar los espacios requeridos!";
+                    return View();
+                }
+            }
+            catch (Exception e) 
+            {
+                return View(e);
+            }
         }
 
         /*----------------------USUARIO COMUN-------------------------------*/
@@ -169,14 +222,14 @@ namespace Fundacion_Dehvi.Controllers
         {
             try
             {
-                if(inputArchivo == null && usuario.idUsuario == 0)
+                if (inputArchivo == null && usuario.idUsuario == 0)
                 {
                     ViewBag.mensaje = "¡Lo sentimos! Debe agregar una imagen!";
                     return RedirectToAction("EditarMiAvatar");
                 }
 
                 //se guardar la extension del archivo temporalmente
-                string extension= Path.GetExtension(Path.GetFileName(inputArchivo.FileName));
+                string extension = Path.GetExtension(Path.GetFileName(inputArchivo.FileName));
 
                 /*comprobar que la carpeta donde se guardan las cosas este creada*/
                 string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UserImages");
@@ -191,11 +244,11 @@ namespace Fundacion_Dehvi.Controllers
                 inputArchivo.SaveAs(ruta);
 
                 //actualizar ruta en la base de datos
-                usuario.rutaImg = "/UserImages/"+usuario.idUsuario + extension;
+                usuario.rutaImg = "/UserImages/" + usuario.idUsuario + extension;
 
                 UM.ActualizarImgUsuario(usuario);
 
-                @Session["rutaImg"]=usuario.rutaImg;
+                @Session["rutaImg"] = usuario.rutaImg;
 
                 return RedirectToAction("EditarMiAvatar");
 
@@ -290,6 +343,6 @@ namespace Fundacion_Dehvi.Controllers
 
         }
 
-        
+
     }//fin de clase
 }//fin de namespace

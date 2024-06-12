@@ -1,0 +1,66 @@
+﻿@model Fundacion_Dehvi.Entities.UsuarioEnt
+@{
+    ViewBag.Title = "NuevoUsuarioAdmin";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!--INICIO: Page Tittle-->
+<section id="page-title" class="text-light" style="background-image:url(../../Src/image/usuario/background.jpg); background-size: cover; background-position: center center;"></section>
+<!--FIN: Page Tittle-->
+<!--INICIO: Page Content-->
+<section id="page-content">
+    <div class="container">
+        <!--BTN retroceder-->
+        <a class="btn btn-rounded" href="@Url.Action("ListaUsuariosAdmin","Usuario")"><i class="icon-arrow-left"></i> Lista de Usuarios </a>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="h5 mb-4">Informacion Personal</div>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("EditarMisDatos", "Usuario", FormMethod.Post, new { @class = "form-validate pt-3" }))
+                {
+                    @Html.TextBoxFor(m => m.idUsuario, new { @type = "hidden" })
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Cedula Fisica</label>
+                            @Html.TextBoxFor(m => m.cedulaFisica, new { @class = "form-control", @required = "required", @placeholder = "Cedula Fisica", @onkeyup = "consultaCedula()" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Departamento</label>
+                            @*@Html.DropDownListFor(m=>m.idDepartamento, ViewBag.listaDepartamentos as List<SelectListItem>, new {@class="form-control", @type="number", @placeholder="Departamento", @required="required"})*@
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>Nombre</label>
+                            @Html.TextBoxFor(m => m.nombre, new { @class = "form-control", @readonly = "readonly", @required = "required", @placeholder = "Nombre" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Primer Apellido</label>
+                            @Html.TextBoxFor(m => m.apellido1, new { @class = "form-control", @readonly = "readonly", @required = "required", @placeholder = "Primer Apellido" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Segundo Apellido</label>
+                            @Html.TextBoxFor(m => m.apellido2, new { @class = "form-control", @readonly = "readonly", @required = "required", @placeholder = "Segundo Apellido" })
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Correo Electronico</label>
+                            @Html.TextBoxFor(m => m.correo, new { @class = "form-control", @required = "required", @placeholder = "Cedula Fisica" })
+
+                        </div>
+                    </div>
+
+                    <div class="text-center form-group" style="margin:20px;">
+                        <button type="submit" class="btn">Crear Usuario</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<!--FIN: Page Content-->
