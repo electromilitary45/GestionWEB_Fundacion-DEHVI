@@ -14,11 +14,12 @@ namespace Fundacion_Dehvi.Controllers
     {
         //----------INSTANCIAS----------
         private readonly UsuarioModel UM = new UsuarioModel();
+        private readonly DepartamentoModel DM = new DepartamentoModel();
         private readonly UtililitariosEnt Util = new UtililitariosEnt();
 
         //------------------ADMINISTRACION DE USUARIOS------------------
 
-        //----- Lista Usuarios Admin
+        //----- INICIO: Lista Usuarios Admin
         [HttpGet]
         public ActionResult ListaUsuariosAdmin()
         {
@@ -38,7 +39,7 @@ namespace Fundacion_Dehvi.Controllers
 
         }
 
-        //----- Nuevo Usuario Admin
+        //----- INICIO: Nuevo Usuario Admin
         [HttpGet]
         public ActionResult NuevoUsuarioAdmin()
         {
@@ -49,7 +50,9 @@ namespace Fundacion_Dehvi.Controllers
                     return RedirectToAction("AccesoNoAuthorizado", "Shared");
                 }
 
-
+                ViewBag.listaDepartamentos = DM.LItemDepartamento();
+                ViewBag.listaRoles = UM.LItemRol();
+                //ViewBag.listaDepartamentos 
                 return View();
             }
             else
@@ -66,6 +69,8 @@ namespace Fundacion_Dehvi.Controllers
             {
                 if (usuario.cedulaFisica != null && usuario.nombre != null && usuario.apellido1 != null && usuario.apellido2 != null && usuario.idDepartamento != 0 && usuario.idRol != 0)
                 {
+                    ViewBag.listaDepartamentos = DM.LItemDepartamento();
+                    ViewBag.listaRoles = UM.LItemRol();
                     var user = UM.registrarUsuario(usuario);
 
                     switch (user)
@@ -73,6 +78,8 @@ namespace Fundacion_Dehvi.Controllers
                         case 1:
                             ViewBag.mensaje = "Ya existe un usuario con la cedula fisica digitada!";
                             return View();
+                        case 2:
+                            return RedirectToAction("ListaUsuariosAdmin", "Usuario");
                         default:
                             return View();
                     }

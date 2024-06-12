@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Web.Http;
 
+
 namespace API_Dehvi.Controllers
 {
     public class UsuarioController : ApiController
@@ -208,6 +209,38 @@ namespace API_Dehvi.Controllers
             catch (Exception)
             {
                 return 0; //Error al activar el usuario
+            }
+        }
+
+        //--Inicio: ListaRoles
+        [HttpGet]
+        [Route("LRoles")]
+        public List<System.Web.Mvc.SelectListItem> IListRoles()
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities())
+                {
+                    var roles = (from r in con.Rol select r).ToList();
+
+                    List<System.Web.Mvc.SelectListItem> listaRoles = new List<System.Web.Mvc.SelectListItem>();
+                    var res = new List<System.Web.Mvc.SelectListItem>();
+
+                    foreach (var role in roles)
+                    {
+                        res.Add(new System.Web.Mvc.SelectListItem
+                        {
+                            Value = role.idRol.ToString(),
+                            Text = role.nombre
+                        });
+                    }
+                    return res;
+
+                }
+            }
+            catch (Exception)
+            {
+                return null;
             }
         }
 

@@ -50,6 +50,17 @@ namespace Fundacion_Dehvi.Models
             }
         }
 
+        //---INICIO: Listar Roles
+        public List<System.Web.Mvc.SelectListItem> LItemRol()
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlAPI + "LRoles";
+                var resp = client.GetAsync(url).Result;
+                return resp.Content.ReadFromJsonAsync<List<System.Web.Mvc.SelectListItem>>().Result;
+            }
+        }
+
 
         /*----------------------USUARIOS COMUNES--------------------------*/
 
