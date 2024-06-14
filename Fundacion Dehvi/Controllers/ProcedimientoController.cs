@@ -12,17 +12,20 @@ namespace Fundacion_Dehvi.Controllers
     {
         //------------------- Instancias -------------------
         ProcedimientoModel p = new ProcedimientoModel();
+        DepartamentoModel d = new DepartamentoModel();
 
         //------------------- Crear Procedimiento -------------------
         [HttpGet]
         public ActionResult CrearProce()
         {
-            if (Session["idusuario"] != null)
+
+            if (Session["idusuario"] == null)
             {
                 return RedirectToAction("InicioSesion, Login");
             }
             else
             {
+                ViewBag.idDepartamento = d.LItemDepartamento();
                 return View();
             }
         } // fin del crear procedimiento
@@ -32,13 +35,20 @@ namespace Fundacion_Dehvi.Controllers
         {
             try
             {
+                ViewBag.idDepartamento = d.LItemDepartamento();
+                proce.fechaCreacion = DateTime.Now.Date;
                 var resp = p.CrearProce(proce);
 
+                
                 if (resp == 1)
                 {
                     TempData["Mensaje"] = "El Procedimiento fue registrado exitosamente";
-                    return RedirectToAction("ListaProcesSector");
+                    return RedirectToAction("ListaProces");
 
+                }else if(resp == 2)
+                {
+                    TempData["Mensaje"] = "Ya existe un procedimiento con ese codigo!";
+                    return RedirectToAction("ListaProces");
                 }
                 else
                 {
@@ -114,7 +124,8 @@ namespace Fundacion_Dehvi.Controllers
             }
             else
             {
-                var datos = p.PerfilProce(q);
+                ViewBag.idDepartamento = d.LItemDepartamento();
+                var datos = p.ConsultaProce(q);
                 return View(datos);
             }
         } // fin del get actualizar procedimiento
@@ -124,12 +135,13 @@ namespace Fundacion_Dehvi.Controllers
         {
             try
             {
+                ViewBag.idDepartamento = d.LItemDepartamento();
                 var resp = p.ActualizarProce(entidad);
 
                 if (resp == 1)
                 {
                     TempData["Mensaje"] = "El procedimiento fue actualizada exitosamente";
-                    return RedirectToAction("PerfilProce", "Procedimiento");
+                    return RedirectToAction("ListaProces", "Procedimiento");
                 }
                 else
                 {

@@ -14,7 +14,7 @@ namespace API_Dehvi.Controllers
         //------------------- Crear Procedimientos -------------------
         [HttpPost]
         [Route("CrearProce")]
-        public Procedimiento CrearProce(ProcedimientosEnt procedimiento)
+        public int CrearProce(ProcedimientosEnt procedimiento)
         {
             try
             {
@@ -36,19 +36,18 @@ namespace API_Dehvi.Controllers
                         con.Procedimiento.Add(p);
                         con.SaveChanges();
 
-                        return p; // se realiza exitosamente el registro
+                        return 1; // se realiza exitosamente el registro
                     }
                     else
                     {
-                        return null;
+                        return 2;
                     }
-
 
                 }
             }// fin del try
             catch (Exception ex)
             {
-                return null; // es un registro fallido
+                return 500; // es un registro fallido
 
             } // fin del catch
         }// fin de crear procedimientos
@@ -273,5 +272,30 @@ namespace API_Dehvi.Controllers
             }// fin del catch
         }// fin de buscar si el codigo es existente
 
+        //------------------- Consulta de Procedimiento ------------------
+        [HttpGet]
+        [Route("ConsultaProce")]
+        public Procedimiento ConsultaProce(long q)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities()) //conexion a la base de datos
+                {
+                    con.Configuration.LazyLoadingEnabled = false;
+                    var data = (from p in con.Procedimiento
+                                where p.idProcedimiento == q
+                                select p).FirstOrDefault();
+                    if (data != null)
+                    {
+                        return data; // Procedimiento encontrado
+                    }
+                    return null; // no encontrado
+                }
+            }// fin del try
+            catch (Exception)
+            {
+                return null; // Error al consultar
+            }// fin del catch
+        }// fin de la consulta de la empresa
     }
 }

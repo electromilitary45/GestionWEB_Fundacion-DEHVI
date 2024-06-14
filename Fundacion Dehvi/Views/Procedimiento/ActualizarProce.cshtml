@@ -1,8 +1,87 @@
-﻿
+﻿@model Fundacion_Dehvi.Entities.ProcedimientosEnt
 @{
-    ViewBag.Title = "ActualizarProce";
+    ViewBag.Title = "Actualizar Procedimiento";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>ActualizarProce</h2>
+<link href="~/Src/css/custom.css" rel="stylesheet">
 
+<section id="page-title" class="text-light" style="background-image: url(../../Src/image/1.png); background-size: cover; background-position: center center;">
+    <div class="container">
+        <div class="breadcrumb">
+            <ul>
+                <li><a href="@Url.Action("Index","Home")">Home</a> </li>
+                <li><a href="@Url.Action("ListaProces","Procedimiento")">Procedimientos</a> </li>
+                <li class="active"><a href="#">Actualizar Procedimiento</a> </li>
+            </ul>
+        </div>
+        <div class="page-title">
+            <h2 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); padding: 12px; text-align: center;">Actualizar Procedimiento</h2>
+        </div>
+    </div>
+</section>
+
+<section id="page-content" class="sidebar-left">
+    <div class="container">
+        <div class="row">
+            <!-- post content -->
+            <div class="content col-lg-9">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- FORMS -->
+                        <div class="card">
+                            <div class="card-body">
+                                @if (ViewBag.mensaje != null)
+                                {
+                                    <div class="alert alert-primary" role="alert">
+                                        @ViewBag.mensaje
+                                    </div>
+                                }
+
+                                @using (Html.BeginForm("ActualizarProce", "Procedimiento", FormMethod.Post, new { @class = "form-validate", @novalidate = "novalidate" }))
+                                {
+                                    @Html.HiddenFor(m => m.idProcedimiento)
+                                <div class="form-row">
+                                    <!-- NOMBRE -->
+                                    <div class="form-group col-md-6">
+                                        @Html.TextBoxFor(m => m.nombre, new { @class = "form-control", @required = "", @placeholder = "Nombre" })
+                                    </div>
+                                </div>
+                                <div class="form-row">
+
+                                    <!-- Objetivo -->
+                                    <div class="form-group col-md-6">
+                                        @Html.TextAreaFor(m => m.objetivo, new { @class = "form-control", @required = "", @placeholder = "Objetivo" })
+                                    </div>
+                                    <!-- Descripcion -->
+                                    <div class="form-group col-md-6">
+                                        @Html.TextAreaFor(m => m.descripcion, new { @class = "form-control", @required = "", @placeholder = "Descripción" })
+                                    </div>
+                                </div>
+                                
+                                <input type="submit" class="btn m-t-30 mt-3" value="Actualizar Procedimiento">
+                            }
+                            </div>
+                        </div>
+                        <!-- FIN FORMS -->
+                    </div>
+                </div>
+
+            </div>
+            <!-- end: post content -->
+            <!-- Sidebar-->
+            <div class="sidebar col-lg-3">
+                <!--Tabs with Posts-->
+                <div class="widget ">
+                    <div class="row mb-3">
+                        <div class="col-lg-12 text-left">
+                            <a href="@Url.Action("ListaProces", "Procedimiento")" class="btn" style="background-color: #59B2E9; border-color: #59B2E9 ">Lista de Procedimientos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End: Tabs with Posts-->
+        </div>
+        <!-- end: Sidebar-->
+    </div>
+</section> <!-- end: Content -->

@@ -372,7 +372,6 @@
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Procedimiento\CrearProce.cshtml" />
     <Content Include="Views\Procedimiento\ListaProces.cshtml" />
-    <Content Include="Views\Procedimiento\ListaProcesSector.cshtml" />
     <Content Include="Views\Procedimiento\PerfilProce.cshtml" />
     <Content Include="Views\Procedimiento\ActualizarProce.cshtml" />
     <Content Include="Views\Departamento\ListaDepartasAdmin.cshtml" />

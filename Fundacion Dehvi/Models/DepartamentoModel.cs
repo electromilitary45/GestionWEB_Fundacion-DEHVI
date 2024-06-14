@@ -82,7 +82,7 @@ namespace Fundacion_Dehvi.Models
             }
         } // fin de desactivar
 
-        //----------- Lista Roles DropDown ---------------
+        //----------- Lista Departamentos DropDown ---------------
         public List<System.Web.Mvc.SelectListItem> LItemDepartamento()
         {
             using (var client = new HttpClient())

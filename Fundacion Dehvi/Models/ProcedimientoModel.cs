@@ -82,5 +82,18 @@ namespace Fundacion_Dehvi.Models
             }
         } // fin de desactivar
 
+        //------------ Consulta Procedimiento ------------
+        public ProcedimientosEnt ConsultaProce(long q)
+        {
+            using (var client = new HttpClient())
+            {
+
+                var url = urlApi + "ConsultaProce?q=" + q;
+                var resp = client.GetAsync(url).Result;
+                return resp.Content.ReadFromJsonAsync<ProcedimientosEnt>().Result;
+
+            }
+        }//fin consulta procedimiento
+
     }// fin de la clase
 }// fin del namespace
