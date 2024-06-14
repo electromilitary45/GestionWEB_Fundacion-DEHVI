@@ -384,6 +384,7 @@
     <Content Include="Views\Departamento\PerfilDepa.cshtml" />
     <Content Include="Views\Usuario\NuevoUsuarioAdmin.cshtml" />
     <Content Include="Views\Usuario\ListaUsuariosAdmin.cshtml" />
+    <Content Include="Views\Usuario\EditarUsuarioAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

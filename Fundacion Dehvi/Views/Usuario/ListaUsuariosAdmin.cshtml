@@ -14,8 +14,17 @@
 
             <div class="col-lg-9">
                 <!--INICIO: Tabla-->
+
                 <div class="container">
+                    @if (ViewBag.mensaje != null)
+                    {
+
+                        <div class="alert alert-primary" role="alert">
+                            @ViewBag.mensaje
+                        </div>
+                    }
                     <div class="row team-members m-b-30">
+
                         @foreach (var u in Model)
                         {
 
@@ -36,15 +45,15 @@
                                             <div class="col-lg-1">
                                                 @if (u.estado == true)
                                                 {
-                                                    <a href="#"><i class="icon-toggle-right" style="color: #000000;"></i></a>
+                                                    <a href="@Url.Action("DesactivarUsuario","Usuario", new {q=u.idUsuario})"><i class="icon-toggle-right" style="color: #000000;"></i></a>
                                                 }
                                                 else
                                                 {
-                                                    <a href="#"><i class="icon-toggle-left" style="color: #000000;"></i></a>
+                                                    <a href="@Url.Action("ActivarUsuario","Usuario", new {q=u.idUsuario})"><i class="icon-toggle-left" style="color: #000000;"></i></a>
                                                 }
                                             </div>
                                             <div class="col-lg-1">
-                                                <a href="#"><i class="icon-edit" style="color: #000000"></i></a>
+                                                <a href="@Url.Action("EditarUsuarioAdmin","Usuario", new {q=u.idUsuario})"><i class="icon-edit" style="color: #000000"></i></a>
                                             </div>
                                         </div>
                                         <h6 style="color:white">@u.nombre @u.apellido1 @u.apellido2</h6>
@@ -62,7 +71,7 @@
             </div>
             <!--Sidebar-->
             <div class="sidebar col-lg-3">
-                <a href="@Url.Action("NuevoUsuarioAdmin","Usuario")" class="btn">Nuevo Usuario</a>
+                <a href="@Url.Action("NuevoUsuarioAdmin","Usuario")" class="btn btn-rounded"><i class="fa fa-user-plus"></i> Nuevo Usuario</a>
             </div>
         </div>
     </div>
