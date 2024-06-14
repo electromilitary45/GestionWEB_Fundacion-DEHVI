@@ -39,6 +39,37 @@ namespace Fundacion_Dehvi.Controllers
 
         }
 
+        //----- INICIO: Activar y desactivar Usuarios
+        [HttpGet]
+        public ActionResult ActivarUsuario(long q)
+        {
+            var resp = UM.ActUsuario(q);
+
+            if (resp != 0)
+            {
+                return RedirectToAction("ListaUsuariosAdmin", "Usuario");
+            }
+            else
+            {
+                return RedirectToAction("ListaUsuariosAdmin", "Usuario");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult DesactivarUsuario(long q)
+        {
+            var resp = UM.InacUsuario(q);
+
+            if (resp != 0)
+            {
+                return RedirectToAction("ListaUsuariosAdmin", "Usuario");
+            }
+            else
+            {
+                return RedirectToAction("ListaUsuariosAdmin", "Usuario");
+            }
+        }
+
         //----- INICIO: Nuevo Usuario Admin
         [HttpGet]
         public ActionResult NuevoUsuarioAdmin()
@@ -90,7 +121,53 @@ namespace Fundacion_Dehvi.Controllers
                     return View();
                 }
             }
-            catch (Exception e) 
+            catch (Exception e)
+            {
+                return View(e);
+            }
+        }
+
+        //----- INICIO: Editar Usuario
+        [HttpGet]
+        public ActionResult EditarUsuarioAdmin(long q)
+        {
+
+            if (Session["idUsuario"] != null & q != 0)
+            {
+                if (long.Parse(Session["idRol"].ToString()) != 1)
+                {
+                    return RedirectToAction("AccesoNoAuthorizado", "Shared");
+                }
+
+                ViewBag.listaDepartamentos = DM.LItemDepartamento();
+                ViewBag.listaRoles = UM.LItemRol();
+                var datos = UM.ConsultaUsuariosID(q);
+                return View(datos);
+            }
+            else
+            {
+                return RedirectToAction("InicioSesion", "Login");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditarUsuarioAdmin(UsuarioEnt usuario)
+        {
+            try
+            {
+                ViewBag.listaDepartamentos = DM.LItemDepartamento();
+                ViewBag.listaRoles = UM.LItemRol();
+                var user = UM.ActualizarUsuario(usuario);
+                if(user != 500)
+                {
+                    ViewBag.mensaje = "Usuario editado con exito";
+                    return RedirectToAction("ListaUsuariosAdmin","Usuario");
+                }
+
+                ViewBag.mensaje = "Error al editar!";
+                return View(UM.ConsultaUsuariosID(usuario.idUsuario));
+            }
+            catch (Exception e)
             {
                 return View(e);
             }

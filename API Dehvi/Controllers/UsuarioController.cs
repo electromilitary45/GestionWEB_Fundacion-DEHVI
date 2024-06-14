@@ -120,6 +120,7 @@ namespace API_Dehvi.Controllers
                     }
                     else
                     {
+                        usuario.contrasenaNueva = util.randomPassword();
                         //----INICIO: Creacion de usuario----
                         var user = new Usuario
                         {
@@ -129,7 +130,8 @@ namespace API_Dehvi.Controllers
                             apellido2 = usuario.apellido2,
 
                             correo = usuario.correo,
-                            contrasena = util.encrpytar(usuario.cedulaFisica), //Contraseña por defecto es la cedula (encriptada)
+                            
+                            contrasena = util.encrpytar(usuario.contrasenaNueva), //La contraseña nueva es totalmente nueva y ramdon
 
                             idDepartamento = usuario.idDepartamento,
                             idRol = Convert.ToByte(usuario.idRol),
@@ -149,7 +151,7 @@ namespace API_Dehvi.Controllers
                         html = html.Replace("@@apellido1", usuario.apellido1);
                         html = html.Replace("@@apellido2", usuario.apellido2);
                         html = html.Replace("@@correo", usuario.correo);
-                        html = html.Replace("@@contrasena", usuario.cedulaFisica);
+                        html = html.Replace("@@contrasena", usuario.contrasenaNueva);
                         util.enviarCorreo(usuario.correo, "Nueva Cuenta DEHVI", html);
                         //----FIN: Envio de correo----
 
@@ -165,16 +167,16 @@ namespace API_Dehvi.Controllers
         }
 
         //--Inicio: DesactivarUsuario---
-        [HttpDelete]
+        [HttpPut]
         [Route("DesactivarUsuario")]
-        public int DesactivarUsuario(long q)
+        public int DesactivarUsuario(Usuario_Ent usuario)
         {
             try
             {
                 using (var con = new BD_fundacionDehviEntities())
                 {
                     var user = (from u in con.Usuario
-                                where u.idUsuario == q
+                                where u.idUsuario == usuario.idUsuario
                                 select u).FirstOrDefault();
 
                     user.estado = false;
@@ -191,14 +193,14 @@ namespace API_Dehvi.Controllers
         //--Inicio: ActivarUsuario---
         [HttpPut]
         [Route("ActivarUsuario")]
-        public int ActivarUsuario(long q)
+        public int ActivarUsuario(Usuario_Ent usuario) 
         {
             try
             {
                 using (var con = new BD_fundacionDehviEntities())
                 {
                     var user = (from u in con.Usuario
-                                where u.idUsuario == q
+                                where u.idUsuario == usuario.idUsuario
                                 select u).FirstOrDefault();
 
                     user.estado = true;
@@ -241,6 +243,37 @@ namespace API_Dehvi.Controllers
             catch (Exception)
             {
                 return null;
+            }
+        }
+
+        //---INICIO: Actualizar Usuario---
+        [HttpPut]
+        [Route("ActualizarUsuario")]
+        public int ActualizarUsuario(Usuario_Ent usuario)
+        {
+            try
+            {
+                using(var con = new BD_fundacionDehviEntities())
+                {
+                    var user = (from u in con.Usuario 
+                                where u.idUsuario == usuario.idUsuario
+                                select u).FirstOrDefault();
+
+                    user.nombre = usuario.nombre;
+                    user.apellido1 = usuario.apellido1;
+                    user.apellido2 = usuario.apellido2;
+                    user.correo = usuario.correo;
+                    user.idRol = usuario.idRol;
+                    user.idDepartamento = usuario.idDepartamento;
+
+                    con.SaveChanges();
+
+                    return 1;
+                }
+            }
+            catch (Exception)
+            {
+                return 500;
             }
         }
 

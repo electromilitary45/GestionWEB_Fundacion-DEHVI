@@ -1,4 +1,4 @@
-﻿﻿using Fundacion_Dehvi.Entities;
+﻿using Fundacion_Dehvi.Entities;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -28,10 +28,22 @@ namespace Fundacion_Dehvi.Models
             }
         }
 
+        //---INICIO: Actualizar Usuario---
+        public int ActualizarUsuario(UsuarioEnt usuario)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlAPI + "ActualizarUsuario";
+                JsonContent cont = JsonContent.Create(usuario);
+                var resp = client.PutAsync(url, cont).Result;
+                return resp.Content.ReadFromJsonAsync<int>().Result;
+            }
+        }
+
         //---INICIO: LISTAR USUARIOS---
         public List<UsuarioEnt> ListaCompletaUsuarios()
         {
-            using(var client = new HttpClient())
+            using (var client = new HttpClient())
             {
                 string url = urlAPI + "ListaUsuarios";
                 var resp = client.GetAsync(url).Result;
@@ -61,6 +73,36 @@ namespace Fundacion_Dehvi.Models
             }
         }
 
+        //--INICIO: Cambiar Estado a ACTIVO a usuario
+        public int ActUsuario(long q)
+        {
+
+            using (var client = new HttpClient())
+            {
+                UsuarioEnt usuario = new UsuarioEnt();
+                usuario.idUsuario = q;
+
+                string url = urlAPI + "ActivarUsuario";
+                JsonContent cont = JsonContent.Create(usuario);
+                var resp = client.PutAsync(url, cont).Result;
+                return resp.Content.ReadFromJsonAsync<int>().Result;
+            }
+        }
+
+        //--INICIO: Cambiar Estado a INACTIVO a usuario
+        public int InacUsuario(long q)
+        {
+            using (var client = new HttpClient())
+            {
+                UsuarioEnt usuario = new UsuarioEnt();
+                usuario.idUsuario = q;
+
+                string url = urlAPI + "DesactivarUsuario";
+                JsonContent cont = JsonContent.Create(usuario);
+                var resp = client.PutAsync(url,cont).Result;
+                return resp.Content.ReadFromJsonAsync<int>().Result;
+            }
+        }
 
         /*----------------------USUARIOS COMUNES--------------------------*/
 
@@ -113,12 +155,13 @@ namespace Fundacion_Dehvi.Models
         }
 
         //---INICIO: subir imagen
-        public int ActualizarImgUsuario(UsuarioEnt usuario) 
+        public int ActualizarImgUsuario(UsuarioEnt usuario)
         {
-            using (var client = new HttpClient()) {
+            using (var client = new HttpClient())
+            {
                 string url = urlAPI + "SubirAvatar";
                 JsonContent cont = JsonContent.Create(usuario);
-                var resp = client.PutAsync(url,cont).Result;
+                var resp = client.PutAsync(url, cont).Result;
                 return resp.Content.ReadFromJsonAsync<int>().Result;
             }
         }
