@@ -1,0 +1,208 @@
+﻿using API_Dehvi.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+
+namespace API_Dehvi.Controllers
+{
+    public class ManualController : ApiController
+    {
+        //------------------------------MANUALES--------------------------
+        //---- INICIO: Crear un Manual -----
+        [HttpPost]
+        [Route("CrearManual")]
+        public long RegistroManual(Manual_Ent manual)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities())
+                {
+
+                    //--Se crea el manual
+                    var Manual = new Manual
+                    {
+                        idProcedimiento = manual.idProcedimiento,
+                        nombre = manual.nombre,
+                        codReferencia = manual.codReferencia,
+                        estado = true,
+                        idUsuarioCreador = manual.idUsuarioCreador,
+                        fechaCreacion = manual.fechaCreacion
+                    };
+                    con.Manual.Add(Manual);
+                    con.SaveChanges();
+                    return Manual.idManual;
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
+        //--- INICIO:  Lista Manuales por Procedimiento ----
+        [HttpGet]
+        [Route("ListaManProcedimiento")]
+        public List<Manual_Ent> ListaManualesProcedimiento(long q)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities()) //conexion a la base de datos
+                {
+                    var data = (
+                        from m in con.Manual
+                        join u in con.Usuario on m.idUsuarioCreador equals u.idUsuario
+                        orderby m.estado descending
+                        where m.idProcedimiento == q
+                        select new Manual_Ent
+                        {
+                            idManual = m.idManual,
+                            estado = m.estado,
+                            codReferencia = m.codReferencia,
+                            fechaCreacion = m.fechaCreacion,
+                            idProcedimiento = m.idProcedimiento,
+                            idUsuarioCreador = m.idUsuarioCreador,
+                            nombre = m.nombre,
+                            nombreUsuario = u.nombre + " " + u.apellido1 + " " + u.apellido2
+                        }
+                        ).ToList();
+                    return data;
+                }
+
+            }// fin del try
+            catch (Exception)
+            {
+                return null;
+            }// fin del catch
+        }// fin de la lista total de procedimientos
+
+
+
+        //-------------------------------DOCMANUAL-------------------------------
+        //---- INICIO: CrearDocManual----
+        [HttpPost]
+        [Route("CrearDocManual")]
+        public long RegistrarDocManual(DocManual_Ent docManual)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities())
+                {
+                    var DocManual = new DocManual
+                    {
+                        idManual = docManual.idManual,
+                        versionDoc = contarArchivosPorManual(docManual.idManual),
+                        estado = true,
+                        idUsuarioCreador = docManual.idUsuarioCreador,
+                        ruta = null,
+                        fechaCreacion = docManual.fechaCreacion
+                    };
+                    con.DocManual.Add(DocManual);
+                    con.SaveChanges();
+                    return DocManual.idDocManual;
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        //---- INICIO: Actualizar la ruta de un DocManual
+        [HttpPut]
+        [Route("ActualizarRutaDocManual")]
+        public int RutaDocManual(DocManual_Ent docManual)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities())
+                {
+                    con.Configuration.LazyLoadingEnabled = false;
+
+                    var doc = (from d in con.DocManual
+                               where d.idDocManual == docManual.idDocManual
+                               select d
+                               ).FirstOrDefault();
+
+                    doc.ruta = docManual.ruta;
+                    con.SaveChanges();
+
+                    return 1;
+                }
+            }
+            catch (Exception)
+            {
+                return 500;
+            }
+        }
+
+        //---- INICIO: Contador de los documentos que tiene un Manual
+        // no es accedible por el api
+        public long contarArchivosPorManual(long idManual)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities())
+                {
+                    con.Configuration.LazyLoadingEnabled = false;
+                    var contador = (
+                        from m in con.DocManual
+                        where m.idManual == idManual
+                        select m
+                        ).Count();
+
+                    if (contador != 0)
+                    {
+                        contador++;
+                    }
+
+                    return contador;
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        
+          //----INICIO: Lista Documenos por Manual ---
+        [HttpGet]
+        [Route("ListaDocManualxManual")]
+        public List<DocManual_Ent> ListaDocManualxManual(long q)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities()) //conexion a la base de datos
+                {
+                    var data = (
+                        from dm in con.DocManual
+                        join u in con.Usuario on dm.idUsuarioCreador equals u.idUsuario
+                        where dm.idManual == q
+                        select new DocManual_Ent
+                        {
+                            idDocManual=dm.idDocManual,
+                            idManual=dm.idManual,
+                            estado=dm.estado,
+                            fechaCreacion=dm.fechaCreacion,
+                            idUsuarioCreador=dm.idUsuarioCreador,
+                            ruta=dm.ruta,
+                            versionDoc=dm.versionDoc,
+                            nombreUsuario = u.nombre + " " + u.apellido1 + " " + u.apellido2
+                        }
+                        ).ToList();
+                    return data;
+                }
+
+            }// fin del try
+            catch (Exception)
+            {
+                return null;
+            }// fin del catch
+        }// fin de la lista total de procedimientos
+
+    }
+}

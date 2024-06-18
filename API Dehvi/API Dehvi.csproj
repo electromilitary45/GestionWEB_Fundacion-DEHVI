@@ -178,6 +178,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\DepartamentosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManualController.cs" />
     <Compile Include="Controllers\ProcedimientoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -188,6 +189,8 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\DepartamentoEnt.cs" />
+    <Compile Include="Entities\DocManual_Ent.cs" />
+    <Compile Include="Entities\Manual_Ent.cs" />
     <Compile Include="Entities\ProcedimientosEnt.cs" />
     <Compile Include="Entities\Rol_Ent.cs" />
     <Compile Include="Entities\Usuario_Ent.cs" />
@@ -314,6 +317,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Manual\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

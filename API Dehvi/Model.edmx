@@ -20,7 +20,7 @@
           <Property Name="idDocManual" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idManual" Type="bigint" Nullable="false" />
           <Property Name="versionDoc" Type="bigint" Nullable="false" />
-          <Property Name="ruta" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ruta" Type="varchar" MaxLength="255" />
           <Property Name="fechaCreacion" Type="datetime" Nullable="false" />
           <Property Name="estado" Type="bit" Nullable="false" />
           <Property Name="idUsuarioCreador" Type="bigint" Nullable="false" />
@@ -272,7 +272,7 @@
           <Property Name="idDocManual" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idManual" Type="Int64" Nullable="false" />
           <Property Name="versionDoc" Type="Int64" Nullable="false" />
-          <Property Name="ruta" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ruta" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="fechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="estado" Type="Boolean" Nullable="false" />
           <Property Name="idUsuarioCreador" Type="Int64" Nullable="false" />

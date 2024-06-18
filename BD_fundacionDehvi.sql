@@ -80,7 +80,7 @@ CREATE TABLE DocManual(
     idDocManual bigint NOT NULL IDENTITY(1,1),
     idManual bigint NOT NULL,
     versionDoc bigint NOT NULL,
-    ruta varchar(255) NOT NULL,
+    ruta varchar(255) NULL,
     fechaCreacion datetime NOT NULL,
     estado bit NOT NULL,
     idUsuarioCreador bigint NOT NULL,

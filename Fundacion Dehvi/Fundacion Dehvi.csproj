@@ -145,10 +145,13 @@
     <Compile Include="Controllers\DepartamentoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ManualController.cs" />
     <Compile Include="Controllers\ProcedimientoController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Entities\DepartamentoEnt.cs" />
+    <Compile Include="Entities\DocManual_Ent.cs" />
+    <Compile Include="Entities\Manual_Ent.cs" />
     <Compile Include="Entities\ProcedimientosEnt.cs" />
     <Compile Include="Entities\UsuarioEnt.cs" />
     <Compile Include="Entities\UtililitariosEnt.cs" />
@@ -156,6 +159,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DepartamentoModel.cs" />
+    <Compile Include="Models\ManualModel.cs" />
     <Compile Include="Models\ProcedimientoModel.cs" />
     <Compile Include="Models\UsuarioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -384,6 +388,7 @@
     <Content Include="Views\Usuario\NuevoUsuarioAdmin.cshtml" />
     <Content Include="Views\Usuario\ListaUsuariosAdmin.cshtml" />
     <Content Include="Views\Usuario\EditarUsuarioAdmin.cshtml" />
+    <Content Include="Views\Manual\AgregarManual.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

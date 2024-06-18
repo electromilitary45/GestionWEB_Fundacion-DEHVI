@@ -45,7 +45,7 @@ namespace API_Dehvi.Controllers
 
                 }
             }// fin del try
-            catch (Exception ex)
+            catch (Exception)
             {
                 return 500; // es un registro fallido
 
