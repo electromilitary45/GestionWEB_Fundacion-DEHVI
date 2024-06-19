@@ -1,8 +1,106 @@
-﻿
+﻿@model Tuple<Fundacion_Dehvi.Entities.ProcedimientosEnt, IEnumerable<Fundacion_Dehvi.Entities.Manual_Ent>>
+
 @{
-    ViewBag.Title = "PerfilProce";
+    ViewBag.Title = "Perfil del Procedimiento";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>PerfilProce</h2>
+<link href="~/Src/css/custom.css" rel="stylesheet">
 
+<section id="page-title" class="text-light" style="background-image: url(../../Src/image/1.png); background-size: cover; background-position: center center;">
+    <div class="container">
+        <div class="breadcrumb">
+            <ul>
+                <li><a href="@Url.Action("Index","Home")">Home</a> </li>
+                <li><a href="@Url.Action("ListaDeparta","Departamento")">Procedimiento</a> </li>
+                <li class="active"><a href="#">Perfil de Procedimiento</a> </li>
+            </ul>
+        </div>
+        <div class="page-title">
+            <h2 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); padding: 12px; text-align: center;">@Html.DisplayFor(m => m.Item1.nombre)</h2>
+        </div>
+    </div>
+</section>
+
+
+
+<section id="page-content" class="sidebar-left">
+
+    <section class="d-flex justify-content-center" style="padding: 10px 0;">
+        <div>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" data-mask="" placeholder="">
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="icon-search"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- post content -->
+            <div class="content col-lg-9">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- Grid de los Procedimientos -->
+
+                        <div class="row team-members team-members-shadow m-b-40">
+                            @if (Model != null)
+                            {
+                                foreach (var item in Model.Item2)
+                                {
+                                    if (item.idProcedimiento == Model.Item1.idProcedimiento)
+                                    {
+                                        <div class="col-lg-4">
+                                            <div class="team-member" onclick="location.href='@Url.Action("PerfilManual", "Manual", new { q = item.idManual })';" style="cursor: pointer;">
+                                                <div class="team-image">
+                                                    <img src="~/Src/image/1.png" style="object-fit: cover; height: 160px; width: 100%;">
+                                                </div>
+                                                <div class="team-desc">
+                                                    <span>@item.codReferencia</span>
+                                                    <h3>@item.nombre</h3>
+                                                    <span>Fecha de Creación</span>
+                                                    <p>@item.fechaCreacion.ToString("dd/MM/yyyy")</p>
+                                                    <span>Acciones</span>
+                                                    <a href="@Url.Action("PerfilManual", "Manual", new { q = item.idManual })" style="align-content:e">
+                                                        <i class="icon-eye" style="color: #808080"></i>
+                                                    </a>
+                                                    <a href="" style="align-content:e">
+                                                        <i class="icon-download" style="color: #808080"></i>
+                                                    </a>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    }
+                                }
+                            }
+                        </div>
+
+
+                        <!-- Fin del Grid -->
+                    </div>
+                </div>
+            </div>
+            <!-- end: post content -->
+            <!-- Sidebar-->
+            <div class="sidebar col-lg-3">
+                <!--Tabs with Posts-->
+                <div class="widget">
+                    <div class="row mb-3">
+                        <div class="col-lg-12 text-left">
+                            <a href="@Url.Action("AgregarManual", "Manual")" class="btn" style="background-color: #59B2E9; border-color: #59B2E9">Agregar Manuales</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End: Tabs with Posts-->
+        </div>
+        <!-- end: Sidebar-->
+    </div>
+</section> <!-- end: Content -->

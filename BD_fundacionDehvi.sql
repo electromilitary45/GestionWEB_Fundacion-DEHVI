@@ -92,16 +92,16 @@ CREATE TABLE DocManual(
 --------------- INSERTS ROLES---------------
 
 INSERT INTO Rol VALUES (1, 'Administrador')
-INSERT INTO Rol VALUES (2, 'Jeferatura')
+INSERT INTO Rol VALUES (2, 'Jefatura')
 INSERT INTO Rol VALUES (3, 'Empleado')
 INSERT INTO Rol VALUES (4, 'Externo')
 
 --------------- INSERTS DEPARTAMENTOS---------------
-INSERT INTO Departamento (nombre, estado) VALUES ('Gestion Humana', 1)
+INSERT INTO Departamento (nombre, estado) VALUES ('Gestión Humana', 1)
 INSERT INTO Departamento (nombre, estado) VALUES ('Finanzas', 1)
-INSERT INTO Departamento (nombre, estado) VALUES ('Gestion de Calidad', 1)
+INSERT INTO Departamento (nombre, estado) VALUES ('Gestión de Calidad', 1)
 INSERT INTO Departamento (nombre, estado) VALUES ('Alianzas', 1)
-INSERT INTO Departamento (nombre, estado) VALUES ('Atencion Integral', 1)
+INSERT INTO Departamento (nombre, estado) VALUES ('Atención Integral', 1)
 INSERT INTO Departamento (nombre, estado) VALUES ('Centros Infantiles', 1)
 INSERT INTO Departamento (nombre, estado) VALUES ('Operaciones', 1)
 INSERT INTO Departamento (nombre, estado) VALUES ('Publicidad', 1)

@@ -13,6 +13,7 @@ namespace Fundacion_Dehvi.Controllers
         //------------------- Instancias -------------------
         ProcedimientoModel p = new ProcedimientoModel();
         DepartamentoModel d = new DepartamentoModel();
+        ManualModel m = new ManualModel();
 
         //------------------- Crear Procedimiento -------------------
         [HttpGet]
@@ -94,7 +95,7 @@ namespace Fundacion_Dehvi.Controllers
             var datos = p.ListaProcesSector(q);
             if (Session["mensaje"] != null)
             {
-                ViewBag.MensajeAcc = Session["mensaje"].ToString();
+                ViewBag.MensajeProc = Session["mensaje"].ToString();
             }
 
             return View(datos); // muestra el listado de procedimientos por sector
@@ -106,12 +107,17 @@ namespace Fundacion_Dehvi.Controllers
         {
 
             var datos = p.PerfilProce(q);
+            var datos2 = m.ListaManProcedimiento(q);
+
+            var model = new Tuple<ProcedimientosEnt, IEnumerable<Manual_Ent>>(datos, (IEnumerable<Manual_Ent>)datos2);
+
+
             if (Session["mensaje"] != null)
             {
-                ViewBag.MensajeAcc = Session["mensaje"].ToString();
+                ViewBag.MensajeProc = Session["mensaje"].ToString();
             }
 
-            return View(datos); // muestra el perfil del procedimiento en especifico
+            return View(model); // muestra el perfil del procedimiento en especifico
         }// fin del get del perfil
 
         //------------------- Actualizar Procedimiento -------------------

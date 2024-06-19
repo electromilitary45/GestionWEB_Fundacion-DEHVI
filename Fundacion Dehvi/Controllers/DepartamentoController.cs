@@ -112,7 +112,7 @@ namespace Fundacion_Dehvi.Controllers
             var model = new Tuple<DepartamentoEnt, IEnumerable<ProcedimientosEnt>>(datos, (IEnumerable<ProcedimientosEnt>)datos2);
             if (Session["mensaje"] != null)
             {
-                ViewBag.MensajeAcc = Session["mensaje"].ToString();
+                ViewBag.MensajeDepa = Session["mensaje"].ToString();
             }
 
             return View(model); // muestra el perfil del Departamento en especifico
