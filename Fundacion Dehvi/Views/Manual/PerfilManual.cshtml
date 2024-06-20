@@ -1,0 +1,74 @@
+﻿@model Tuple<Fundacion_Dehvi.Entities.Manual_Ent, IEnumerable<Fundacion_Dehvi.Entities.DocManual_Ent>>
+@{
+    ViewBag.Title = "PerfilManual";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!--INICIO: Page Tittle-->
+<section id="page-title" class="text-light" style="background-image:url(../../Src/image/usuario/background.jpg); background-size: cover; background-position: center center;"></section>
+<!--FIN: Page Tittle-->
+<!--INICIO: Contenido-->
+<section id="page-content">
+    <!--INICIO: BTN Retorceder-->
+    <div class="container">
+        <a class="btn btn-rounded" href="@Url.Action("PerfilProce", "Procedimiento", new { q=ViewBag.idProcedimiento })"><i class="icon-arrow-left"></i> Perfil del Procedimiento</a>
+    </div>
+    <!--Fin: BTN Retorceder-->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <img src="~/Src/image/Archivos/archivo-predeterminado.png" width="250" />
+            </div>
+            <div class="col-lg-8">
+                <hr />
+                <!--INICIO: Acordion-->
+                <div class="toggle accordion accordion-shadow">
+                    <div class="ac-item">
+                        <h6 class="ac-title"><i class="fa fa-rocket"></i> Versiones </h6>
+                        <div class="ac-content" style="display: none;">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Version</th>
+                                        <th scope="col">Fecha de Actualizacion</th>
+                                        <th scope="col">Usuario que actualizo</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Item2)
+                                    {
+                                        if (item.estado == true)
+                                        {
+                                            <tr class="table-success">
+                                                <td>@item.versionDoc</td>
+                                                <td>@item.fechaCreacion</td>
+                                                <td><i class="fa fa-user"></i> @item.nombreUsuario</td>
+                                                <td><a href="@item.ruta"><i class="fa fa-cloud-download-alt"></i> Descargar</a></td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            <tr class="table-danger">
+                                                <td>@item.versionDoc</td>
+                                                <td>@item.fechaCreacion</td>
+                                                <td><i class="fa fa-user"></i> @item.nombreUsuario</td>
+                                                <td><a href="@item.ruta"><i class="fa fa-cloud-download-alt"></i> Descarga</a></td>
+                                            </tr>
+                                        }
+                                    }
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!--FIN: Acordion-->
+            </div>
+        </div>
+    </div>
+</section>
+<!--FIN Contenido-->

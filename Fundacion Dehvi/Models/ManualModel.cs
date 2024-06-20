@@ -49,7 +49,7 @@ namespace Fundacion_Dehvi.Models
                 return resp.Content.ReadFromJsonAsync<int>().Result;
             }
         }
-        
+
         //----INICIO: Listat Manuales por procedimiento
         public List<Manual_Ent> ListaManProcedimiento(long q)
         {
@@ -72,6 +72,37 @@ namespace Fundacion_Dehvi.Models
             }
         }
 
+        //----INICIO: Lista de DocManuales por Manuales
+        public List<DocManual_Ent> ListaDocManualxManual2(long q)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlAPI + "ListaDocManualxManual2?q=" + q;
+                var resp = client.GetAsync(url).Result;
+                return resp.Content.ReadFromJsonAsync<List<DocManual_Ent>>().Result;
+            }
+        }
 
+        //----INICIO: Consulta Manual
+        public Manual_Ent ConsultaManualId(long q)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlAPI + "ConsultaManualId?q=" + q;
+                var resp = client.GetAsync(url).Result;
+                return resp.Content.ReadFromJsonAsync<Manual_Ent>().Result;
+            }
+        }
+
+        //----INICIO: Desactivar DocManuales
+        public int DesactivarDocManuales(long q, long a)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = $"{urlAPI}DesactivarDocManuales?q={q}&a={a}";
+                var resp = client.PutAsync(url, null).Result;
+                return resp.Content.ReadFromJsonAsync<int>().Result;
+            }
+        }
     }//fin class
 }//fin namespace

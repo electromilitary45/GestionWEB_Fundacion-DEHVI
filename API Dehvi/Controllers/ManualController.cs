@@ -1,6 +1,7 @@
 ﻿using API_Dehvi.Entities;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -10,7 +11,8 @@ namespace API_Dehvi.Controllers
 {
     public class ManualController : ApiController
     {
-        //------------------------------MANUALES--------------------------
+        /*------------------------------MANUALES--------------------------*/
+
         //---- INICIO: Crear un Manual -----
         [HttpPost]
         [Route("CrearManual")]
@@ -52,6 +54,8 @@ namespace API_Dehvi.Controllers
             {
                 using (var con = new BD_fundacionDehviEntities()) //conexion a la base de datos
                 {
+                    con.Configuration.LazyLoadingEnabled = false;
+
                     var data = (
                         from m in con.Manual
                         join u in con.Usuario on m.idUsuarioCreador equals u.idUsuario
@@ -79,10 +83,35 @@ namespace API_Dehvi.Controllers
             }// fin del catch
         }// fin de la lista total de procedimientos
 
+        //--- INICIO: Consulta para un Manual en especifico
+        [HttpGet]
+        [Route("ConsultaManualId")]
+        public Manual ConsultaManualEspecifico(long q)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities())
+                {
+                    con.Configuration.LazyLoadingEnabled = false;
+                    var data = (
+                        from m in con.Manual
+                        where m.idManual == q
+                        select m
+                        ).FirstOrDefault();
 
+                    return data;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
 
-        //-------------------------------DOCMANUAL-------------------------------
+        /*-------------------------------DOCMANUAL-------------------------------*/
+
         //---- INICIO: CrearDocManual----
+
         [HttpPost]
         [Route("CrearDocManual")]
         public long RegistrarDocManual(DocManual_Ent docManual)
@@ -168,8 +197,8 @@ namespace API_Dehvi.Controllers
             }
         }
 
-        
-          //----INICIO: Lista Documenos por Manual ---
+
+        //----INICIO: Lista Documenos por Manual ---
         [HttpGet]
         [Route("ListaDocManualxManual")]
         public List<DocManual_Ent> ListaDocManualxManual(long q)
@@ -178,19 +207,21 @@ namespace API_Dehvi.Controllers
             {
                 using (var con = new BD_fundacionDehviEntities()) //conexion a la base de datos
                 {
+                    con.Configuration.LazyLoadingEnabled = false;
                     var data = (
                         from dm in con.DocManual
                         join u in con.Usuario on dm.idUsuarioCreador equals u.idUsuario
                         where dm.idManual == q
+                        orderby dm.fechaCreacion descending
                         select new DocManual_Ent
                         {
-                            idDocManual=dm.idDocManual,
-                            idManual=dm.idManual,
-                            estado=dm.estado,
-                            fechaCreacion=dm.fechaCreacion,
-                            idUsuarioCreador=dm.idUsuarioCreador,
-                            ruta=dm.ruta,
-                            versionDoc=dm.versionDoc,
+                            idDocManual = dm.idDocManual,
+                            idManual = dm.idManual,
+                            estado = dm.estado,
+                            fechaCreacion = dm.fechaCreacion,
+                            idUsuarioCreador = dm.idUsuarioCreador,
+                            ruta = dm.ruta,
+                            versionDoc = dm.versionDoc,
                             nombreUsuario = u.nombre + " " + u.apellido1 + " " + u.apellido2
                         }
                         ).ToList();
@@ -204,5 +235,77 @@ namespace API_Dehvi.Controllers
             }// fin del catch
         }// fin de la lista total de procedimientos
 
-    }
-}
+        //----INICIO: LIsta Documentos por manual
+        [HttpGet]
+        [Route("ListaDocManualxManual2")]
+        public List<DocManual_Ent> ListaDocManualxManual2(long q)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities()) //conexion a la base de datos
+                {
+                    con.Configuration.LazyLoadingEnabled = false;
+                    var data = (
+                        from dm in con.DocManual
+                        join u in con.Usuario on dm.idUsuarioCreador equals u.idUsuario
+                        where dm.idManual == q
+                        orderby dm.fechaCreacion descending
+                        select new DocManual_Ent
+                        {
+                            idDocManual = dm.idDocManual,
+                            idManual = dm.idManual,
+                            estado = dm.estado,
+                            fechaCreacion = dm.fechaCreacion,
+                            idUsuarioCreador = dm.idUsuarioCreador,
+                            ruta = dm.ruta,
+                            versionDoc = dm.versionDoc,
+                            nombreUsuario = u.nombre + " " + u.apellido1 + " " + u.apellido2
+                        }
+                    ).Take(3).ToList(); // Limitar a los últimos 3 registros}
+                    return data;
+                }
+            }
+            catch (Exception) { return null; }
+
+        }//fin Lista domanual 2
+
+        //----INICIO: Desactivar todos los docManual menos el ultimo registrado
+        [HttpPut]
+        [Route("DesactivarDocManuales")]
+        public int DesacDocManual(long q, long a)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities())
+                {
+                    //--se buscan los ultimos 3 
+                    var data = (
+                        from dm in con.DocManual
+                        where dm.idManual == q
+                        orderby dm.fechaCreacion descending
+                        select dm
+                    ).Take(3).ToList(); // Limitar a los últimos 3 registros
+
+                    //--se desactivan todos excepto el ultimo creado
+                    foreach ( var d in data)
+                    {
+                        if( d != null)
+                        {
+                            if(d.idDocManual != a)
+                            {
+                                d.estado=false;
+                            }
+                        }
+                    }
+                    con.SaveChanges();
+                    return 1;
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+    }//fin class
+}//fin namespace

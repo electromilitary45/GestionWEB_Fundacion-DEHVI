@@ -14,6 +14,29 @@ namespace Fundacion_Dehvi.Controllers
         //----INSTANCIA
         private readonly ManualModel MM = new ManualModel();
 
+
+
+
+        /*----------------------------ADMINISTRACION---------------------------*/
+        //--- INICIO: Perfil de Manual para un administrador
+        [HttpGet]
+        public ActionResult PerfilManualAdmin(long q)
+        {
+            if (Session["idUsuario"] == null)
+            {
+                return RedirectToAction("InicioSesion", "Login");
+            }
+
+            var datos = MM.ConsultaManualId(q);
+            var datos2 = MM.ListaDocManualxManual(q);
+
+            var model = new Tuple<Manual_Ent, IEnumerable<DocManual_Ent>>(datos, datos2);
+
+            return View(model);
+        }
+
+        /*----------------------------USUARIOS COMUNES---------------------------*/
+
         //---- INICIO: Agregar Manual
         [HttpGet]
         public ActionResult AgregarManual(long q)
@@ -87,11 +110,14 @@ namespace Fundacion_Dehvi.Controllers
                 inputDocManual.SaveAs(ruta);
 
                 var rutaDoc = "/Archivos/" + manual.idProcedimiento + "/" + respManual + "/" + respDocManual + extension;
-                docManual.idDocManual=respDocManual;
+                docManual.idDocManual = respDocManual;
                 docManual.ruta = rutaDoc;
 
                 //actualizar ruta en la base de datos
                 MM.ActRutaDocManual(docManual);
+
+                ////desactivar los docManuales desactualizados
+                //MM.DesactivarDocManuales(respManual,respDocManual);
 
                 return RedirectToAction("PerfilProce", "Procedimiento", new { q = manual.idProcedimiento });
             }
@@ -101,6 +127,27 @@ namespace Fundacion_Dehvi.Controllers
             }
 
         }
+
+        //---- INICIO:Perfil de manual para usuario
+        [HttpGet]
+        public ActionResult PerfilManual(long q, long a)
+        {
+            if (Session["idUsuario"] == null)
+            {
+                return RedirectToAction("InicioSesion", "Login");
+            }
+
+            ViewBag.idProcedimiento = a;
+
+            var datos = MM.ConsultaManualId(q);
+            var datos2 = MM.ListaDocManualxManual2(q);
+
+            var model = new Tuple<Manual_Ent, IEnumerable<DocManual_Ent>>(datos, datos2);
+
+            return View(model);
+        }
+
+
 
     }//fin class
 }//fin namespace
