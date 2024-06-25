@@ -23,21 +23,21 @@
                             @ViewBag.mensaje
                         </div>
                     }
-                    <div class="row team-members m-b-30">
+                    <div class="row team-members team-members-shadow m-b-40">
 
                         @foreach (var u in Model)
                         {
 
                             <div class="col-lg-4">
-                                <div class="team-member" style="background-color: #808080; border-radius: 20px; ">
+                                <div class="team-member">
                                     <div class="team-image">
                                         @if (u.rutaImg != null)
                                         {
-                                            <img src="@u.rutaImg" height="225" width="350" style="background-size:cover; background-position:center; background-repeat:no-repeat;">
+                                            <img src="@u.rutaImg" style="background-size: cover; background-position: center; height: 130px; width: auto;">
                                         }
                                         else
                                         {
-                                            <img src="~/Src/image/usuario/foto-perfil.jpg" height="225" width="350" style="background-size:cover; background-position:center; background-repeat:no-repeat;">
+                                            <img src="~/Src/image/usuario/8.jpg" style="background-size:cover; background-position:center; height: 130px; width: auto">
                                         }
                                     </div>
                                     <div class="team-desc text-left">
@@ -45,21 +45,20 @@
                                             <div class="col-lg-1">
                                                 @if (u.estado == true)
                                                 {
-                                                    <a href="@Url.Action("DesactivarUsuario","Usuario", new {q=u.idUsuario})"><i class="icon-toggle-right" style="color: #000000;"></i></a>
+                                                    <a href="@Url.Action("DesactivarUsuario","Usuario", new {q=u.idUsuario})"><i class="icon-toggle-right" style="color: #6D6D6D;"></i></a>
                                                 }
                                                 else
                                                 {
-                                                    <a href="@Url.Action("ActivarUsuario","Usuario", new {q=u.idUsuario})"><i class="icon-toggle-left" style="color: #000000;"></i></a>
+                                                    <a href="@Url.Action("ActivarUsuario","Usuario", new {q=u.idUsuario})"><i class="icon-toggle-left" style="color: #6D6D6D;"></i></a>
                                                 }
                                             </div>
                                             <div class="col-lg-1">
-                                                <a href="@Url.Action("EditarUsuarioAdmin","Usuario", new {q=u.idUsuario})"><i class="icon-edit" style="color: #000000"></i></a>
+                                                <a href="@Url.Action("EditarUsuarioAdmin","Usuario", new {q=u.idUsuario})"><i class="icon-edit" style="color: #6D6D6D"></i></a>
                                             </div>
                                         </div>
-                                        <h6 style="color:white">@u.nombre @u.apellido1 @u.apellido2</h6>
-                                        <span style="color: #3B3B3B;">Departamento</span>
-                                        <br />
-                                        <span style="color:#FFFFFF">@u.nombreDepartamento</span>
+                                        <h6>@u.nombre @u.apellido1 @u.apellido2</h6>
+                                        <span>Departamento</span>
+                                        <p>@u.nombreDepartamento</p>
                                     </div>
                                 </div>
                             </div>

@@ -40,7 +40,7 @@
 
                                 @using (Html.BeginForm("CrearProce", "Procedimiento", FormMethod.Post, new { @class = "form-validate", @novalidate = "novalidate" }))
                                 {
-                                    <input type="hidden" name="idUsuario" value="@Session["idUsuario"]" required/>
+                                    <input type="hidden" name="idUsuario" value="@Session["idUsuario"]" required />
                                     @*@Html.TextBoxFor(m=>m.idUsuario, new { @value = @Session["idUsuario"] })*@
                                     <div class="form-row">
                                         <!-- Código -->
@@ -52,22 +52,20 @@
                                             @Html.TextBoxFor(m => m.nombre, new { @class = "form-control", @required = "required", @placeholder = "Nombre" })
                                         </div>
                                     </div>
-                                    <div class="form-row">
-
-                                        <!-- Objetivo -->
-                                        <div class="form-group col-md-6">
-                                            @Html.TextAreaFor(m => m.objetivo, new { @class = "form-control", @required = "required", @placeholder = "Objetivo" })
-                                        </div>
-                                        <!-- Descripcion -->
-                                        <div class="form-group col-md-6">
-                                            @Html.TextAreaFor(m => m.descripcion, new { @class = "form-control", @required = "required", @placeholder = "Descripción" })
-                                        </div>
-                                    </div>
                                     <!-- DropDown de los Departamentos -->
                                     <div class="form-group">
                                         @Html.DropDownListFor(m => m.idDepartamento, ViewBag.LItemDepartamento as SelectList, "Seleccione el Departamento", new { @class = "form-control", @required = "required" })
                                     </div>
-
+                                    <div class="form-row">
+                                        <!-- Objetivo -->
+                                        <div class="form-group col-md-6">
+                                            @Html.TextAreaFor(m => m.objetivo, new { @class = "form-control", @required = "required", @placeholder = "Objetivo", @rows = "6" })
+                                        </div>
+                                        <!-- Descripcion -->
+                                        <div class="form-group col-md-6">
+                                            @Html.TextAreaFor(m => m.descripcion, new { @class = "form-control", @required = "required", @placeholder = "Descripción", @rows = "6" })
+                                        </div>
+                                    </div>
                                     <input type="submit" class="btn m-t-30 mt-3" value="Agregar Procedimiento">
                                 }
                             </div>

@@ -204,7 +204,9 @@
     <Content Include="Src\css\custom.css" />
     <Content Include="Src\css\fonts.css" />
     <Content Include="Src\css\plugins.css" />
+    <Content Include="Src\css\rtl.css" />
     <Content Include="Src\css\style.css" />
+    <Content Include="Src\css\theme.css" />
     <Content Include="Src\funciones\FuncionesUsuarios.js" />
     <Content Include="Src\image\1.jpg" />
     <Content Include="Src\image\1.png" />

@@ -19,6 +19,30 @@
 /* ----------------------------------------------------------------
     BODY
 -----------------------------------------------------------------*/
+.item-container {
+    display: flex;
+    align-items: center; /* Alinea verticalmente los elementos en el centro */
+    justify-content: space-between; /* Alinea uno al inicio y otro al final */
+    text-align: center; /* Asegura que el texto dentro del span esté centrado */
+    width: 100%; /* Opcional: ajusta según el contenedor padre */
+}
+
+    .item-container span {
+        flex-grow: 1; /* Permite que el span crezca para ocupar todo el espacio disponible */
+        text-align: center; /* Asegura que el texto esté centrado */
+    }
+
+.icon-link {
+    flex-shrink: 0; /* Evita que el enlace se encoja, manteniendo el ícono visible */
+    text-align: right; /* Alinea el ícono a la derecha */
+}
+
+    .icon-link i {
+        color: #808080; /* Estilo para el ícono, color gris */
+    }
+
+
+
 html {
     overflow-x: hidden;
 }
@@ -13304,10 +13328,11 @@ a.btn:not([href]):not([tabindex]) {
 
 .card {
     border: 1px solid #e6e8eb;
-    border-radius: 5px;
+    border-radius: 15px;
     background-color: #ffffff;
     margin-bottom: 20px;
     box-shadow: 0 0 35px 0 rgba(154, 161, 171, 0.15);
+    align-content:center
 }
 
     .card .card-header {
@@ -16574,7 +16599,7 @@ span.highlight {
     position: relative;
     overflow: hidden;
     margin-bottom: 30px;
-    border-radius: 4px;
+    border-radius: 40px;
 }
 
     .team-members .team-member .team-image {

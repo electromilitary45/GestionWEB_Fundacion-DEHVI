@@ -39,14 +39,14 @@
 
                                 @using (Html.BeginForm("CrearDepartamento", "Departamento", FormMethod.Post, new { @class = "form-validate", @novalidate = "novalidate" }))
                                 {
-                                    <div class="form-row" >
+                                    <div class="form-row">
                                         <!-- Nombre Departamento -->
                                         <div class="form-group col-md-6">
                                             <label for="nombre">Nombre del Departamento</label>
                                             @Html.TextBoxFor(m => m.nombre, new { @class = "form-control", @required = "", @placeholder = "Ingrese el nombre del departamento:" })
                                         </div>
+
                                     </div>
-                                   
                                     <input type="submit" class="btn m-t-30 mt-3" value="Agregar Departamento">
                                 }
                             </div>
