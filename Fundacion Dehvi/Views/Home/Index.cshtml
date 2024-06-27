@@ -4,6 +4,12 @@
     ViewBag.Title = "IndexPrincipal";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 
+    // Variables generales
+    int yearStart = 2000; // Año de inicio para calcular los años pasados
+    int currentYear = DateTime.Now.Year; // Año actual
+
+    // Cálculo de los años pasados
+    int yearsPassed = currentYear - yearStart;
 }
 
 <div style="background-color:white">
@@ -19,7 +25,7 @@
                 trabajo diario con nuestra herramienta diseñada
                 especialmente para ti.
         </div>
-        <img src="~/Src/image/1.png" class="img" alt="Imagen" />
+        <img src="~/Src/image/1.png" class="img" alt="Imagen" style="width:70%" />
     </div>
 </div>
 
@@ -27,19 +33,19 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 text-center">
-                <div class="counter bold" style="color: #C69AD1 "> <span data-speed="1500" data-refresh-interval="50" data-to="1300" data-from="1000" data-seperator="true"></span> </div>
+                <div class="counter bold" style="color: #C69AD1">
+                    <span id="yearsSince2000" data-speed="2500" data-refresh-interval="510" data-to="0" data-from="100" data-seperator="true"></span>
+                </div>
                 <p>Años En El País</p>
             </div>
-
-
             <div class="col-lg-4 text-center">
                 <div class="vertical"></div>
-                <div class="counter bold" style="color: #C69AD1"> <span data-speed="2500" data-refresh-interval="50" data-to="50" data-from="5000" data-seperator="true"></span> </div>
+                <div class="counter bold" style="color: #C69AD1"> <span data-speed="2500" data-refresh-interval="50" data-to="05" data-from="100" data-seperator="true"></span> </div>
                 <p>Centros Educativos</p>
             </div>
             <div class="col-lg-4 text-center">
                 <div class="vertical"></div>
-                <div class="counter bold" style="color: #C69AD1"> <span data-speed="2500" data-refresh-interval="50" data-to="3889" data-from="2000" data-seperator="true"></span> </div>
+                <div class="counter bold" style="color: #C69AD1"> <span data-speed="2500" data-refresh-interval="50" data-to="06" data-from="100" data-seperator="true"></span> </div>
                 <p>Proyectos Activos</p>
             </div>
         </div>
@@ -97,3 +103,23 @@
         </div>
     </div>
 </section>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var startYear = 2000;
+        var currentYear = new Date().getFullYear();
+        var yearsPassed = currentYear - startYear;
+
+        var counterSpan = document.getElementById('yearsSince2000');
+        if (counterSpan) {
+            counterSpan.setAttribute('data-to', yearsPassed);
+            counterSpan.innerText = yearsPassed;  // Para visualización inmediata antes de que la animación comience
+        }
+
+        // Aquí deberías inicializar tu contador, dependiendo de la librería que estés utilizando.
+        // Asumiendo que usas un plugin de jQuery para contadores, algo como esto:
+        $('.counter').counterUp({
+            delay: 10,
+            time: 1000
+        });
+    });
+</script>
