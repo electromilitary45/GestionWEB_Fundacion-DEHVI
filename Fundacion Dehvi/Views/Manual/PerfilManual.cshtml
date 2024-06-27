@@ -2,25 +2,99 @@
 @{
     ViewBag.Title = "PerfilManual";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var primerItem = Model.Item2.FirstOrDefault();
+    long idProcedimiento = ViewBag.idProcedimiento;
 }
+
 
 <!--INICIO: Page Tittle-->
 <section id="page-title" class="text-light" style="background-image:url(../../Src/image/usuario/background.jpg); background-size: cover; background-position: center center;"></section>
 <!--FIN: Page Tittle-->
+<!--INICIO: Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="modal" aria-labelledby="modal-label" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-label">Subir una nueva version <i class="fa fa-cloud-upload-alt"></i></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <img src="~/Src/image/Archivos/archivo-predeterminado.png" width="200" />
+                    </div>
+                    <div class="col-lg-7">
+                        @using (Html.BeginForm("NuevaVersionDocManual", "Manual", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                        {
+                            <input type="hidden" name="idUsuarioCreador" id="idUsuarioCreador" required value="@Session["idUsuario"]" />
+                            <input type="hidden" name="idManual" id="idManual" required value="@primerItem.idManual" />
+                            <input type="hidden" name="idProcedimiento" id="idProcedimiento" required value="@idProcedimiento" />
+                            <input type="file" name="inputDoc" id="inputDoc" required />
+
+                            <button type="submit" class="btn btn-sm" name="btnSubmit">Guardar archivo <i class="icon-check"></i></button>
+                        }
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-b btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--FIN: Modal-->
 <!--INICIO: Contenido-->
 <section id="page-content">
     <!--INICIO: BTN Retorceder-->
     <div class="container">
-        <a class="btn btn-rounded" href="@Url.Action("PerfilProce", "Procedimiento", new { q=ViewBag.idProcedimiento })"><i class="icon-arrow-left"></i> Perfil del Procedimiento</a>
+        <a class="btn btn-rounded" href="@Url.Action("PerfilProce", "Procedimiento", new { q=idProcedimiento })"><i class="icon-arrow-left"></i> Perfil del Procedimiento</a>
     </div>
     <!--Fin: BTN Retorceder-->
 
     <div class="container">
         <div class="row">
+
+
             <div class="col-lg-4">
                 <img src="~/Src/image/Archivos/archivo-predeterminado.png" width="250" />
             </div>
             <div class="col-lg-8">
+
+                @if (ViewBag.mensaje != null)
+                {
+                    <div class="container">
+                        <div role="alert" class="alert alert-info alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
+                            <strong><i class="fa fa-check-circle"></i> Warning!</strong> @ViewBag.mensaje
+                        </div>
+                    </div>
+                }
+
+                <!--Boton para descargar-->
+                <div class="row">
+                    <div class="col-lg-3">
+                        <a href="@primerItem.ruta" class="btn btn-success btn-icon-holder btn-shadow btn-light-hover">Descargar<i class="fa fa-cloud-download-alt"></i> </a>
+                    </div>
+                    <div class="col-lg-3">
+                        <a data-target="#modal" data-toggle="modal" href="#" class="btn btn-info btn-icon-holder btn-shadow btn-light-hover">Actualizar<i class="fa fa-cloud-upload-alt"></i></a>
+                    </div>
+                </div>
+
+                <hr />
+                <!--FECHA ULTIMA ACTUALIZACION-->
+                <div class="">
+                    <h5><i class="icon-calendar"></i> Fecha de Creacion/Actualizacion</h5>
+                    <p>@primerItem.fechaCreacion</p>
+                </div>
+                <!--Usuario-->
+                <div class="">
+                    <h5><i class="icon-user"></i> Usuario Creador</h5>
+                    <p>@primerItem.nombreUsuario</p>
+                </div>
+
+
+
                 <hr />
                 <!--INICIO: Acordion-->
                 <div class="toggle accordion accordion-shadow">
@@ -58,9 +132,6 @@
                                             </tr>
                                         }
                                     }
-
-
-
                                 </tbody>
                             </table>
                         </div>

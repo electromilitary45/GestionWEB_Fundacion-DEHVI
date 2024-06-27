@@ -391,6 +391,7 @@
     <Content Include="Views\Manual\AgregarManual.cshtml" />
     <Content Include="Views\Manual\PerfilManualAdmin.cshtml" />
     <Content Include="Views\Manual\PerfilManual.cshtml" />
+    <Content Include="Views\Manual\ConsultaManuales.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

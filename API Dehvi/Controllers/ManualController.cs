@@ -16,7 +16,7 @@ namespace API_Dehvi.Controllers
         //---- INICIO: Crear un Manual -----
         [HttpPost]
         [Route("CrearManual")]
-        public long RegistroManual(Manual_Ent manual)
+        public long CrearManual(Manual_Ent manual)
         {
             try
             {
@@ -108,7 +108,119 @@ namespace API_Dehvi.Controllers
             }
         }
 
-        /*-------------------------------DOCMANUAL-------------------------------*/
+        //--- INICIO: Consulta General Manuales
+        [HttpGet]
+        [Route("ConsultaManuales")]
+        public List<Manual_Ent> ConsultaManuales()
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities()) //conexion a la base de datos
+                {
+                    var data = (
+                        from m in con.Manual
+                        join u in con.Usuario on m.idUsuarioCreador equals u.idUsuario
+                        orderby m.idManual descending
+                        select new Manual_Ent
+                        {
+                            idManual = m.idManual,
+                            estado = m.estado,
+                            codReferencia = m.codReferencia,
+                            fechaCreacion = m.fechaCreacion,
+                            idProcedimiento = m.idProcedimiento,
+                            idUsuarioCreador = m.idUsuarioCreador,
+                            nombre = m.nombre,
+                            nombreUsuario = u.nombre + " " + u.apellido1 + " " + u.apellido2
+
+                        }).ToList();
+                    return data;
+                }
+
+            }// fin del try
+            catch (Exception)
+            {
+                return null;// error
+            }// fin del catch
+
+        }// fin de la lista completa de manuales
+
+        //--- INICIO: Actualizar Manual
+        [HttpPut]
+        [Route("ActualizarManual")]
+        public int ActualizarManual(Manual_Ent manual)
+        {
+            try
+          {
+                using (var con = new BD_fundacionDehviEntities()) //conexion a la base de datos
+                {
+                    var data = (
+                        from m in con.Manual
+                        where m.idManual == manual.idManual
+                        select m).FirstOrDefault();
+
+                    if (data != null)
+                    {
+                        data.nombre = manual.nombre;
+                        data.estado = manual.estado;
+
+                        con.SaveChanges();
+
+                        return 1;
+                    }
+                    return 2;
+                }
+
+            }// fin del try
+            catch (Exception)
+            {
+                return 0;// error
+            }// fin del catch
+
+        }// fin de actualizar manuales 
+
+        //--- INICIO: Actualizar Estado Manual
+        [HttpPut]
+        [Route("EstadoManual")]
+        public int EstadoManual(Manual_Ent manual)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities()) //conexion a la base de datos
+                {
+                    var data = (
+                        from m in con.Manual
+                        where m.idManual == manual.idManual
+                        select m).FirstOrDefault();
+
+                    if (data != null)
+                    {
+                        if (data.estado == true)
+                        {
+                            data.estado = false; // se cambia el estado de activo a inactivo
+
+                            con.SaveChanges();
+
+                            return 1; // guarda el estado
+                        }
+
+                        data.estado = true; // se cambia el estado de inactivo a activo
+
+                        con.SaveChanges();
+
+                        return 2; // se guarda el estado
+                    }
+
+                    return 3; // manual no encontrado
+                }
+            }
+            catch (Exception)
+            {
+                return 0;// error
+            }// fin del catch
+
+        }// fin de actualizar estado manuales
+
+        /*-------------------------------DOC MANUAL-------------------------------*/
 
         //---- INICIO: CrearDocManual----
 
@@ -169,7 +281,7 @@ namespace API_Dehvi.Controllers
         }
 
         //---- INICIO: Contador de los documentos que tiene un Manual
-        // no es accedible por el api
+        // no es accesible por el api
         public long contarArchivosPorManual(long idManual)
         {
             try
@@ -196,7 +308,6 @@ namespace API_Dehvi.Controllers
                 return 0;
             }
         }
-
 
         //----INICIO: Lista Documenos por Manual ---
         [HttpGet]
@@ -287,13 +398,13 @@ namespace API_Dehvi.Controllers
                     ).Take(3).ToList(); // Limitar a los últimos 3 registros
 
                     //--se desactivan todos excepto el ultimo creado
-                    foreach ( var d in data)
+                    foreach (var d in data)
                     {
-                        if( d != null)
+                        if (d != null)
                         {
-                            if(d.idDocManual != a)
+                            if (d.idDocManual != a)
                             {
-                                d.estado=false;
+                                d.estado = false;
                             }
                         }
                     }
@@ -306,6 +417,8 @@ namespace API_Dehvi.Controllers
                 return 0;
             }
         }
+
+
 
     }//fin class
 }//fin namespace

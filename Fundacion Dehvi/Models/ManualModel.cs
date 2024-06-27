@@ -26,6 +26,54 @@ namespace Fundacion_Dehvi.Models
             }
         }
 
+        //----INICIO: Listat Manuales por procedimiento
+        public List<Manual_Ent> ListaManProcedimiento(long q)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlAPI + "ListaManProcedimiento?q=" + q;
+                var resp = client.GetAsync(url).Result;
+                return resp.Content.ReadFromJsonAsync<List<Manual_Ent>>().Result;
+            }
+        }
+
+        //------------ Lista Manuales Completa ------------
+        public List<ProcedimientosEnt> ConsultaManuales()
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlAPI + "ConsultaManuales";
+                var resp = client.GetAsync(url).Result;
+                return resp.Content.ReadFromJsonAsync<List<ProcedimientosEnt>>().Result;
+            }
+        }// fin de la lista de todos los manuales
+
+        //------------ Actualizar Procedimiento ------------
+        public int ActualizarManual(ProcedimientosEnt entidad)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlAPI + "ActualizarManual";
+                JsonContent contenido = JsonContent.Create(entidad);
+                var resp = client.PutAsync(url, contenido).Result;
+                return resp.Content.ReadFromJsonAsync<int>().Result;
+            }
+        }// fin actualizar
+
+        //------------ Desactivar Procedimiento ------------
+        public int EstadoManual(ProcedimientosEnt entidad)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlAPI + "EstadoManual";
+                JsonContent contenido = JsonContent.Create(entidad);
+                var resp = client.PutAsync(url, contenido).Result;
+                return resp.Content.ReadFromJsonAsync<int>().Result;
+            }
+        } // fin de desactivar
+
+        //--------------- Documentos del Manual -------------------------
+
         //----INICIO: Registro de un DocManual
         public long CrearDocManual(DocManual_Ent docManual)
         {
@@ -49,19 +97,7 @@ namespace Fundacion_Dehvi.Models
                 return resp.Content.ReadFromJsonAsync<int>().Result;
             }
         }
-
-        //----INICIO: Listat Manuales por procedimiento
-        public List<Manual_Ent> ListaManProcedimiento(long q)
-        {
-            using (var client = new HttpClient())
-            {
-                string url = urlAPI + "ListaManProcedimiento?q=" + q;
-                var resp = client.GetAsync(url).Result;
-                return resp.Content.ReadFromJsonAsync<List<Manual_Ent>>().Result;
-            }
-        }
-
-        //----INICIO: Lista de DocManuales por Manuales
+               //----INICIO: Lista de DocManuales por Manuales
         public List<DocManual_Ent> ListaDocManualxManual(long q)
         {
             using (var client = new HttpClient())
