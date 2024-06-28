@@ -1,7 +1,58 @@
-﻿@{
-    ViewBag.Title = "ConsultaManuales";
+﻿@model Tuple<IEnumerable<Fundacion_Dehvi.Entities.Manual_Ent>, IEnumerable<Fundacion_Dehvi.Entities.DepartamentoEnt>>
+@{
+    ViewBag.Title = "Manuales";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>ConsultaManuales</h2>
+<!--INICIO: Page Tittle-->
+<section id="page-title" class="text-light" style="background-image:url(../../Src/image/usuario/background.jpg); background-size: cover; background-position: center center;"></section>
+<!--FIN: Page Tittle-->
+<!--INICIO: Page Content-->
+<section id="page-content">
+    <div class="container">
+        <div class="row"></div>
 
+        <!--INICIO: Filtro-->
+        <nav class="grid-filter gf-creative center" data-layout="#portfolio">
+            <ul>
+                <li class="active"><a href="#" data-category="*">Mostrar Todos</a></li>
+                @foreach (var dep in Model.Item2)
+                {
+                    <li><a href="#" data-category=".ct-@dep.idDepartamento">@dep.nombre</a></li>
+                }
+                @*
+                    <li><a href="#" data-category=".ct-photography">Photography</a></li>
+                    <li><a href="#" data-category=".ct-marketing">Marketing</a></li>
+                    <li><a href="#" data-category=".ct-media">Media</a></li>
+                    <li><a href="#" data-category=".ct-webdesign">Web design</a></li>*@
+            </ul>
+            @*<br />
+            <div class="grid-active-title">Mostrar Todos</div>*@
+        </nav>
+        <!--FIN: Filtro-->
+
+        <!--INICIO: PORTFOLIO-->
+        <div id="portfolio" class="grid-layout portfolio-4-columns">
+            @foreach (var man in Model.Item1)
+            {
+                <div class="portfolio-item no-overlay img-zoom ct-@man.idDepartamento">
+                    <div class="portfolio-item-wrap">
+                        <div class="portfolio-img">
+                            <div class="portfolio-image">
+                                <a href="@Url.Action("PerfilManual", "Manual", new { q = man.idManual, a=man.idProcedimiento})"><img src="~/Src/image/Archivos/archivo-predeterminado.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="portfolio-description">
+                            <a href="portfolio-page-grid-gallery.html">
+                                <h6>@man.nombre</h6>
+                                <span>Creacion: @man.fechaCreacion</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <!--FIN: PORTFOLIO-->
+    </div>
+</section>
+<!--FIN: Page Content-->

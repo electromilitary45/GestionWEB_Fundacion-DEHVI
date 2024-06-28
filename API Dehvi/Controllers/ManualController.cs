@@ -119,8 +119,10 @@ namespace API_Dehvi.Controllers
                 {
                     var data = (
                         from m in con.Manual
+                        join p in con.Procedimiento on m.idProcedimiento equals p.idProcedimiento
                         join u in con.Usuario on m.idUsuarioCreador equals u.idUsuario
-                        orderby m.idManual descending
+                        
+                        orderby m.fechaCreacion descending
                         select new Manual_Ent
                         {
                             idManual = m.idManual,
@@ -129,6 +131,7 @@ namespace API_Dehvi.Controllers
                             fechaCreacion = m.fechaCreacion,
                             idProcedimiento = m.idProcedimiento,
                             idUsuarioCreador = m.idUsuarioCreador,
+                            idDepartamento= p.idDepartamento,
                             nombre = m.nombre,
                             nombreUsuario = u.nombre + " " + u.apellido1 + " " + u.apellido2
 

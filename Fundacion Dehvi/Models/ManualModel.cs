@@ -11,7 +11,7 @@ namespace Fundacion_Dehvi.Models
 {
     public class ManualModel
     {
-        //----- INSTANCIAS -----
+        //----- INSTANCIAS ----- :p
         private readonly string urlAPI = ConfigurationManager.AppSettings["urlApi"];
 
         //----INICIO: Registro de nuevo manual---
@@ -38,18 +38,18 @@ namespace Fundacion_Dehvi.Models
         }
 
         //------------ Lista Manuales Completa ------------
-        public List<ProcedimientosEnt> ConsultaManuales()
+        public List<Manual_Ent> ConsultaManuales()
         {
             using (var client = new HttpClient())
             {
                 string url = urlAPI + "ConsultaManuales";
                 var resp = client.GetAsync(url).Result;
-                return resp.Content.ReadFromJsonAsync<List<ProcedimientosEnt>>().Result;
+                return resp.Content.ReadFromJsonAsync<List<Manual_Ent>>().Result;
             }
         }// fin de la lista de todos los manuales
 
-        //------------ Actualizar Procedimiento ------------
-        public int ActualizarManual(ProcedimientosEnt entidad)
+        //------------ Actualizar Manual ------------
+        public int ActualizarManual(Manual_Ent entidad)
         {
             using (var client = new HttpClient())
             {
@@ -60,8 +60,8 @@ namespace Fundacion_Dehvi.Models
             }
         }// fin actualizar
 
-        //------------ Desactivar Procedimiento ------------
-        public int EstadoManual(ProcedimientosEnt entidad)
+        //------------ Desactivar Manual ------------
+        public int EstadoManual(Manual_Ent entidad)
         {
             using (var client = new HttpClient())
             {
@@ -72,7 +72,7 @@ namespace Fundacion_Dehvi.Models
             }
         } // fin de desactivar
 
-        //--------------- Documentos del Manual -------------------------
+        /*--------------- Documentos del Manual -------------------------*/
 
         //----INICIO: Registro de un DocManual
         public long CrearDocManual(DocManual_Ent docManual)

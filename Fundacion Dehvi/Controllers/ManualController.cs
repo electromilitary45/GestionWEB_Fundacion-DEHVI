@@ -13,7 +13,7 @@ namespace Fundacion_Dehvi.Controllers
     {
         //----INSTANCIA
         private readonly ManualModel MM = new ManualModel();
-
+        private readonly DepartamentoModel DM = new DepartamentoModel();
 
 
 
@@ -160,9 +160,12 @@ namespace Fundacion_Dehvi.Controllers
                 else
                 {
                     var datos = MM.ConsultaManuales();
+                    var datos2 = DM.ListaDeparta();
+
+                    var model = new Tuple<IEnumerable<Manual_Ent>,IEnumerable<DepartamentoEnt>>(datos,datos2);
                     //Muestra los mensajes referentes a manales agregados correctamente y al cambio de estado de estas cuando sea pertinente
                     ViewBag.Mensaje = TempData["Mensaje"];
-                    return View(datos);
+                    return View(model);
                 }
             }
             catch (Exception e)

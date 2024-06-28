@@ -20,6 +20,7 @@ namespace API_Dehvi.Entities
 
         //----- Atributos genericos
         public string nombreUsuario { get; set; }
+        public long idDepartamento { get; set; }
 
     }
 }
