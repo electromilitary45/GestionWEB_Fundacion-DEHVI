@@ -1,6 +1,7 @@
 ﻿using API_Dehvi.Entities;
 using Fundacion_Dehvi.Entities;
 using Fundacion_Dehvi.Models;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,19 +24,18 @@ namespace Fundacion_Dehvi.Controllers
         [HttpGet]
         public ActionResult ListaUsuariosAdmin()
         {
-            if (Session["idUsuario"] != null)
-            {
-                if (long.Parse(Session["idRol"].ToString()) != 1)
-                {
-                    return RedirectToAction("AccesoNoAuthorizado", "Shared");
-                }
-                var datos = UM.ListaCompletaUsuarios();
-                return View(datos);
-            }
-            else
+            var idRol = byte.Parse(Session["idRol"].ToString());
+            if (Session["idUsuario"] == null)
             {
                 return RedirectToAction("InicioSesion", "Login");
             }
+            if (idRol != 1)
+            {
+                return RedirectToAction("AccesoNoAuthorizado", "Shared");
+            }
+
+            var datos = UM.ListaCompletaUsuarios();
+            return View(datos);
 
         }
 
@@ -74,22 +74,22 @@ namespace Fundacion_Dehvi.Controllers
         [HttpGet]
         public ActionResult NuevoUsuarioAdmin()
         {
-            if (Session["idUsuario"] != null)
-            {
-                if (long.Parse(Session["idRol"].ToString()) != 1)
-                {
-                    return RedirectToAction("AccesoNoAuthorizado", "Shared");
-                }
-
-                ViewBag.listaDepartamentos = DM.LItemDepartamento();
-                ViewBag.listaRoles = UM.LItemRol();
-                //ViewBag.listaDepartamentos 
-                return View();
-            }
-            else
+            var idRol = byte.Parse(Session["idRol"].ToString());
+            if (Session["idUsuario"] == null)
             {
                 return RedirectToAction("InicioSesion", "Login");
             }
+            if (idRol != 1)
+            {
+                return RedirectToAction("AccesoNoAuthorizado", "Shared");
+            }
+
+
+            ViewBag.listaDepartamentos = DM.LItemDepartamento();
+            ViewBag.listaRoles = UM.LItemRol();
+            //ViewBag.listaDepartamentos 
+            return View();
+
 
         }
 
@@ -131,23 +131,23 @@ namespace Fundacion_Dehvi.Controllers
         [HttpGet]
         public ActionResult EditarUsuarioAdmin(long q)
         {
-
-            if (Session["idUsuario"] != null & q != 0)
-            {
-                if (long.Parse(Session["idRol"].ToString()) != 1)
-                {
-                    return RedirectToAction("AccesoNoAuthorizado", "Shared");
-                }
-
-                ViewBag.listaDepartamentos = DM.LItemDepartamento();
-                ViewBag.listaRoles = UM.LItemRol();
-                var datos = UM.ConsultaUsuariosID(q);
-                return View(datos);
-            }
-            else
+            var idRol = byte.Parse(Session["idRol"].ToString());
+            if (Session["idUsuario"] == null)
             {
                 return RedirectToAction("InicioSesion", "Login");
             }
+            if (idRol != 1)
+            {
+                return RedirectToAction("AccesoNoAuthorizado", "Shared");
+            }
+
+            
+
+            ViewBag.listaDepartamentos = DM.LItemDepartamento();
+            ViewBag.listaRoles = UM.LItemRol();
+            var datos = UM.ConsultaUsuariosID(q);
+            return View(datos);
+
         }
 
         [HttpPost]
@@ -158,10 +158,10 @@ namespace Fundacion_Dehvi.Controllers
                 ViewBag.listaDepartamentos = DM.LItemDepartamento();
                 ViewBag.listaRoles = UM.LItemRol();
                 var user = UM.ActualizarUsuario(usuario);
-                if(user != 500)
+                if (user != 500)
                 {
                     ViewBag.mensaje = "Usuario editado con exito";
-                    return RedirectToAction("ListaUsuariosAdmin","Usuario");
+                    return RedirectToAction("ListaUsuariosAdmin", "Usuario");
                 }
 
                 ViewBag.mensaje = "Error al editar!";
@@ -180,32 +180,28 @@ namespace Fundacion_Dehvi.Controllers
         [HttpGet]
         public ActionResult PerfilUsuario()
         {
-            if (Session["idUsuario"] != null)
-            {
-                long idUsuario = long.Parse(Session["idUsuario"].ToString());
-                var datos = UM.ConsultaUsuariosID(idUsuario);
-                return View(datos);
-            }
-            else
+            if (Session == null)
             {
                 return RedirectToAction("InicioSesion", "Login");
             }
 
+            long idUsuario = long.Parse(Session["idUsuario"].ToString());
+            var datos = UM.ConsultaUsuariosID(idUsuario);
+            return View(datos);
         }//fin perfil usuario
 
         //-----INICIO: Cambio de contraseña
         [HttpGet]
         public ActionResult CambioContrasena()
         {
-            if (Session["idUsuario"] != null)
-            {
-                var datos = UM.ConsultaUsuariosID(long.Parse(Session["idUsuario"].ToString()));
-                return View(datos);
-            }
-            else
+            if (Session["idUsuario"] == null)
             {
                 return RedirectToAction("InicioSesion", "Login");
             }
+
+            var datos = UM.ConsultaUsuariosID(long.Parse(Session["idUsuario"].ToString()));
+            return View(datos);
+
 
         }//fin cambio contraseña
 

@@ -22,28 +22,160 @@ namespace Fundacion_Dehvi.Controllers
         [HttpGet]
         public ActionResult PerfilManualAdmin(long q)
         {
+
             if (Session["idUsuario"] == null)
             {
                 return RedirectToAction("InicioSesion", "Login");
             }
+            var idRol = byte.Parse(Session["idRol"].ToString());
+            if (idRol != 1 && idRol != 2)
+            {
+                return RedirectToAction("AccesoNoAuthorizado", "Shared");
+            }
 
             var datos = MM.ConsultaManualId(q);
             var datos2 = MM.ListaDocManualxManual(q);
-
             var model = new Tuple<Manual_Ent, IEnumerable<DocManual_Ent>>(datos, datos2);
 
             return View(model);
         }
 
-        /*---------------------------- USUARIOS Manuales ---------------------------*/
+        [HttpGet]
+        public ActionResult ActualizarEstadoManual(long q)
+        {
+            var entidad = new Manual_Ent();
+            entidad.idManual = q;
+
+            var resp = MM.EstadoManual(entidad);
+
+            switch (resp)
+            {
+                case 1:
+                    TempData["mensaje"] = "Se ha desactivado el Manual.";
+                    return RedirectToAction("PerfilManualAdmin", "Manual", new { q });
+                case 2:
+                    TempData["mensaje"] = "Se ha activado el Manual.";
+                    return RedirectToAction("PerfilManualAdmin", "Manual", new { q });
+                default:
+                    TempData["mensaje"] = "Manual no encontrado.";
+                    return RedirectToAction("PerfilManualAdmin", "Manual", new { q });
+
+            }
+
+
+        }
+
+        /*--- INICIO: NuevaVersion de DocManual */
+        [HttpPost]
+        public ActionResult NuevaVersionDocManual(HttpPostedFileBase inputDoc, long idProcedimiento, long idManual, long idUsuarioCreador)
+        {
+            try
+            {
+                if (inputDoc != null || idProcedimiento != 0 || idManual != 0 || idUsuarioCreador != 0)
+                {
+                    DocManual_Ent docManual = new DocManual_Ent
+                    {
+                        idManual = idManual,
+                        idUsuarioCreador = idUsuarioCreador,
+                        fechaCreacion = DateTime.Now
+                    };
+
+                    long respDocManual = MM.CrearDocManual(docManual);
+                    //----INICIO
+                    //Se guarda al extension del archivo temporalmente
+                    string extension = Path.GetExtension(Path.GetFileName(inputDoc.FileName));
+
+                    /*
+                     * Se comprueba que la carpeta donde se guardan los archivos
+                     * 
+                     */
+                    string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Archivos/" + idProcedimiento + "/" + idManual);
+
+                    if (!Directory.Exists(directorio))
+                    {
+                        Directory.CreateDirectory(directorio);
+                    }
+
+                    //se crea la ruta donde se guarda el archivo y se guarda el archivo
+                    string ruta = Path.Combine(directorio, respDocManual + extension);
+                    inputDoc.SaveAs(ruta);
+
+                    var rutaDoc = "/Archivos/" + idProcedimiento + "/" + idManual + "/" + respDocManual + extension;
+                    docManual.idDocManual = respDocManual;
+                    docManual.ruta = rutaDoc;
+
+                    //actualizar ruta en la base de datos
+                    MM.ActRutaDocManual(docManual);
+                    MM.DesactivarDocManuales(idManual, respDocManual);
+
+                    TempData["mensaje"] = "Nueva version del manual agregada";
+                    return RedirectToAction("PerfilManualAdmin", "Manual", new { q = idManual });
+
+                }
+
+                TempData["mensaje"] = "Debe rellenar los espacios requeridos";
+
+                return RedirectToAction("PerfilManualAdmin", "Manual", new { q = idManual });
+            }
+            catch (Exception ex)
+            {
+                return View(ex);
+            }
+        }
+
+        //--- INICIO: EDITAR MANUAL
+        [HttpGet]
+        public ActionResult EditarManual(long q)
+        {
+            
+            if (Session["idUsuario"] == null)
+            {
+                return RedirectToAction("InicioSesion", "Login");
+            }
+            byte idRol = byte.Parse(Session["idRol"].ToString());
+            if (idRol != 1 && idRol != 2)
+            {
+                return RedirectToAction("AccesoNoAuthorizado", "Shared");
+            }
+
+            var datos = MM.ConsultaManualId(q);
+            return View(datos);
+        }
+        [HttpPost]
+        public ActionResult EditarManual(Manual_Ent manual)
+        {
+            try
+            {
+                if (manual.nombre == null || manual.codReferencia == null)
+                {
+                    TempData["mensaje"] = "Debe llenar los espacios requeridos";
+                    return RedirectToAction("EditarManual", new { q = manual.idManual });
+                }
+
+                MM.ActualizarManual(manual);
+
+                TempData["mensaje"] = "Manual actualizado con exito";
+                return RedirectToAction("PerfilManualAdmin", new { q = manual.idManual });
+            }
+            catch (Exception ex)
+            {
+                return View(ex);
+            }
+        }
 
         //---- INICIO: Agregar Manual
         [HttpGet]
         public ActionResult AgregarManual(long q)
         {
+            
             if (Session["idUsuario"] == null)
             {
                 return RedirectToAction("InicioSesion", "Login");
+            }
+            var idRol = byte.Parse(Session["idRol"].ToString());
+            if (idRol != 1 && idRol != 2)
+            {
+                return RedirectToAction("AccesoNoAuthorizado", "Shared");
             }
 
             //---idProcedimiento
@@ -128,20 +260,23 @@ namespace Fundacion_Dehvi.Controllers
 
         }
 
+
+        /*---------------------------- USUARIOS Manuales ---------------------------*/
+
         //---- INICIO:Perfil de manual para usuario
         [HttpGet]
-        public ActionResult PerfilManual(long q, long a)
+        public ActionResult PerfilManual(long q)
         {
             if (Session["idUsuario"] == null)
             {
                 return RedirectToAction("InicioSesion", "Login");
             }
 
-            ViewBag.idProcedimiento = a;
+
 
             var datos = MM.ConsultaManualId(q);
             var datos2 = MM.ListaDocManualxManual2(q);
-
+            ViewBag.idProcedimiento = datos.idProcedimiento;
             var model = new Tuple<Manual_Ent, IEnumerable<DocManual_Ent>>(datos, datos2);
             ViewBag.mensaje = TempData["mensaje"];
             return View(model);
@@ -162,7 +297,7 @@ namespace Fundacion_Dehvi.Controllers
                     var datos = MM.ConsultaManuales();
                     var datos2 = DM.ListaDeparta();
 
-                    var model = new Tuple<IEnumerable<Manual_Ent>,IEnumerable<DepartamentoEnt>>(datos,datos2);
+                    var model = new Tuple<IEnumerable<Manual_Ent>, IEnumerable<DepartamentoEnt>>(datos, datos2);
                     //Muestra los mensajes referentes a manales agregados correctamente y al cambio de estado de estas cuando sea pertinente
                     ViewBag.Mensaje = TempData["Mensaje"];
                     return View(model);
@@ -175,64 +310,5 @@ namespace Fundacion_Dehvi.Controllers
         }// fin de la lista de los manuales
 
 
-        /*---------------------------- Doc Manual ---------------------------*/
-        [HttpPost]
-        public ActionResult NuevaVersionDocManual(HttpPostedFileBase inputDoc, long idProcedimiento, long idManual, long idUsuarioCreador)
-        {
-            try
-            {
-                if (inputDoc != null || idProcedimiento != 0 || idManual != 0 || idUsuarioCreador != 0)
-                {
-                    DocManual_Ent docManual = new DocManual_Ent
-                    {
-                        idManual = idManual,
-                        idUsuarioCreador = idUsuarioCreador,
-                        fechaCreacion = DateTime.Now
-                    };
-
-                    long respDocManual = MM.CrearDocManual(docManual);
-                    //----INICIO
-                    //Se guarda al extension del archivo temporalmente
-                    string extension = Path.GetExtension(Path.GetFileName(inputDoc.FileName));
-
-                    /*
-                     * Se comprueba que la carpeta donde se guardan los archivos
-                     * 
-                     */
-                    string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Archivos/" + idProcedimiento + "/" + idManual);
-
-                    if (!Directory.Exists(directorio))
-                    {
-                        Directory.CreateDirectory(directorio);
-                    }
-
-                    //se crea la ruta donde se guarda el archivo y se guarda el archivo
-                    string ruta = Path.Combine(directorio, respDocManual + extension);
-                    inputDoc.SaveAs(ruta);
-
-                    var rutaDoc = "/Archivos/" + idProcedimiento + "/" + idManual + "/" + respDocManual + extension;
-                    docManual.idDocManual = respDocManual;
-                    docManual.ruta = rutaDoc;
-
-                    //actualizar ruta en la base de datos
-                    MM.ActRutaDocManual(docManual);
-                    MM.DesactivarDocManuales(idManual, respDocManual);
-
-                    TempData["mensaje"] = "Nueva version del manual agregada";
-                    return RedirectToAction("PerfilManual", "Manual", new { q = idManual, a=idProcedimiento });
-
-                }
-
-                TempData["mensaje"] = "Debe rellenar los espacios requeridos";
-
-                return RedirectToAction("PerfilManual", "Manual", new { q = idManual, a=idProcedimiento });
-            }
-            catch (Exception ex)
-            {
-                return View(ex);
-            }
-        }
-
-        
     }//fin class
 }//fin namespace

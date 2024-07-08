@@ -1,9 +1,163 @@
-﻿@model Tuple<Fundacion_Dehvi.Entities.Manual_Ent,IEnumerable<Fundacion_Dehvi.Entities.DocManual_Ent>>
+﻿@model Tuple<Fundacion_Dehvi.Entities.Manual_Ent, IEnumerable<Fundacion_Dehvi.Entities.DocManual_Ent>>
 @{
-    ViewBag.Title = "PerfilManualAdmin";
+    ViewBag.Title = "Administracion de Manual";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    long idProcedimiento = Model.Item1.idProcedimiento;
+    var primerItem = Model.Item2.FirstOrDefault();
 }
 
+<!--INICIO: Page Tittle-->
+<section id="page-title" class="text-light" style="background-image:url(../../Src/image/usuario/background.jpg); background-size: cover; background-position: center center;"></section>
+<!--FIN: Page Tittle-->
+<!--INICIO: Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="modal" aria-labelledby="modal-label" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-label">Subir una nueva version <i class="fa fa-cloud-upload-alt"></i></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <img src="~/Src/image/Archivos/archivo-predeterminado.png" width="200" />
+                    </div>
+                    <div class="col-lg-7">
+                        @using (Html.BeginForm("NuevaVersionDocManual", "Manual", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                        {
+                            <input type="hidden" name="idUsuarioCreador" id="idUsuarioCreador" required value="@Session["idUsuario"]" />
+                            <input type="hidden" name="idManual" id="idManual" required value="@primerItem.idManual" />
+                            <input type="hidden" name="idProcedimiento" id="idProcedimiento" required value="@idProcedimiento" />
+                            <input type="file" name="inputDoc" id="inputDoc" required />
 
-<h2>PerfilManualAdmin</h2>
+                            <button type="submit" class="btn btn-sm" name="btnSubmit">Guardar archivo <i class="icon-check"></i></button>
+                        }
 
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-b btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--FIN: Modal-->
+
+<!--INICIO: PAGE CONTENT-->
+<section id="page-content" class="sidebar-left">
+    <div class="container">
+        <!--INICIO: BTN-RETROCEDER-->
+        <a class="btn btn-rounded" href="@Url.Action("PerfilProce", "Procedimiento", new { q=idProcedimiento })"><i class="icon-arrow-left"></i> Perfil del Procedimiento</a>
+        <!--FIN: BTN-RETTROCEDER-->
+        <div class="row">
+            <!--INICIO: CONTENIDO-->
+            <div class="content col-lg-9">
+
+                <!--INICIO: Ultimo Registro-->
+                @if (ViewBag.mensaje != null)
+                {
+                    <div class="container">
+                        <div role="alert" class="alert alert-info alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
+                            <strong><i class="fa fa-check-circle"></i> Alerta!</strong> @ViewBag.mensaje
+                        </div>
+                    </div>
+                }
+
+                <!--Boton para descargar-->
+                <div class="row">
+                    <div class="col-lg-3">
+                        <a href="@primerItem.ruta" class="btn btn-success btn-icon-holder btn-shadow btn-light-hover">Descargar<i class="fa fa-cloud-download-alt"></i> </a>
+                    </div>
+                    <div class="col-lg-3">
+                        <a data-target="#modal" data-toggle="modal" href="#" class="btn btn-info btn-icon-holder btn-shadow btn-light-hover">Actualizar<i class="fa fa-cloud-upload-alt"></i></a>
+                    </div>
+                </div>
+
+                <hr />
+                <!--FECHA ULTIMA ACTUALIZACION-->
+                <div class="">
+                    <h5><i class="icon-calendar"></i> Fecha de Creacion/Actualizacion</h5>
+                    <p>@primerItem.fechaCreacion</p>
+                </div>
+                <!--Usuario-->
+                <div class="">
+                    <h5><i class="icon-user"></i> Usuario Creador</h5>
+                    <p>@primerItem.nombreUsuario</p>
+                </div>
+
+
+
+                <hr />
+                <!--FIN: Ultimo Registro-->
+                <!--INICIO: DATATABLE-->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table id="datatable1" class="table table-bordered table-hover" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Version</th>
+                                    <th scope="col">Fecha de Actualizacion</th>
+                                    <th scope="col">Usuario que actualizo</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Item2)
+                                {
+                                    if (item.estado == true)
+                                    {
+                                        <tr class="table-success">
+                                            <td>@item.versionDoc</td>
+                                            <td>@item.fechaCreacion</td>
+                                            <td><i class="fa fa-user"></i> @item.nombreUsuario</td>
+                                            <td>
+                                                <a href="@item.ruta"><i class="fa fa-cloud-download-alt"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        <tr class="table-danger">
+                                            <td>@item.versionDoc</td>
+                                            <td>@item.fechaCreacion</td>
+                                            <td><i class="fa fa-user"></i> @item.nombreUsuario</td>
+                                            <td>
+                                                <a href="@item.ruta"><i class="fa fa-cloud-download-alt"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--FIN: DATATABLE-->
+
+            </div>
+            <!--FIN: CONTENIDO-->
+            <!--INICIO: SIDEBAR-->
+            <div class="sidebar col-lg-3">
+                <div class="widget widget-myaccount p-cb">
+                    <ul class="text-left">
+                        <li><a><i class="icon-tag"></i> Nombre: @Model.Item1.nombre</a></li>
+                        <li><a><i class="fa fa-flag"></i> Codigo de Referencia: @Model.Item1.codReferencia</a></li>
+                        <li><hr /></li>
+                        <li><a href="@Url.Action("EditarManual", "Manual", new {q=Model.Item1.idManual})"><i class="icon-edit-2"></i> Editar Manual</a></li>
+                        @if (Model.Item1.estado == true)
+                        {
+                            <li><a href="@Url.Action("ActualizarEstadoManual", "Manual", new {q=Model.Item1.idManual})"><i class="icon-toggle-right"></i> Manual Activo</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@Url.Action("ActualizarEstadoManual", "Manual", new {q=Model.Item1.idManual})"><i class="icon-toggle-right"></i> Activar Manual</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <!--FIN: SIDEBAR-->
+        </div>
+    </div>
+</section>
+<!--FIN: PAGE CONTENT-->

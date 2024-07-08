@@ -2,7 +2,23 @@
 
 @{
     ViewBag.Title = "IndexPrincipal";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    if (Session["idUsuario"] != null)
+    {
+        switch (byte.Parse(Session["idRol"].ToString()))
+        {
+            case 1: //admin
+                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+                break;
+            case 2://jefaruta
+                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+                break;
+            default: //todos sin permisos
+                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+                break;
+        }
+    }
+
 
     // Variables generales
     int yearStart = 2000; // Año de inicio para calcular los años pasados

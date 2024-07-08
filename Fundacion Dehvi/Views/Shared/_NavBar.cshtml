@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<Fundacion_Dehvi.Entities.DepartamentoEnt>
 
+@{
+    var idRol = byte.Parse(Session["idRol"].ToString());
+}
+
 <li class="dropdown">
     <a href="#">Departamentos</a>
     <ul class="dropdown-menu">

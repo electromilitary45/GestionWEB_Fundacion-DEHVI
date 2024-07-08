@@ -381,7 +381,7 @@ namespace API_Dehvi.Controllers
             }
             catch (Exception) { return null; }
 
-        }//fin Lista domanual 2
+        }//fin Lista domanual 2 solo da los ultimos 3 registros
 
         //----INICIO: Desactivar todos los docManual menos el ultimo registrado
         [HttpPut]
