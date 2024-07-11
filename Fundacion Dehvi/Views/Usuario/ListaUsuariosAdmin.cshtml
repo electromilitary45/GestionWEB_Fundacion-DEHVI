@@ -27,17 +27,18 @@
 
                         @foreach (var u in Model)
                         {
+                            var boxShadowColor = u.estado ? "rgba(0, 128, 0, 0.5)" : "rgba(255, 0, 0, 0.5)";
 
                             <div class="col-lg-4">
-                                <div class="team-member">
+                                <div class="team-member" style="box-shadow: 0 0 10px @boxShadowColor; border-radius: 10px; overflow: hidden;">
                                     <div class="team-image">
                                         @if (u.rutaImg != null)
                                         {
-                                            <img src="@u.rutaImg" style="background-size: cover; background-position: center; height: 130px; width: auto;">
+                                            <img src="@u.rutaImg" style="height: 130px; width: 100%; object-fit: cover; object-position: center;">
                                         }
                                         else
                                         {
-                                            <img src="~/Src/image/usuario/8.jpg" style="background-size:cover; background-position:center; height: 130px; width: auto">
+                                            <img src="~/Src/image/usuario/8.jpg" style="height: 130px; width: 100%; object-fit: cover; object-position: center;">
                                         }
                                     </div>
                                     <div class="team-desc text-left">
@@ -63,6 +64,7 @@
                                 </div>
                             </div>
                         }
+
 
                     </div>
                 </div>
