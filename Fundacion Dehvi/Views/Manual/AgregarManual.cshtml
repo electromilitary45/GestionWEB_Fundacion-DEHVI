@@ -31,11 +31,11 @@
                             @using (Html.BeginForm("AgregarManual", "Manual", FormMethod.Post, new { @class = "form-validate pt-3", @novalidate = "novalidate", @enctype = "multipart/form-data" }))
                             {
                                 <input name="idProcedimiento" id="idProcedimiento" class="form-control" type="hidden" value="@ViewBag.idProcedimiento" required />
-                                <input name="idUsuarioCreador" id="idUsuarioCreador" value="@Session["idUsuario"]" required/>
+                                <input name="idUsuarioCreador" id="idUsuarioCreador" type="hidden" value="@Session["idUsuario"]" required/>
 
                                 <div class="row">
                                     <div class="col-lg-5">
-                                        <img src="~/Src/image/Archivos/carpeta-archivo-subir.png" width="256" />
+                                        <img src="~/Src/image/Archivos/carpeta-archivo-subir.png" width="200" />
                                     </div>
                                     <div class="col-lg-7">
 
