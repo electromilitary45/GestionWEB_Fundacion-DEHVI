@@ -20,6 +20,7 @@ namespace Fundacion_Dehvi.Controllers
         [HttpGet]
         public ActionResult InicioSesion()
         {
+            ViewBag.mensaje = TempData["mensaje"];
             return View();
         }
 
@@ -32,7 +33,7 @@ namespace Fundacion_Dehvi.Controllers
                 var user = UM.InicioSesion(usuario);
 
                 if (user != null)
-                { 
+                {
                     Session["idUsuario"] = user.idUsuario;
                     Session["nombre"] = user.nombre;
                     Session["apellido1"] = user.apellido1;
@@ -45,13 +46,13 @@ namespace Fundacion_Dehvi.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
-                else
-                {
-                    ViewBag.mensaje = "Usuario o contraseña incorrectos";
-                    return View();
-                }
 
-            }catch(Exception ex)
+                TempData["mensaje"] = "Usuario o contraseña incorrectos";
+                return RedirectToAction("InicioSesion", "Login");
+
+
+            }
+            catch (Exception ex)
             {
                 return View();
             }
@@ -61,6 +62,7 @@ namespace Fundacion_Dehvi.Controllers
         [HttpGet]
         public ActionResult RecuperarContrasena()
         {
+            ViewBag.mensaje = TempData["mensaje"];
             return View();
         }
 
@@ -72,12 +74,12 @@ namespace Fundacion_Dehvi.Controllers
                 var resp = UM.RecuperarContrasena(usuario);
                 if (resp != null)
                 {
-                    ViewBag.mensaje = "Se ha enviado un correo con su nueva contraseña";
+                    TempData["mensaje"] = "Se ha enviado un correo con su nueva contraseña";
                     return RedirectToAction("InicioSesion", "Login");
                 }
                 else
                 {
-                    ViewBag.mensaje = "Correo/Cedula no registrado o encontrado";
+                    TempData["mensaje"] = "Correo/Cedula no registrado o encontrado";
                     return View();
                 }
             }
@@ -92,7 +94,7 @@ namespace Fundacion_Dehvi.Controllers
         public ActionResult CerrarSesion()
         {
             Session.Clear();
-            return RedirectToAction("InicioSesion","Login");
+            return RedirectToAction("InicioSesion", "Login");
         }
 
     }//Fin de la clase
