@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Manuales";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var idRol = byte.Parse(Session["idRol"].ToString());
 }
 
 <!--INICIO: Page Tittle-->
@@ -27,10 +28,9 @@
                     <li><a href="#" data-category=".ct-webdesign">Web design</a></li>*@
             </ul>
             @*<br />
-            <div class="grid-active-title">Mostrar Todos</div>*@
+                <div class="grid-active-title">Mostrar Todos</div>*@
         </nav>
         <!--FIN: Filtro-->
-
         <!--INICIO: PORTFOLIO-->
         <div id="portfolio" class="grid-layout portfolio-4-columns">
             @foreach (var man in Model.Item1)
@@ -39,7 +39,15 @@
                     <div class="portfolio-item-wrap">
                         <div class="portfolio-img">
                             <div class="portfolio-image">
-                                <a href="@Url.Action("PerfilManual", "Manual", new { q = man.idManual, a=man.idProcedimiento})"><img src="~/Src/image/Archivos/archivo-predeterminado.png" alt=""></a>
+                                @if (idRol == 1 && idRol == 2)
+                                {
+                                    <a href="@Url.Action("PerfilManual", "Manual", new { q = man.idManual })"><img src="~/Src/image/Archivos/archivo-predeterminado.png" alt=""></a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("PerfilManualAdmin", "Manual", new { q = man.idManual })"><img src="~/Src/image/Archivos/archivo-predeterminado.png" alt=""></a>
+
+                                }
                             </div>
                         </div>
                         <div class="portfolio-description">
