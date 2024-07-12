@@ -4,6 +4,9 @@
     ViewBag.Title = "Perfil del Procedimiento";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     var idRol = byte.Parse(Session["idRol"].ToString());
+
+    var itemsConIdProcedimiento = Model.Item2.Where(item => item.idProcedimiento == Model.Item1.idProcedimiento).ToList();
+
 }
 
 <link href="~/Src/css/custom.css" rel="stylesheet">
@@ -49,87 +52,93 @@
                         <!-- Grid de los Procedimientos -->
 
                         <div class="row team-members team-members-shadow m-b-40">
-                            @if (Model != null)
+                            @if (itemsConIdProcedimiento != null)
                             {
-                                foreach (var item in Model.Item2)
+                                foreach (var item in itemsConIdProcedimiento)
                                 {
-                                    if (item.idProcedimiento == Model.Item1.idProcedimiento)
+                                    switch (idRol)
                                     {
+                                        case 1:
+                                            <div class="col-lg-4">
+                                                <div class="team-member"
+                                                     onclick="location.href='@Url.Action("PerfilManualAdmin", "Manual", new { q = item.idManual})';"
+                                                     style="cursor: pointer;">
+                                                    <div class="team-image">
+                                                        <img src="~/Src/image/1.png" style="object-fit: cover; height: 160px; width: 100%;">
+                                                    </div>
+                                                    <div class="team-desc">
+                                                        <span>@item.codReferencia</span>
+                                                        <h3>@item.nombre</h3>
+                                                        <span>Fecha de Creación</span>
+                                                        <p>@item.fechaCreacion.ToString("dd/MM/yyyy")</p>
+                                                        <span>Acciones</span>
 
-                                        switch (idRol)
-                                        {
-                                            case 1:
-                                                <div class="col-lg-4">
-                                                    <div class="team-member"
-                                                         onclick="location.href='@Url.Action("PerfilManualAdmin", "Manual", new { q = item.idManual})';"
-                                                         style="cursor: pointer;">
-                                                        <div class="team-image">
-                                                            <img src="~/Src/image/1.png" style="object-fit: cover; height: 160px; width: 100%;">
-                                                        </div>
-                                                        <div class="team-desc">
-                                                            <span>@item.codReferencia</span>
-                                                            <h3>@item.nombre</h3>
-                                                            <span>Fecha de Creación</span>
-                                                            <p>@item.fechaCreacion.ToString("dd/MM/yyyy")</p>
-                                                            <span>Acciones</span>
+                                                        <a href="@Url.Action("PerfilManualAdmin", "Manual", new { q = item.idManual})" style="align-content:end">
+                                                            <i class="icon-eye" style="color: #808080"></i>
+                                                        </a>
 
-                                                            <a href="@Url.Action("PerfilManualAdmin", "Manual", new { q = item.idManual})" style="align-content:end">
-                                                                <i class="icon-eye" style="color: #808080"></i>
-                                                            </a>
-
-                                                        </div>
                                                     </div>
                                                 </div>
-                                                break;
-                                            case 2:
-                                                <div class="col-lg-4">
-                                                    <div class="team-member"
-                                                         onclick="location.href='@Url.Action("PerfilManualAdmin", "Manual", new { q = item.idManual})';"
-                                                         style="cursor: pointer;">
-                                                        <div class="team-image">
-                                                            <img src="~/Src/image/1.png" style="object-fit: cover; height: 160px; width: 100%;">
-                                                        </div>
-                                                        <div class="team-desc">
-                                                            <span>@item.codReferencia</span>
-                                                            <h3>@item.nombre</h3>
-                                                            <span>Fecha de Creación</span>
-                                                            <p>@item.fechaCreacion.ToString("dd/MM/yyyy")</p>
-                                                            <span>Acciones</span>
+                                            </div>
+                                            break;
+                                        case 2:
+                                            <div class="col-lg-4">
+                                                <div class="team-member"
+                                                     onclick="location.href='@Url.Action("PerfilManualAdmin", "Manual", new { q = item.idManual})';"
+                                                     style="cursor: pointer;">
+                                                    <div class="team-image">
+                                                        <img src="~/Src/image/1.png" style="object-fit: cover; height: 160px; width: 100%;">
+                                                    </div>
+                                                    <div class="team-desc">
+                                                        <span>@item.codReferencia</span>
+                                                        <h3>@item.nombre</h3>
+                                                        <span>Fecha de Creación</span>
+                                                        <p>@item.fechaCreacion.ToString("dd/MM/yyyy")</p>
+                                                        <span>Acciones</span>
 
-                                                            <a href="@Url.Action("PerfilManualAdmin", "Manual", new { q = item.idManual})" style="align-content:end">
-                                                                <i class="icon-eye" style="color: #808080"></i>
-                                                            </a>
+                                                        <a href="@Url.Action("PerfilManualAdmin", "Manual", new { q = item.idManual})" style="align-content:end">
+                                                            <i class="icon-eye" style="color: #808080"></i>
+                                                        </a>
 
-                                                        </div>
                                                     </div>
                                                 </div>
-                                                break;
-                                            default:
-                                                <div class="col-lg-4">
-                                                    <div class="team-member"
-                                                         onclick="location.href='@Url.Action("PerfilManual", "Manual", new { q = item.idManual})';"
-                                                         style="cursor: pointer;">
-                                                        <div class="team-image">
-                                                            <img src="~/Src/image/1.png" style="object-fit: cover; height: 160px; width: 100%;">
-                                                        </div>
-                                                        <div class="team-desc">
-                                                            <span>@item.codReferencia</span>
-                                                            <h3>@item.nombre</h3>
-                                                            <span>Fecha de Creación</span>
-                                                            <p>@item.fechaCreacion.ToString("dd/MM/yyyy")</p>
-                                                            <span>Acciones</span>
+                                            </div>
+                                            break;
+                                        default:
+                                            <div class="col-lg-4">
+                                                <div class="team-member"
+                                                     onclick="location.href='@Url.Action("PerfilManual", "Manual", new { q = item.idManual})';"
+                                                     style="cursor: pointer;">
+                                                    <div class="team-image">
+                                                        <img src="~/Src/image/1.png" style="object-fit: cover; height: 160px; width: 100%;">
+                                                    </div>
+                                                    <div class="team-desc">
+                                                        <span>@item.codReferencia</span>
+                                                        <h3>@item.nombre</h3>
+                                                        <span>Fecha de Creación</span>
+                                                        <p>@item.fechaCreacion.ToString("dd/MM/yyyy")</p>
+                                                        <span>Acciones</span>
 
-                                                            <a href="@Url.Action("PerfilManual", "Manual", new { q = item.idManual})" style="align-content:end">
-                                                                <i class="icon-eye" style="color: #808080"></i>
-                                                            </a>
+                                                        <a href="@Url.Action("PerfilManual", "Manual", new { q = item.idManual})" style="align-content:end">
+                                                            <i class="icon-eye" style="color: #808080"></i>
+                                                        </a>
 
-                                                        </div>
                                                     </div>
                                                 </div>
-                                                break;
-                                        }
+                                            </div>
+                                            break;
                                     }
                                 }
+                            }
+                            @if (itemsConIdProcedimiento.Count() == 0)
+                            {
+                                <div class="alert-container" style="display: flex; align-items: center; justify-content: center; padding: 20px; background-color: #f0f8ff; border: 1px solid #b8daff; border-radius: 10px;">
+                                    <img src="~/Src/image/procedimientos/chiquito-binoculares.png" style="width: 100px; height: auto; margin-right: 20px;">
+                                    <div role="alert" class="alert alert-info" style="flex: 1; background-color: #d1ecf1; color: #0c5460; border-color: #bee5eb; padding: 20px; border-radius: 10px;">
+                                        <h4 style="margin-top: 0;">No se encontraron manuales para este procedimiento</h4>
+                                        <p>Lo sentimos, no pudimos encontrar manuales para este procedimiento. Por favor, inténtelo de nuevo más tarde.</p>
+                                    </div>
+                                </div>
                             }
                         </div>
 
