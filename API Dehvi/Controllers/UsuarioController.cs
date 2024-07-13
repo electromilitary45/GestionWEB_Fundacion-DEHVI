@@ -313,7 +313,8 @@ namespace API_Dehvi.Controllers
                                    idDepartamento = u.idDepartamento,
                                    idRol = u.idRol,
                                    nombreDepartamento= d.nombre,
-                                   rutaImg = u.rutaImg
+                                   rutaImg = u.rutaImg,
+                                   fechaCreacion = u.fechaCreacion
                                }).FirstOrDefault();
 
                     return user;

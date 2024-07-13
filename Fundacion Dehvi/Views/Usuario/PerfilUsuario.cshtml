@@ -33,38 +33,29 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-4">
-                                <p>[Tiempo empresa]</p>
-                                <span>Tiempo en la empresa</span>
-                            </div>
-                            <div class="col-md-4">
-                                <p>[Procedimientos]</p>
-                                <span>Procedimientos Creados</span>
-                            </div>
-                            <div class="col-md-4">
-                                <p>[Manuales]</p>
-                                <span>Manuales Creados</span>
-                            </div>
+                                <span><i class="icon-clock"></i> Tiempo en la empresa</span>
+                                @{ 
+                                    DateTime fechaCreacion = DateTime.Parse(Session["fechaCreacion"].ToString());
+                                    DateTime fechaActual = DateTime.Now;
+                                    TimeSpan tiempoTranscurrido = fechaActual - fechaCreacion;
 
+                                    int annos = (int)(tiempoTranscurrido.Days / 365.25);
+                                    int meses = (int)((tiempoTranscurrido.Days % 365.25) / 30);
+                                    int dias = (int)((tiempoTranscurrido.Days % 365.25) % 30);
+                                }
+                            <p>Años: @annos, Meses: @meses, Dias: @dias</p>
+                            </div>
                         </div>
                     </div>
                     <br />
-                    <br />
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-4">
-                                <span>Correo Electronico</span>
+                            <div class="col-md-6">
+                                <span><i class="icon-mail"></i> Correo Electronico</span>
                                 <p>@Session["correo"]</p>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <span>Correo Electronico</span>
-                                <p>@Session["correo"]</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <span>Empleado Del Departamento:</span>
+                            <div class="col-md-6">
+                                <span><i class="icon-home"></i> Empleado Del Departamento:</span>
                                 <p>@Session["nomDepartamento"]</p>
                             </div>
                         </div>

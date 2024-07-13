@@ -180,7 +180,7 @@ namespace Fundacion_Dehvi.Controllers
         [HttpGet]
         public ActionResult PerfilUsuario()
         {
-            if (Session == null)
+            if (Session["idUsuario"] == null)
             {
                 return RedirectToAction("InicioSesion", "Login");
             }

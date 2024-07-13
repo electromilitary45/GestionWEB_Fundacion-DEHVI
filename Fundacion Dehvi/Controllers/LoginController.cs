@@ -43,6 +43,7 @@ namespace Fundacion_Dehvi.Controllers
                     Session["idDepartamento"] = user.idDepartamento;
                     Session["nomDepartamento"] = user.nombreDepartamento;
                     Session["rutaImg"] = user.rutaImg;
+                    Session["fechaCreacion"]= user.fechaCreacion;
 
                     return RedirectToAction("Index", "Home");
                 }
