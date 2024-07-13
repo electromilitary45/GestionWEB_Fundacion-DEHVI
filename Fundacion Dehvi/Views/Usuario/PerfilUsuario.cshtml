@@ -2,6 +2,9 @@
 @{
     ViewBag.Title = "Perfil de Usuario";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    var idRol = byte.Parse(Session["idRol"].ToString());
+
 }
 
 <!-- Page title -->
@@ -34,7 +37,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <span><i class="icon-clock"></i> Tiempo en la empresa</span>
-                                @{ 
+                                @{
                                     DateTime fechaCreacion = DateTime.Parse(Session["fechaCreacion"].ToString());
                                     DateTime fechaActual = DateTime.Now;
                                     TimeSpan tiempoTranscurrido = fechaActual - fechaCreacion;
@@ -43,7 +46,7 @@
                                     int meses = (int)((tiempoTranscurrido.Days % 365.25) / 30);
                                     int dias = (int)((tiempoTranscurrido.Days % 365.25) % 30);
                                 }
-                            <p>Años: @annos, Meses: @meses, Dias: @dias</p>
+                                <p>Años: @annos, Meses: @meses, Dias: @dias</p>
                             </div>
                         </div>
                     </div>
@@ -51,7 +54,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6">
-                                <span><i class="icon-mail"></i> Correo Electronico</span>
+                                <span><i class="icon-mail"></i> Correo Electronico @idRol</span>
                                 <p>@Session["correo"]</p>
                             </div>
                             <div class="col-md-6">
@@ -63,85 +66,33 @@
                 </div>
                 <!---->
 
-                <hr />
+                <div class="line"></div>
                 <!--Inicio: Tabs-->
-                <div>
-                    <div class="container">
-                        <div class="tabs">
-                            <ul class="nav nav-tabs nav-fill" id="tabs-posts" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#procedimientos" role="tab" aria-controls="procedimientos" aria-selected="true">Procedimientos Creados  <span class="badge badge-info">Cantidad: 1</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#manuales" role="tab" aria-controls="manuales" aria-selected="false">Manuales Creados  <span class="badge badge-info">Cantidad: 1</span></a>
-                                </li>
-                            </ul>
-                            <div class="tab-content" id="tabs-posts-content">
-                                <!--Inicio: Procedimientos Creados-->
-                                <div class="tab-pane fade active show" id="procedimientos" role="tabpanel" aria-labelledby="procedimientos-tab">
-
-                                    <!--MENSAJE-->
-                                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                        No hay informacion para mostrar.
-                                    </div>
-
-                                    <!--CAROUSEL-->
-                                    <div class="carousel" data-items="3">
-                                        <div class="post-item border">
-                                            <div class="post-item-wrap">
-                                                <div class="post-image">
-                                                    <a href="#">
-                                                        <img alt="predeterminada" src="~/Src/image/Archivos/archivo-predeterminado.png" />
-                                                    </a>
-                                                </div>
-                                                <div class="post-item-description">
-                                                    <span class="post-meta-date"><i class="fa fa-calendar-o"></i>[Fecha Creacion]</span>
-                                                    <span class="post-meta-comments"><i class="fa fa-comments-o"></i>[Codigo]</span>
-                                                    <h6><a href="#">Lighthouse, standard post with a single image</a></h6>
-
-                                                    <a href="#" class="item-link">Leer mas<i class="icon-chevron-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--Fin carousel-->
+                @if (idRol == 1 || idRol == 2)
+                {
+                    <h6><i class="icon-book"></i> Manuales Creados</h6>
+                    <!--CAROUSEL-->
+                    <div class="carousel" data-items="3">
+                        <div class="post-item border">
+                            <div class="post-item-wrap">
+                                <div class="post-image">
+                                    <a href="#">
+                                        <img alt="predeterminada" src="~/Src/image/Archivos/archivo-predeterminado.png" />
+                                    </a>
                                 </div>
-                                <!--Fin: Procedimientos Creados-->
-                                <!--Inicio: Manuales Creados-->
-                                <div class="tab-pane fade" id="manuales" role="tabpanel" aria-labelledby="manuales-tab">
-
-                                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                        No hay informacion para mostrara.
-                                    </div>
-
-                                    <!--CAROUSEL-->
-                                    <div class="carousel" data-items="3">
-                                        <div class="post-item border">
-                                            <div class="post-item-wrap">
-                                                <div class="post-image">
-                                                    <a href="#">
-                                                        <img alt="predeterminada" src="~/Src/image/Archivos/archivo-predeterminado.png" />
-                                                    </a>
-                                                </div>
-                                                <div class="post-item-description">
-                                                    <span class="post-meta-date"><i class="fa fa-calendar-o"></i>[Fecha Creacion]</span>
-                                                    <span class="post-meta-comments"><i class="fa fa-comments-o"></i>[Codigo]</span>
-                                                    <h6><a href="#">Lighthouse, standard post with a single image</a></h6>
-
-                                                    <a href="#" class="item-link">Leer mas<i class="icon-chevron-right"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--Fin carousel-->
-
+                                <div class="post-item-description">
+                                    <span class="post-meta-date"><i class="fa fa-calendar-o"></i>[Fecha Creacion]</span>
+                                    <span class="post-meta-comments"><i class="fa fa-comments-o"></i>[Codigo]</span>
+                                    <h6><a href="#">Lighthouse, standard post with a single image</a></h6>
+                                    <a href="#" class="item-link">Leer mas<i class="icon-chevron-right"></i></a>
                                 </div>
-                                <!--Fin: Manuales-->
                             </div>
                         </div>
-
                     </div>
-                </div>
+                    <!--Fin carousel-->
+
+                }
+
                 <!--Fin TABS-->
 
             </div>
