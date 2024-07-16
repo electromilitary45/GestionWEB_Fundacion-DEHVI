@@ -121,7 +121,7 @@ namespace API_Dehvi.Controllers
                         from m in con.Manual
                         join p in con.Procedimiento on m.idProcedimiento equals p.idProcedimiento
                         join u in con.Usuario on m.idUsuarioCreador equals u.idUsuario
-                        
+
                         orderby m.fechaCreacion descending
                         select new Manual_Ent
                         {
@@ -131,7 +131,7 @@ namespace API_Dehvi.Controllers
                             fechaCreacion = m.fechaCreacion,
                             idProcedimiento = m.idProcedimiento,
                             idUsuarioCreador = m.idUsuarioCreador,
-                            idDepartamento= p.idDepartamento,
+                            idDepartamento = p.idDepartamento,
                             nombre = m.nombre,
                             nombreUsuario = u.nombre + " " + u.apellido1 + " " + u.apellido2
 
@@ -153,7 +153,7 @@ namespace API_Dehvi.Controllers
         public int ActualizarManual(Manual_Ent manual)
         {
             try
-          {
+            {
                 using (var con = new BD_fundacionDehviEntities()) //conexion a la base de datos
                 {
                     var data = (
@@ -222,6 +222,45 @@ namespace API_Dehvi.Controllers
             }// fin del catch
 
         }// fin de actualizar estado manuales
+
+        //--- INICIO: Consulta Manuales creados por usuario en especifico
+        [HttpGet]
+        [Route("ConsultaManualesXUsuario")]
+        public List<Manual_Ent> ConsultaManualXUsuario(long q)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities())
+                {
+                    var data = (
+                        from m in con.Manual
+                        where m.idUsuarioCreador == q
+                        join p in con.Procedimiento on m.idProcedimiento equals p.idProcedimiento
+                        join u in con.Usuario on m.idUsuarioCreador equals u.idUsuario
+                        
+                        orderby m.fechaCreacion descending
+                        select new Manual_Ent
+                        {
+                            idManual = m.idManual,
+                            estado = m.estado,
+                            codReferencia = m.codReferencia,
+                            fechaCreacion = m.fechaCreacion,
+                            idProcedimiento = m.idProcedimiento,
+                            idUsuarioCreador = m.idUsuarioCreador,
+                            idDepartamento = p.idDepartamento,
+                            nombre = m.nombre,
+                            nombreUsuario = u.nombre + " " + u.apellido1 + " " + u.apellido2
+
+                        }).ToList();
+                    return data;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+        }
 
         /*-------------------------------DOC MANUAL-------------------------------*/
 

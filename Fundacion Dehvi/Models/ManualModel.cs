@@ -14,6 +14,7 @@ namespace Fundacion_Dehvi.Models
         //----- INSTANCIAS ----- :p
         private readonly string urlAPI = ConfigurationManager.AppSettings["urlApi"];
 
+        /*----------------------MANUALES-------------------------*/
         //----INICIO: Registro de nuevo manual---
         public long CrearManual(Manual_Ent manual)
         {
@@ -37,7 +38,7 @@ namespace Fundacion_Dehvi.Models
             }
         }
 
-        //------------ Lista Manuales Completa ------------
+        //------INICIO:------ Lista Manuales Completa ------------
         public List<Manual_Ent> ConsultaManuales()
         {
             using (var client = new HttpClient())
@@ -48,7 +49,18 @@ namespace Fundacion_Dehvi.Models
             }
         }// fin de la lista de todos los manuales
 
-        //------------ Actualizar Manual ------------
+        //-----INICIO: Lista de Manuales por Usuario
+        public List<Manual_Ent> ConsultaManualesXUsuarios(long q)
+        {
+            using(var client = new HttpClient())
+            {
+                string url = urlAPI + "ConsultaManualesXUsuario?q=" + q;
+                var resp = client.GetAsync(url).Result;
+                return resp.Content.ReadFromJsonAsync<List<Manual_Ent>>().Result;
+            }
+        }
+
+        //------INICIO:------ Actualizar Manual ------------
         public int ActualizarManual(Manual_Ent entidad)
         {
             using (var client = new HttpClient())
@@ -60,7 +72,7 @@ namespace Fundacion_Dehvi.Models
             }
         }// fin actualizar
 
-        //------------ Desactivar Manual ------------
+        //-------INICIO:----- Desactivar Manual ------------
         public int EstadoManual(Manual_Ent entidad)
         {
             using (var client = new HttpClient())
@@ -72,7 +84,7 @@ namespace Fundacion_Dehvi.Models
             }
         } // fin de desactivar
 
-        /*--------------- Documentos del Manual -------------------------*/
+        /*-------INICIO:-------- Documentos del Manual -------------------------*/
 
         //----INICIO: Registro de un DocManual
         public long CrearDocManual(DocManual_Ent docManual)

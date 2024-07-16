@@ -15,6 +15,7 @@ namespace Fundacion_Dehvi.Controllers
     {
         //----------INSTANCIAS----------
         private readonly UsuarioModel UM = new UsuarioModel();
+        private readonly ManualModel MM = new ManualModel();
         private readonly DepartamentoModel DM = new DepartamentoModel();
         private readonly UtililitariosEnt Util = new UtililitariosEnt();
 
@@ -186,8 +187,9 @@ namespace Fundacion_Dehvi.Controllers
             }
 
             long idUsuario = long.Parse(Session["idUsuario"].ToString());
-            var datos = UM.ConsultaUsuariosID(idUsuario);
-            return View(datos);
+            var datosU = UM.ConsultaUsuariosID(idUsuario);
+            var datosM = MM.ConsultaManualesXUsuarios(idUsuario);
+            return View(datosM);
         }//fin perfil usuario
 
         //-----INICIO: Cambio de contraseña

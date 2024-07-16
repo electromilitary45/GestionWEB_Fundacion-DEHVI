@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Fundacion_Dehvi.Entities.Manual_Ent>
 @{
     ViewBag.Title = "Perfil de Usuario";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -70,26 +70,41 @@
                 <!--Inicio: Tabs-->
                 @if (idRol == 1 || idRol == 2)
                 {
-                    <h6><i class="icon-book"></i> Manuales Creados</h6>
-                    <!--CAROUSEL-->
-                    <div class="carousel" data-items="3">
-                        <div class="post-item border">
-                            <div class="post-item-wrap">
-                                <div class="post-image">
-                                    <a href="#">
-                                        <img alt="predeterminada" src="~/Src/image/Archivos/archivo-predeterminado.png" />
-                                    </a>
-                                </div>
-                                <div class="post-item-description">
-                                    <span class="post-meta-date"><i class="fa fa-calendar-o"></i>[Fecha Creacion]</span>
-                                    <span class="post-meta-comments"><i class="fa fa-comments-o"></i>[Codigo]</span>
-                                    <h6><a href="#">Lighthouse, standard post with a single image</a></h6>
-                                    <a href="#" class="item-link">Leer mas<i class="icon-chevron-right"></i></a>
+                    if (Model != null)
+                    {
+                        <h6><i class="icon-book"></i> Manuales Creados</h6>
+                        foreach (var item in Model)
+                        {
+                            <!--CAROUSEL-->
+                            <div class="carousel" data-items="3">
+                                <div class="post-item border">
+                                    <div class="post-item-wrap">
+                                        <div class="post-image">
+                                            <a href="@Url.Action("PerfilManualAdmin", "Manual", new {q=item.idManual})">
+                                                <img alt="predeterminada" src="~/Src/image/Archivos/archivo-predeterminado.png" />
+                                            </a>
+                                        </div>
+                                        <div class="post-item-description">
+                                            <span class="post-meta-date"><i class="fa fa-flag"></i>@item.codReferencia</span>
+                                            <h6><a href="@Url.Action("PerfilManualAdmin", "Manual", new {q=item.idManual})">@item.nombre</a></h6>
+                                            <a href="@Url.Action("PerfilManualAdmin", "Manual", new {q=item.idManual})" class="item-link">Ir al perfil<i class="icon-chevron-right"></i></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <!--Fin carousel-->
+                        }
+                    }
+                    else
+                    {
+                        <div class="alert-container" style="display: flex; align-items: center; justify-content: center; padding: 20px; background-color: #f0f8ff; border: 1px solid #b8daff; border-radius: 10px;">
+                            <img src="~/Src/image/procedimientos/chiquito-binoculares.png" style="width: 100px; height: auto; margin-right: 20px;">
+                            <div role="alert" class="alert alert-info" style="flex: 1; background-color: #d1ecf1; color: #0c5460; border-color: #bee5eb; padding: 20px; border-radius: 10px;">
+                                <h4 style="margin-top: 0;">No se encontraron manuales.</h4>
+                                <p>Lo sentimos, no pudimos encontrar manuales. Por favor, inténtelo de nuevo más tarde.</p>
+                            </div>
                         </div>
-                    </div>
-                    <!--Fin carousel-->
+                    }
 
                 }
 
