@@ -3,11 +3,12 @@
 @{
     ViewBag.Title = "Perfil del Departamento";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    int idRol = Convert.ToInt32(Session["idRol"]);
 }
 
 <link href="~/Src/css/custom.css" rel="stylesheet">
 
-<section id="page-title" class="text-light" style="background-image: url(../../Src/image/1.png); background-size: cover; background-position: center center;">
+<section id="page-title" class="text-light" style="background-image: url(../../Src/image/imagenes/Departamentos.png); background-size: cover; background-position: center center;">
     <div class="container">
         <div class="breadcrumb">
             <ul>
@@ -91,13 +92,16 @@
             <!-- Sidebar-->
             <div class="sidebar col-lg-3">
                 <!--Tabs with Posts-->
-                <div class="widget">
-                    <div class="row mb-3">
-                        <div class="col-lg-12 text-left">
-                            <a href="@Url.Action("CrearProce", "Procedimiento")" class="btn" style="background-color: #59B2E9; border-color: #59B2E9">Agregar Procedimiento</a>
+                @if (idRol == 1 || idRol == 2)
+                {
+                    <div class="widget">
+                        <div class="row mb-3">
+                            <div class="col-lg-12 text-left">
+                                <a href="@Url.Action("CrearProce", "Procedimiento")" class="btn" style="background-color: #59B2E9; border-color: #59B2E9">Agregar Procedimiento</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    }
             </div>
             <!--End: Tabs with Posts-->
         </div>

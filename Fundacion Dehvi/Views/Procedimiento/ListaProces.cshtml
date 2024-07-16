@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Fundacion_Dehvi.Entities.ProcedimientosEnt>
+﻿@model Tuple<IEnumerable<Fundacion_Dehvi.Entities.ProcedimientosEnt>, IEnumerable<Fundacion_Dehvi.Entities.DepartamentoEnt>>
 @{
     ViewBag.Title = "Lista de Procedimientos";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -6,7 +6,9 @@
 
 <link href="~/Src/css/custom.css" rel="stylesheet">
 
-<section id="page-title" class="text-light" style="background-image: url(../../Src/image/1.png); background-size: cover; background-position: center center;">
+<section id="page-title" class="text-light" style="background-image: url(../../Src/image/imagenes/Procedimientos.png); background-size: cover; background-position: center center;">
+    <div class="bg-overlay" data-style="1"></div>
+
     <div class="container">
         <div class="breadcrumb">
             <ul>
@@ -15,82 +17,62 @@
             </ul>
         </div>
         <div class="page-title">
-            <h2 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); padding: 12px; text-align: center;">Todos los Procedimientos</h2>
+            <h2 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); padding: 12px; text-align: center;">Procedimientos</h2>
         </div>
     </div>
 </section>
-
-<section id="page-content" class="sidebar-left">
-
-    <section class="d-flex justify-content-center" style="padding: 10px 0;">
-        <div>
-            <div class="form-group">
-                <div class="input-group">
-                    <input type="text" class="form-control" data-mask="" placeholder="">
-                    <div class="input-group-append">
-                        <span class="input-group-text"><i class="icon-search"></i></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+<!--FIN: Page Tittle-->
+<!--INICIO: Page Content-->
+<section id="page-content">
     <div class="container">
-        <div class="row">
-            <!-- post content -->
-            <div class="content col-lg-9">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!-- Grid de los Procedimientos -->
+        <div class="row"></div>
 
+        <!--INICIO: Filtro-->
+        <nav class="grid-filter gf-creative center" data-layout="#portfolio">
+            <ul>
+                <li class="active"><a href="#" data-category="*">Mostrar Todos</a></li>
+                @foreach (var dep in Model.Item2)
+                {
+                    <li><a href="#" data-category=".ct-@dep.idDepartamento">@dep.nombre</a></li>
+                }
+
+        </nav>
+        <!--FIN: Filtro-->
+        <!--INICIO: PORTFOLIO-->
+        <div id="portfolio" class="grid-layout portfolio-3-columns">
+            @foreach (var item in Model.Item1)
+            {
+                <div class="portfolio-item no-overlay img-zoom ct-@item.idDepartamento">
+                    <div class="portfolio-item-wrap">
                         <div class="row team-members team-members-shadow m-b-40">
-                            @if (Model != null)
-                            {
-                                foreach (var item in Model)
-                                {
-                                    <div class="col-md-5">
-                                        <div class="team-member" onclick="location.href='@Url.Action("PerfilProce", "Procedimiento", new { q = item.idProcedimiento })';" style="cursor: pointer;">
-                                            <div class="team-image">
-                                                <img src="~/Src/image/1.png" style="object-fit: cover; height: 180px; width: 100%;">
-                                            </div>
-                                            <div class="team-desc">
-                                                <div class="item-container">
-                                                    <span>@item.codProcedimiento</span>
-                                                    @if (Session["idRol"] != null)
-                                                    {
-                                                        <a href="@Url.Action("ActualizarProce", "Procedimiento", new { q = item.idProcedimiento })">
-                                                            <i class="icon-edit"></i>
-                                                        </a>
-                                                    }
-                                                </div>
-                                                <h7>@item.nombre</h7>
-                                                <p>@item.descripcion</p>
-                                                <span>Fecha de Creación</span>
-                                                <p>@item.fechaCreacion.ToString("dd/MM/yyyy")</p>
-                                            </div>
-                                        </div>
+
+                            <div class="col-md-9">
+                                <div class="team-member" onclick="location.href='@Url.Action("PerfilProce", "Procedimiento", new { q = item.idProcedimiento })';" style="cursor: pointer;">
+                                    <div class="team-image">
+                                        <img src="~/Src/image/imagenes/1.png" style="object-fit: cover; height: 180px; width: 100%;">
                                     </div>
-                                }
-                            }
+                                    <div class="team-desc">
+                                        <div class="item-container">
+                                            <span>@item.codProcedimiento</span>
+                                            @if (Session["idRol"] != null)
+                                            {
+                                                <a href="@Url.Action("ActualizarProce", "Procedimiento", new { q = item.idProcedimiento })">
+                                                    <i class="icon-edit"></i>
+                                                </a>
+                                            }
+                                        </div>
+                                        <h7>@item.nombre</h7>
+                                        <p>@item.descripcion</p>
+                                        <span>Fecha de Creación</span>
+                                        <p>@item.fechaCreacion.ToString("dd/MM/yyyy")</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- Fin del Grid -->
                     </div>
                 </div>
-            </div>
-            <!-- end: post content -->
-            <!-- Sidebar-->
-            <div class="sidebar col-lg-3">
-                <!--Tabs with Posts-->
-                <div class="widget">
-                    <div class="row mb-3">
-                        <div class="col-lg-12 text-left">
-                            <a href="@Url.Action("CrearProce", "Procedimiento")" class="btn" style="background-color: #59B2E9; border-color: #59B2E9">Agregar Procedimiento</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--End: Tabs with Posts-->
+            }
         </div>
-        <!-- end: Sidebar-->
-    </div>
-</section> <!-- end: Content -->
+        <!--FIN: PORTFOLIO-->
+</section>
+<!--FIN: Page Content-->
