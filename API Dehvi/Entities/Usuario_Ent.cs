@@ -29,10 +29,7 @@ namespace API_Dehvi.Entities
         public string contrasenaNueva { get; set; }
         public string contrasenaRepetida { get; set; }
         public string nombreDepartamento { get; set; }
-
-        
-
-
+        public string nombreRol { get; set; }
 
     }
 }

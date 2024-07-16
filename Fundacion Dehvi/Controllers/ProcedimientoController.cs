@@ -76,9 +76,12 @@ namespace Fundacion_Dehvi.Controllers
                 else
                 {
                     var datos = p.ListaProces();
+                    var datos2 = d.ListaDeparta();
+
+                    var model = new Tuple<IEnumerable<ProcedimientosEnt>, IEnumerable<DepartamentoEnt>>(datos, datos2);
                     //Muestra los mensajes referentes a procedimientos agregados correctamente y al cambio de estado de estas cuando sea pertinente
                     ViewBag.Mensaje = TempData["Mensaje"];
-                    return View(datos);
+                    return View(model);
                 }
             }
             catch (Exception e)

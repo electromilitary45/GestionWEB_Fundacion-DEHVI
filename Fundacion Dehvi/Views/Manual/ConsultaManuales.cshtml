@@ -6,7 +6,20 @@
 }
 
 <!--INICIO: Page Tittle-->
-<section id="page-title" class="text-light" style="background-image:url(../../Src/image/usuario/background.jpg); background-size: cover; background-position: center center;"></section>
+<section id="page-title" class="text-light" style="background-image: url(../../Src/image/imagenes/Manuales.png);; background-size: cover; background-position: center center;">
+    <div class="container">
+        <div class="breadcrumb">
+            <ul>
+                <li><a href="@Url.Action("Index","Home")">Home</a> </li>
+                <li><a href="@Url.Action("ConsultaManuales","Manual")">Manuales</a> </li>
+            </ul>
+        </div>
+        <div class="page-title">
+            <h2 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); padding: 12px; text-align: center;">Manuales</h2>
+        </div>
+    </div>
+</section>
+
 <!--FIN: Page Tittle-->
 <!--INICIO: Page Content-->
 <section id="page-content">
@@ -21,14 +34,7 @@
                 {
                     <li><a href="#" data-category=".ct-@dep.idDepartamento">@dep.nombre</a></li>
                 }
-                @*
-                    <li><a href="#" data-category=".ct-photography">Photography</a></li>
-                    <li><a href="#" data-category=".ct-marketing">Marketing</a></li>
-                    <li><a href="#" data-category=".ct-media">Media</a></li>
-                    <li><a href="#" data-category=".ct-webdesign">Web design</a></li>*@
-            </ul>
-            @*<br />
-                <div class="grid-active-title">Mostrar Todos</div>*@
+
         </nav>
         <!--FIN: Filtro-->
         <!--INICIO: PORTFOLIO-->

@@ -1,15 +1,27 @@
 ﻿@model IEnumerable<Fundacion_Dehvi.Entities.DepartamentoEnt>
 
 @{
-    var idRol = byte.Parse(Session["idRol"].ToString());
+    int idRol = Convert.ToInt32(Session["idRol"]);
 }
 
 <li class="dropdown">
     <a href="#">Departamentos</a>
     <ul class="dropdown-menu">
-        <li><a href="@Url.Action("ListaDepartasAdmin", "Departamento")">Admin Departamentos</a></li>
-        <li><a href="@Url.Action("ListaDeparta", "Departamento")">Todos los Departamentos</a></li>
-        <li><a href="@Url.Action("CrearDepartamento", "Departamento")">Agregar Departamento</a></li>
+        @if (idRol == 1)
+        {
+            <li><a href="@Url.Action("ListaDepartasAdmin", "Departamento")">Admin Departamentos</a></li>
+            <li><a href="@Url.Action("ListaDeparta", "Departamento")">Todos los Departamentos</a></li>
+            <li><a href="@Url.Action("CrearDepartamento", "Departamento")">Agregar Departamento</a></li>
+        }
+        else if (idRol == 2)
+        {
+            <li><a href="@Url.Action("ListaDeparta", "Departamento")">Todos los Departamentos</a></li>
+            <li><a href="@Url.Action("CrearDepartamento", "Departamento")">Agregar Departamento</a></li>
+        }
+        else
+        {
+            <li><a href="@Url.Action("ListaDeparta", "Departamento")">Todos los Departamentos</a></li>
+        }
         @if (Model != null)
         {
             foreach (var item in Model)

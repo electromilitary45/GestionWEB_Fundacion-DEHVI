@@ -32,6 +32,7 @@ namespace API_Dehvi.Controllers
                     var data = (
                         from u in con.Usuario
                         join d in con.Departamento on u.idDepartamento equals d.idDepartamento
+                        join r in con.Rol on u.idRol equals r.idRol
                         select new Usuario_Ent
                         {
                             idUsuario = u.idUsuario,
@@ -42,6 +43,7 @@ namespace API_Dehvi.Controllers
                             correo = u.correo,
                             contrasena = u.contrasena,
                             idRol = u.idRol,
+                            nombreRol = r.nombre,
                             idDepartamento = u.idDepartamento,
                             nombreDepartamento = d.nombre,
                             estado = u.estado,
