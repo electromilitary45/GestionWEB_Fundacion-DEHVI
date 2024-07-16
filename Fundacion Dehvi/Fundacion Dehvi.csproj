@@ -641,6 +641,7 @@
     <Content Include="Src\plugins\datatables\Buttons-1.5.6\css\mixins.scss" />
     <Content Include="Src\plugins\pageloader\pageloader.css.map" />
     <Content Include="Views\Manual\EditarManual.cshtml" />
+    <Content Include="Views\Procedimiento\CrearProcedimientoAdminJefa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

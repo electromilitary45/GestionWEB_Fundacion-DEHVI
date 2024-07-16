@@ -188,5 +188,14 @@ namespace Fundacion_Dehvi.Controllers
 
         }// fin del actualizar estado procedimiento
 
+        [HttpGet]
+        public ActionResult CrearProcedimientoAdminJefa(long q)
+        {
+            var depa= d.PerfilDepa(q);
+            ViewBag.idDepa = depa.idDepartamento;
+            ViewBag.nombreDepa = depa.nombre;
+            return View();
+        }
+
     }// fin del controlador
 }// fin del namespace

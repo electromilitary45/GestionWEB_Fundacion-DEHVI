@@ -1,0 +1,102 @@
+﻿@model Fundacion_Dehvi.Entities.ProcedimientosEnt
+@{
+
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var idDepartamento = long.Parse(ViewBag.idDepa.ToString());
+    var nombreDepa = ViewBag.nombreDepa;
+    ViewBag.Title = "Crear Procedimiento";
+
+}
+
+<link href="~/Src/css/custom.css" rel="stylesheet">
+
+<section id="page-title" class="text-light" style="background-image: url(../../Src/image/imagenes/Procedimientos.png); background-size: cover; background-position: center center;">
+    <div class="container">
+        <div class="breadcrumb">
+            <ul>
+                <li><a href="@Url.Action("Index","Home")">Home</a> </li>
+                <li><a href="@Url.Action("PerfilDepa","Departamento", new {q=idDepartamento})">Departamento</a> </li>
+                <li class="active"><a href="#">Agregar Procedimiento</a> </li>
+            </ul>
+        </div>
+        <div class="page-title">
+            <h2 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); padding: 12px; text-align: center;">Agregar Procedimiento</h2>
+        </div>
+    </div>
+</section>
+
+<section id="page-content" class="sidebar-left">
+    <div class="container">
+        <div class="row">
+            <!-- post content -->
+            <div class="content col-lg-9">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- FORMS -->
+                        <div class="card">
+                            <div class="card-body">
+                                @if (ViewBag.mensaje != null)
+                                {
+                                    <div class="alert alert-primary" role="alert">
+                                        @ViewBag.mensaje
+                                    </div>
+                                }
+
+                                @using (Html.BeginForm("CrearProce", "Procedimiento", FormMethod.Post, new { @class = "form-validate", @novalidate = "novalidate" }))
+                                {
+                                    <input type="hidden" name="idUsuario" value="@Session["idUsuario"]" required />
+                                    <input type="hidden" name="idDepartamento" value="@idDepartamento" required />
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <input type="text" value="@nombreDepa" readonly required class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+
+                                        <!-- Código -->
+                                        <div class="form-group col-md-6">
+                                            @Html.TextBoxFor(m => m.codProcedimiento, new { @class = "form-control", @required = "required", @placeholder = "Código de Procedimiento" })
+                                        </div>
+                                        <!-- NOMBRE -->
+                                        <div class="form-group col-md-6">
+                                            @Html.TextBoxFor(m => m.nombre, new { @class = "form-control", @required = "required", @placeholder = "Nombre" })
+                                        </div>
+                                    </div>
+                                    <!-- DropDown de los Departamentos -->
+
+                                    <div class="form-row">
+                                        <!-- Objetivo -->
+                                        <div class="form-group col-md-6">
+                                            @Html.TextAreaFor(m => m.objetivo, new { @class = "form-control", @required = "required", @placeholder = "Objetivo", @rows = "6" })
+                                        </div>
+                                        <!-- Descripcion -->
+                                        <div class="form-group col-md-6">
+                                            @Html.TextAreaFor(m => m.descripcion, new { @class = "form-control", @required = "required", @placeholder = "Descripción", @rows = "6" })
+                                        </div>
+                                    </div>
+                                    <input type="submit" class="btn m-t-30 mt-3" value="Agregar Procedimiento">
+                                }
+                            </div>
+                        </div>
+                        <!-- FIN FORMS -->
+                    </div>
+                </div>
+
+            </div>
+            <!-- end: post content -->
+            <!-- Sidebar-->
+            <div class="sidebar col-lg-3">
+                <!--Tabs with Posts-->
+                <div class="widget ">
+                    <div class="row mb-3">
+                        <div class="col-lg-12 text-left">
+                            <a href="@Url.Action("PerfilDepa","Departamento", new {q=idDepartamento})" class="btn" style="background-color: #59B2E9; border-color: #59B2E9 ">Volver al Perfil del Departamento</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End: Tabs with Posts-->
+        </div>
+        <!-- end: Sidebar-->
+    </div>
+</section> <!-- end: Content -->
