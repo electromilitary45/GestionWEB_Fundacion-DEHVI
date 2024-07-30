@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Fundacion_Dehvi.Entities.UsuarioEnt>
+@{
+    ViewBag.Title = "Usuarios ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!--INICIO: Page Tittle-->
+<section id="page-title" class="text-light" style="background-image:url(../../Src/image/usuario/background.jpg); background-size: cover; background-position: center center;"></section>
+<!--FIN: Page Tittle-->
+<!--INICIO: Page Content-->
+<section id="page-content" class="sidebar-left">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-9">
+                <!--INICIO: Tabla-->
+
+                <div class="container">
+                    @if (ViewBag.mensaje != null)
+                    {
+
+                        <div class="alert alert-primary" role="alert">
+                            @ViewBag.mensaje
+                        </div>
+                    }
+                    <div class="row team-members team-members-shadow m-b-40">
+
+                        @foreach (var u in Model)
+                        {
+                            var boxShadowColor = u.estado ? "rgba(0, 128, 0, 0.5)" : "rgba(255, 0, 0, 0.5)";
+
+                            <div class="col-lg-4">
+                                <div class="team-member" style="box-shadow: 0 0 10px @boxShadowColor; border-radius: 10px; overflow: hidden;">
+                                    <div class="team-image">
+                                        @if (u.rutaImg != null)
+                                        {
+                                            <img src="@u.rutaImg" style="height: 130px; width: 100%; object-fit: cover; object-position: center;">
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Src/image/usuario/8.jpg" style="height: 130px; width: 100%; object-fit: cover; object-position: center;">
+                                        }
+                                    </div>
+                                    <div class="team-desc text-left">
+                                        <div class="row text-right">
+
+                                        </div>
+                                        <h6>@u.nombre @u.apellido1 @u.apellido2</h6>
+                                        <span>Departamento</span>
+                                        <p>@u.nombreDepartamento</p>
+                                        <p><i class="icon-mail"></i> <a href="malito:@u.correo"> @u.correo</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
+                    </div>
+                </div>
+                <!--FIN: TAbla-->
+            </div>
+            <!--Sidebar-->
+            <div class="sidebar col-lg-3">
+                <a href="@Url.Action("NuevoUsuarioAdmin","Usuario")" class="btn btn-rounded"><i class="fa fa-user-plus"></i> Nuevo Usuario</a>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+<!--FIN: Page Content-->

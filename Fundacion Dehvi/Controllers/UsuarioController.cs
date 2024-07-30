@@ -425,6 +425,19 @@ namespace Fundacion_Dehvi.Controllers
 
         }
 
+        //---- INICIO: Usuarios por Departamento
+        [HttpGet]
+        public ActionResult ListaUsuariosDep(long q)
+        {
+            if (Session["idUsuario"] == null)
+            {
+                return RedirectToAction("InicioSesion", "Login");
+            }
+            var datos = UM.ListaUsuarioDep(q);
+
+            return View(datos);
+        }
+
 
     }//fin de clase
 }//fin de namespace

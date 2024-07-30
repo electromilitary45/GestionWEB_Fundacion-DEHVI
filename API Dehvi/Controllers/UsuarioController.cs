@@ -132,7 +132,7 @@ namespace API_Dehvi.Controllers
                             apellido2 = usuario.apellido2,
 
                             correo = usuario.correo,
-                            
+
                             contrasena = util.encrpytar(usuario.contrasenaNueva), //La contraseña nueva es totalmente nueva y ramdon
 
                             idDepartamento = usuario.idDepartamento,
@@ -195,7 +195,7 @@ namespace API_Dehvi.Controllers
         //--Inicio: ActivarUsuario---
         [HttpPut]
         [Route("ActivarUsuario")]
-        public int ActivarUsuario(Usuario_Ent usuario) 
+        public int ActivarUsuario(Usuario_Ent usuario)
         {
             try
             {
@@ -255,9 +255,9 @@ namespace API_Dehvi.Controllers
         {
             try
             {
-                using(var con = new BD_fundacionDehviEntities())
+                using (var con = new BD_fundacionDehviEntities())
                 {
-                    var user = (from u in con.Usuario 
+                    var user = (from u in con.Usuario
                                 where u.idUsuario == usuario.idUsuario
                                 select u).FirstOrDefault();
 
@@ -300,24 +300,24 @@ namespace API_Dehvi.Controllers
                      * Encrpto la contraseña para compararla con la de la base de datos
                      * Verifico que el usuario este activo
                     */
-                    
-                    var user= (from u in con.Usuario
-                               join d in con.Departamento on u.idDepartamento equals d.idDepartamento
-                               where u.correo == usuario.correo && u.contrasena == usuario.contrasena && u.estado == true
-                               select new Usuario_Ent
-                               {
-                                   idUsuario = u.idUsuario,
-                                   cedulaFisica = u.cedulaFisica,
-                                   correo = u.correo,
-                                   nombre=u.nombre,
-                                   apellido1 = u.apellido1,
-                                   apellido2 = u.apellido2,
-                                   idDepartamento = u.idDepartamento,
-                                   idRol = u.idRol,
-                                   nombreDepartamento= d.nombre,
-                                   rutaImg = u.rutaImg,
-                                   fechaCreacion = u.fechaCreacion
-                               }).FirstOrDefault();
+
+                    var user = (from u in con.Usuario
+                                join d in con.Departamento on u.idDepartamento equals d.idDepartamento
+                                where u.correo == usuario.correo && u.contrasena == usuario.contrasena && u.estado == true
+                                select new Usuario_Ent
+                                {
+                                    idUsuario = u.idUsuario,
+                                    cedulaFisica = u.cedulaFisica,
+                                    correo = u.correo,
+                                    nombre = u.nombre,
+                                    apellido1 = u.apellido1,
+                                    apellido2 = u.apellido2,
+                                    idDepartamento = u.idDepartamento,
+                                    idRol = u.idRol,
+                                    nombreDepartamento = d.nombre,
+                                    rutaImg = u.rutaImg,
+                                    fechaCreacion = u.fechaCreacion
+                                }).FirstOrDefault();
 
                     return user;
                 }
@@ -518,7 +518,7 @@ namespace API_Dehvi.Controllers
         {
             try
             {
-                using(var con = new BD_fundacionDehviEntities())
+                using (var con = new BD_fundacionDehviEntities())
                 {
                     var user = (from u in con.Usuario
                                 where u.idUsuario == usuario.idUsuario
@@ -562,8 +562,49 @@ namespace API_Dehvi.Controllers
 
         }
 
+        [HttpGet]
+        [Route("ListaUsuariosDepartamento")]
+        public List<Usuario_Ent> ListaUsDepart(long q)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities())
+                {
+                    con.Configuration.LazyLoadingEnabled = false;
+
+                    var data = (
+                        from u in con.Usuario
+                        join d in con.Departamento on u.idDepartamento equals d.idDepartamento
+                        join r in con.Rol on u.idRol equals r.idRol
+                        where u.idRol == q && u.estado == true
+                        select new Usuario_Ent
+                        {
+                            idUsuario = u.idUsuario,
+                            cedulaFisica = u.cedulaFisica,
+                            nombre = u.nombre,
+                            apellido1 = u.apellido1,
+                            apellido2 = u.apellido2,
+                            correo = u.correo,
+                            contrasena = u.contrasena,
+                            idRol = u.idRol,
+                            nombreRol = r.nombre,
+                            idDepartamento = u.idDepartamento,
+                            nombreDepartamento = d.nombre,
+                            estado = u.estado,
+                            fechaCreacion = u.fechaCreacion,
+                            rutaImg = u.rutaImg
+                        }).ToList();
+
+                    return data;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
         /*-------------------- FIN USUARIOS COMUNES --------------------*/
 
     }//fin de la clase
-    }//fin del namespace
+}//fin del namespace
 

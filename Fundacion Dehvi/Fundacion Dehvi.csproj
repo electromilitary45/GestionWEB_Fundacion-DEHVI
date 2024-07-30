@@ -642,6 +642,7 @@
     <Content Include="Src\plugins\pageloader\pageloader.css.map" />
     <Content Include="Views\Manual\EditarManual.cshtml" />
     <Content Include="Views\Procedimiento\CrearProcedimientoAdminJefa.cshtml" />
+    <Content Include="Views\Usuario\ListaUsuariosDep.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

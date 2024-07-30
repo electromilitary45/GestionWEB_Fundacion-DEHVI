@@ -178,5 +178,14 @@ namespace Fundacion_Dehvi.Models
             }
         }
 
+        public List<UsuarioEnt> ListaUsuarioDep(long q)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlAPI + "ListaUsuariosDepartamento?q=" + q;
+                var resp = client.GetAsync(url).Result;
+                return resp.Content.ReadFromJsonAsync<List<UsuarioEnt>>().Result;
+            }
+        }
     }//fin de la clase
 }//fin del namespace
