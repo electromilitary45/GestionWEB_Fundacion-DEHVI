@@ -25,11 +25,13 @@ namespace Fundacion_Dehvi.Controllers
         [HttpGet]
         public ActionResult ListaUsuariosAdmin()
         {
-            var idRol = byte.Parse(Session["idRol"].ToString());
+
             if (Session["idUsuario"] == null)
             {
                 return RedirectToAction("InicioSesion", "Login");
             }
+
+            var idRol = byte.Parse(Session["idRol"].ToString());
             if (idRol != 1)
             {
                 return RedirectToAction("AccesoNoAuthorizado", "Shared");
@@ -75,11 +77,12 @@ namespace Fundacion_Dehvi.Controllers
         [HttpGet]
         public ActionResult NuevoUsuarioAdmin()
         {
-            var idRol = byte.Parse(Session["idRol"].ToString());
             if (Session["idUsuario"] == null)
             {
                 return RedirectToAction("InicioSesion", "Login");
             }
+
+            var idRol = byte.Parse(Session["idRol"].ToString());
             if (idRol != 1)
             {
                 return RedirectToAction("AccesoNoAuthorizado", "Shared");
@@ -132,17 +135,18 @@ namespace Fundacion_Dehvi.Controllers
         [HttpGet]
         public ActionResult EditarUsuarioAdmin(long q)
         {
-            var idRol = byte.Parse(Session["idRol"].ToString());
+            
             if (Session["idUsuario"] == null)
             {
                 return RedirectToAction("InicioSesion", "Login");
             }
+            var idRol = byte.Parse(Session["idRol"].ToString());
             if (idRol != 1)
             {
                 return RedirectToAction("AccesoNoAuthorizado", "Shared");
             }
 
-            
+
 
             ViewBag.listaDepartamentos = DM.LItemDepartamento();
             ViewBag.listaRoles = UM.LItemRol();

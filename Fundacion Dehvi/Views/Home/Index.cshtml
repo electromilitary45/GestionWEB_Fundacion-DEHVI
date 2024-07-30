@@ -3,10 +3,11 @@
 @{
     ViewBag.Title = "IndexPrincipal";
 
-    var idRol = byte.Parse(Session["idRol"].ToString());
+
 
     if (Session["idUsuario"] != null)
     {
+        var idRol = byte.Parse(Session["idRol"].ToString());
         switch (idRol)
         {
             case 1: //admin
