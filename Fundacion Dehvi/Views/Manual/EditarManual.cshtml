@@ -2,17 +2,22 @@
 @{
     ViewBag.Title = "Editar Manual";
 
-    switch (byte.Parse(Session["idRol"].ToString()))
+    var idRol = byte.Parse(Session["idRol"].ToString());
+
+    if (Session["idUsuario"] != null)
     {
-        case 1:
-            Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-            break;
-        case 2:
-            Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-            break;
-        default:
-            Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-            break;
+        switch (idRol)
+        {
+            case 1: //admin
+                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+                break;
+            case 2://jefaruta
+                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+                break;
+            default: //todos sin permisos
+                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+                break;
+        }
     }
 }
 

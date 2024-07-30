@@ -1,7 +1,25 @@
 ﻿@model Fundacion_Dehvi.Entities.UsuarioEnt
 @{
-    ViewBag.Title = "NuevoUsuarioAdmin";
+    ViewBag.Title = "Nuevo Usuario";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    var idRol = byte.Parse(Session["idRol"].ToString());
+
+    if (Session["idUsuario"] != null)
+    {
+        switch (idRol)
+        {
+            case 1: //admin
+                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+                break;
+            case 2://jefaruta
+                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+                break;
+            default: //todos sin permisos
+                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+                break;
+        }
+    }
 }
 
 <!--INICIO: Page Tittle-->

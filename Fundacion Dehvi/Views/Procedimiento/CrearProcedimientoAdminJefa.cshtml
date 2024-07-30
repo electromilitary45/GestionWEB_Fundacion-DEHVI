@@ -6,6 +6,24 @@
     var nombreDepa = ViewBag.nombreDepa;
     ViewBag.Title = "Crear Procedimiento";
 
+    var idRol = byte.Parse(Session["idRol"].ToString());
+
+    if (Session["idUsuario"] != null)
+    {
+        switch (idRol)
+        {
+            case 1: //admin
+                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+                break;
+            case 2://jefaruta
+                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+                break;
+            default: //todos sin permisos
+                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+                break;
+        }
+    }
+
 }
 
 <link href="~/Src/css/custom.css" rel="stylesheet">

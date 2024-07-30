@@ -3,9 +3,11 @@
 @{
     ViewBag.Title = "IndexPrincipal";
 
+    var idRol = byte.Parse(Session["idRol"].ToString());
+
     if (Session["idUsuario"] != null)
     {
-        switch (byte.Parse(Session["idRol"].ToString()))
+        switch (idRol)
         {
             case 1: //admin
                 Layout = "~/Views/Shared/_LayoutAdmin.cshtml";

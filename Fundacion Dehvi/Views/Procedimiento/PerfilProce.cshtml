@@ -3,9 +3,28 @@
 @{
     ViewBag.Title = "Perfil del Procedimiento";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
     var idRol = byte.Parse(Session["idRol"].ToString());
 
+    if (Session["idUsuario"] != null)
+    {
+        switch (idRol)
+        {
+            case 1: //admin
+                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+                break;
+            case 2://jefaruta
+                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+                break;
+            default: //todos sin permisos
+                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+                break;
+        }
+    }
+
     var itemsConIdProcedimiento = Model.Item2.Where(item => item.idProcedimiento == Model.Item1.idProcedimiento).ToList();
+
+
 
 }
 
