@@ -12,15 +12,12 @@
             case 1: //admin
                 Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
                 break;
-            case 2://jefaruta
-                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-                break;
-            default: //todos sin permisos
-                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+            default: //empleaods
+                Layout = "~/Views/Shared/_LayoutEmpleado.cshtml";
                 break;
         }
     }
-}
 
 <!--INICIO: Page Tittle-->
 <section id="page-title" class="text-light" style="background-image: url('../../Src/image/imagenes/banner 5.png');; background-size: cover; background-position: center center;">
