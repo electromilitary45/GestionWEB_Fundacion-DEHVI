@@ -95,15 +95,5 @@ namespace Fundacion_Dehvi.Models
                 return resp.Content.ReadFromJsonAsync<List<System.Web.Mvc.SelectListItem>>().Result;
             }
         }
-        //------------ Conteo de Usuarios y Procedimientos por Departamento ------------
-        public List<dynamic> Conteo()
-        {
-            using (var client = new HttpClient())
-            {
-                string url = urlApi + "Conteo";
-                var resp = client.GetAsync(url).Result;
-                return resp.Content.ReadFromJsonAsync<List<dynamic>>().Result;
-            }
-        }
     }
 }
