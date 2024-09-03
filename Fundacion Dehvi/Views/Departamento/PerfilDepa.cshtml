@@ -21,11 +21,13 @@
                 break;
         }
     }
+    var departas = Model.Item2.Where(item => item.idDepartamento == Model.Item1.idDepartamento).ToList();
+
 }
 
 <link href="~/Src/css/custom.css" rel="stylesheet">
 
-<section id="page-title" class="text-light" style="background-image: url(../../Src/image/imagenes/Departamentos.png); background-size: cover; background-position: center center;">
+<section id="page-title" class="text-light" style="background-image: url('../../Src/image/imagenes/banner 2.png'); background-size: cover; background-position: center center;">
     <div class="container">
         <div class="breadcrumb">
             <ul>
@@ -40,23 +42,25 @@
     </div>
 </section>
 
+<!-- busqueda -->
+<section style="padding:15px; display: flex; justify-content: center;">
+    <div class="widget widget-newsletter" style="width: 100%;">
+        <form class="col-12" id="widget-search-form-sidebar" style="max-width: 600px; width: 100%; margin: 0 auto;">
+            <div class="input-group">
+                <input type="search" name="q" class="form-control widget-search-form" placeholder="Buscar procedimientos..." style="width: 100%;">
+                <div class="input-group-append">
+                    <button class="btn" type="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+
+<!-- fin de la busqueda -->
 
 
 <section id="page-content" class="sidebar-left">
-
-    <section class="d-flex justify-content-center" style="padding: 10px 0;">
-        <div>
-            <div class="form-group">
-                <div class="input-group">
-                    <input type="text" class="form-control" data-mask="" placeholder="">
-                    <div class="input-group-append">
-                        <span class="input-group-text"><i class="icon-search"></i></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <div class="container">
         <div class="row">
             <!-- post content -->
@@ -98,6 +102,15 @@
                                     }
                                 }
                             }
+                            @if(departas.Count() == 0)
+                            {
+                                <div class="alert-container" style="display: flex; align-items: center; justify-content: center; padding: 20px; background-color: #f0f8ff; border: 1px solid #b8daff; border-radius: 10px;">
+                                    <img src="~/Src/image/imagenes/a.png" style="width: 200px; height: auto; margin-right: 20px;">
+                                    <div role="alert" class="alert alert-info" style="flex: 1; background-color: #d1ecf1; color: #0c5460; border-color: #bee5eb; padding: 20px; border-radius: 10px;">
+                                        <h4 style="text-align:center;  margin-top: 0; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">¡Oops! No se encontraron procedimientos</h4>
+                                    </div>
+                                </div>
+                            }
                         </div>
 
 
@@ -118,7 +131,7 @@
                             </div>
                         </div>
                     </div>
-                    }
+                }
             </div>
             <!--End: Tabs with Posts-->
         </div>

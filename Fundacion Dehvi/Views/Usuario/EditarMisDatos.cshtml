@@ -24,14 +24,14 @@
 }
 
 <!--INICIO: Page Tittle-->
-<section id="page-title" class="text-light" style="background-image:url(../../Src/image/usuario/background.jpg); background-size: cover; background-position: center center;"></section>
+<section id="page-title" class="text-light" style="background-image:url('../../Src/image/imagenes/banner 6.png'); background-size: cover; background-position: center center;"></section>
 <!--FIN: Page Tittle-->
 
 <section id="page-content">
     <div class="container">
         <!--BTN retroceder-->
         <a class="btn btn-rounded" href="@Url.Action("PerfilUsuario","Usuario")"><i class="icon-arrow-left"></i> Mi Perfil </a>
-        
+
         <!--INICIO: Alertas-->
         @if (ViewBag.mensaje != null)
         {
@@ -43,7 +43,6 @@
             </div>
         }
         <!--FIN: Alertas-->
-
         <!--Datos de cuenta-->
         <div class="card">
             <div class="card-header">
@@ -88,7 +87,7 @@
                     </div>
 
                     <div class="text-center form-group" style="margin:20px;">
-                        <button type="submit" class="btn" disabled >Actualizar mis datos</button>
+                        <button type="submit" class="btn" disabled>Actualizar mis datos</button>
                     </div>
                 }
 

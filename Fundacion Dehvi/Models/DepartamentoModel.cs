@@ -1,24 +1,27 @@
 ﻿using Fundacion_Dehvi.Entities;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Fundacion_Dehvi.Models
 {
     public class DepartamentoModel
     {
         // conexión al proyecto Api
-        public string urlApi = ConfigurationManager.AppSettings["urlApi"]; 
+        public string urlApi = ConfigurationManager.AppSettings["urlApi"];
 
         //------------ Registrar Departamento ------------
-        public int CrearDepartamento (DepartamentoEnt depa)
+        public int CrearDepartamento(DepartamentoEnt depa)
         {
             using (var client = new HttpClient())
             {
                 string url = urlApi + "CrearDepartamento";
                 JsonContent cont = JsonContent.Create(depa);
-                var resp = client.PostAsync(url,cont).Result;
+                var resp = client.PostAsync(url, cont).Result;
                 return resp.Content.ReadFromJsonAsync<int>().Result;
             }
         } // fin del crear departamento
@@ -33,7 +36,7 @@ namespace Fundacion_Dehvi.Models
                 return resp.Content.ReadFromJsonAsync<List<DepartamentoEnt>>().Result;
             }
         }// fin de la lista de departamentos
-        
+
         //------------ Lista de Departamentos ------------
         public List<DepartamentoEnt> ListaDepartasAdmin()
         {
@@ -92,6 +95,15 @@ namespace Fundacion_Dehvi.Models
                 return resp.Content.ReadFromJsonAsync<List<System.Web.Mvc.SelectListItem>>().Result;
             }
         }
-
+        //------------ Conteo de Usuarios y Procedimientos por Departamento ------------
+        public List<dynamic> Conteo()
+        {
+            using (var client = new HttpClient())
+            {
+                string url = urlApi + "Conteo";
+                var resp = client.GetAsync(url).Result;
+                return resp.Content.ReadFromJsonAsync<List<dynamic>>().Result;
+            }
+        }
     }
 }

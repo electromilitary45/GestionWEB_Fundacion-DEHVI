@@ -89,6 +89,18 @@ namespace Fundacion_Dehvi.Controllers
                 else
                 {
                     var datos = d.ListaDepartasAdmin();
+                    var conteo = d.Conteo();
+                    // Combinar los datos
+                    var conteito = datos.Select(departamento =>
+                    {
+                        var conteoItem = conteo.FirstOrDefault(c => c.IdDepartamento == departamento.idDepartamento);
+                        if (conteoItem != null)
+                        {
+                            departamento.CantidadEmpleados = conteoItem.CantidadEmpleados;
+                            departamento.CantidadProcedimientos = conteoItem.CantidadProcedimientos;
+                        }
+                        return departamento;
+                    }).ToList();
                     //Muestra los mensajes referentes a departmentos agregadas correctamente y al cambio de estado de estas cuando sea pertinente
                     ViewBag.Mensaje = TempData["Mensaje"];
                     return View(datos);

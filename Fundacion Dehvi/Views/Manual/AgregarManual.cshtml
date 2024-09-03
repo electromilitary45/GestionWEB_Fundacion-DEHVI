@@ -23,75 +23,77 @@
 }
 
 <!--INICIO: Page Tittle-->
-<section id="page-title" class="text-light" style="background-image: url(../../Src/image/imagenes/Manuales.png); background-size: cover; background-position: center center;"></section>
-<!--FIN: Page Tittle-->
-<!--INICIO: Page Content-->
-<section id="page-content" class="sidebar-left">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-9">
-                <!--CONTENIDO-->
-                @if (ViewBag.mensaje != null)
-                {
-                    <div class="col-lg-12">
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            @ViewBag.mensaje
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+<section id="page-title" class="text-light" style="background-image: url('../../Src/image/imagenes/banner 5.png');; background-size: cover; background-position: center center;">
+    <div class="bg-overlay" data-style="1"></div>
+    </section>
+    <!--FIN: Page Tittle-->
+    <!--INICIO: Page Content-->
+    <section id="page-content" class="sidebar-left">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <!--CONTENIDO-->
+                    @if (ViewBag.mensaje != null)
+                    {
+                        <div class="col-lg-12">
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                @ViewBag.mensaje
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            </div>
                         </div>
-                    </div>
-                }
-                <div class="container">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="h6 mb-4">Creando un nuevo manual:</div>
-                        </div>
-                        <div class="card-body">
-                            @using (Html.BeginForm("AgregarManual", "Manual", FormMethod.Post, new { @class = "form-validate pt-3", @novalidate = "novalidate", @enctype = "multipart/form-data" }))
-                            {
-                                <input name="idProcedimiento" id="idProcedimiento" class="form-control" type="hidden" value="@ViewBag.idProcedimiento" required />
-                                <input name="idUsuarioCreador" id="idUsuarioCreador" type="hidden" value="@Session["idUsuario"]" required/>
+                    }
+                    <div class="container">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="h6 mb-4">Creando un nuevo manual:</div>
+                            </div>
+                            <div class="card-body">
+                                @using (Html.BeginForm("AgregarManual", "Manual", FormMethod.Post, new { @class = "form-validate pt-3", @novalidate = "novalidate", @enctype = "multipart/form-data" }))
+                                {
+                                    <input name="idProcedimiento" id="idProcedimiento" class="form-control" type="hidden" value="@ViewBag.idProcedimiento" required />
+                                    <input name="idUsuarioCreador" id="idUsuarioCreador" type="hidden" value="@Session["idUsuario"]" required />
 
-                                <div class="row">
-                                    <div class="col-lg-5">
-                                        <img src="~/Src/image/Archivos/carpeta-archivo-subir.png" width="200" />
-                                    </div>
-                                    <div class="col-lg-7">
+                                    <div class="row">
+                                        <div class="col-lg-5">
+                                            <img src="~/Src/image/Archivos/carpeta-archivo-subir.png" width="200" />
+                                        </div>
+                                        <div class="col-lg-7">
 
-                                        <!--NombreManual-->
-                                        <div class="form-row">
-                                            <div class="form-group col-md-7">
-                                                <label>Nombre del Manual</label>
-                                                @Html.TextBoxFor(m => m.nombre, new { @class = "form-control", @required = "required", @placeholder = "Nombre del manual" })
+                                            <!--NombreManual-->
+                                            <div class="form-row">
+                                                <div class="form-group col-md-7">
+                                                    <label>Nombre del Manual</label>
+                                                    @Html.TextBoxFor(m => m.nombre, new { @class = "form-control", @required = "required", @placeholder = "Nombre del manual" })
+                                                </div>
                                             </div>
-                                        </div>
-                                        <!--CodReferencia-->
-                                        <div class="form-row">
-                                            <div class="form-group col-md-7">
-                                                <label>Codigo de Referencia del Manual</label>
-                                                @Html.TextBoxFor(m => m.codReferencia, new { @class = "form-control", @required = "required", @placeholder = "Codigo de Referencia" })
+                                            <!--CodReferencia-->
+                                            <div class="form-row">
+                                                <div class="form-group col-md-7">
+                                                    <label>Codigo de Referencia del Manual</label>
+                                                    @Html.TextBoxFor(m => m.codReferencia, new { @class = "form-control", @required = "required", @placeholder = "Codigo de Referencia" })
+                                                </div>
                                             </div>
-                                        </div>
-                                        <!--Archivo-->
-                                        <div class="form-row">
-                                            <div class="form-group">
-                                                <label>Archivo</label>
-                                                <input name="inputDocManual" id="inputDocManual" type="file" required />
+                                            <!--Archivo-->
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label>Archivo</label>
+                                                    <input name="inputDocManual" id="inputDocManual" type="file" required />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="text-center form-group" style="margin:20px;">
-                                    <button type="submit" class="btn btn-success">Crear Manual</button>
-                                </div>
-                            }
+                                    <div class="text-center form-group" style="margin:20px;">
+                                        <button type="submit" class="btn btn-success">Crear Manual</button>
+                                    </div>
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="sidebar col-lg-3">
-                <a class="btn" href="@Url.Action("PerfilProce", "Procedimiento", new { q=ViewBag.idProcedimiento })"><i class="icon-arrow-left"></i> Volver al perfil</a>
+                <div class="sidebar col-lg-3">
+                    <a class="btn" href="@Url.Action("PerfilProce", "Procedimiento", new { q=ViewBag.idProcedimiento })"><i class="icon-arrow-left"></i> Volver al perfil</a>
+                </div>
             </div>
         </div>
-    </div>
-</section>
-<!--FIN: Page Content-->
+    </section>
+    <!--FIN: Page Content-->

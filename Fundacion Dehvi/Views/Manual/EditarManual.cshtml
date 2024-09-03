@@ -22,61 +22,63 @@
 }
 
 <!--INICIO: Page Tittle-->
-<section id="page-title" class="text-light" style="background-image: url(../../Src/image/imagenes/Manuales.png); background-size: cover; background-position: center center;"></section>
-<!--FIN: Page Tittle-->
-<!--INICIO: Page Content-->
-<section id="page-content">
-    <div class="container">
-        <div class="row">
-            <div class="sidebar col-lg-3">
-                <a class="btn" href="@Url.Action("PerfilManualAdmin", "Manual", new { q=Model.idManual})"><i class="icon-arrow-left"></i> Volver al perfil</a>
-            </div>
-            <div class="col-lg-9">
-                <!--INICIO: Alerta-->
-                @if (ViewBag.mensaje != null)
-                {
-                    <div class="col-lg-12">
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            @ViewBag.mensaje
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+<section id="page-title" class="text-light" style="background-image: url('../../Src/image/imagenes/banner 5.png');; background-size: cover; background-position: center center;">
+    <div class="bg-overlay" data-style="1"></div>
+    </section> 
+    <!--FIN: Page Tittle-->
+    <!--INICIO: Page Content-->
+    <section id="page-content">
+        <div class="container">
+            <div class="row">
+                <div class="sidebar col-lg-3">
+                    <a class="btn" href="@Url.Action("PerfilManualAdmin", "Manual", new { q=Model.idManual})"><i class="icon-arrow-left"></i> Volver al perfil</a>
+                </div>
+                <div class="col-lg-9">
+                    <!--INICIO: Alerta-->
+                    @if (ViewBag.mensaje != null)
+                    {
+                        <div class="col-lg-12">
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                @ViewBag.mensaje
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            </div>
+                        </div>
+                    }
+                    <!--FIN: Alerta-->
+
+                    <div class="card">
+                        <!--INICIO: Cabezera-->
+                        <div class="card-header">
+                            <div class="h6 mb-4">Editando el Manual: @Model.nombre</div>
+                        </div>
+                        <!--FIN: Cabezera-->
+
+                        <div class="card-body">
+                            @using (Html.BeginForm("EditarManual", "Manual", FormMethod.Post, new { @class = "form-validate pt-3", @novalidate = "novalidate" }))
+                            {
+                                <input hidden id="idManual" name="idManual" value="@Model.idManual" />
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label>Nombre del Manual</label>
+                                        @Html.TextBoxFor(m => m.nombre, new { @class = "form-control", @required = "required", @placeholder = "Nombre del manual", @value = Model.nombre })
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Codigo de Referencia del Manual</label>
+                                        @Html.TextBoxFor(m => m.codReferencia, new { @class = "form-control", @required = "required", @placeholder = "Codigo de Referencia", @value = Model.codReferencia })
+                                    </div>
+                                </div>
+
+                                <div class="text-center form-group" style="margin:20px;">
+                                    <button type="submit" class="btn btn-success">Editar Manual</button>
+                                </div>
+                            }
                         </div>
                     </div>
-                }
-                <!--FIN: Alerta-->
-
-                <div class="card">
-                    <!--INICIO: Cabezera-->
-                    <div class="card-header">
-                        <div class="h6 mb-4">Editando el Manual: @Model.nombre</div>
-                    </div>
-                    <!--FIN: Cabezera-->
-
-                    <div class="card-body">
-                        @using (Html.BeginForm("EditarManual", "Manual", FormMethod.Post, new { @class = "form-validate pt-3", @novalidate = "novalidate" }))
-                        {
-                            <input hidden id="idManual" name="idManual" value="@Model.idManual" />
-
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label>Nombre del Manual</label>
-                                    @Html.TextBoxFor(m => m.nombre, new { @class = "form-control", @required = "required", @placeholder = "Nombre del manual", @value = Model.nombre })
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Codigo de Referencia del Manual</label>
-                                    @Html.TextBoxFor(m => m.codReferencia, new { @class = "form-control", @required = "required", @placeholder = "Codigo de Referencia", @value = Model.codReferencia })
-                                </div>
-                            </div>
-                            
-                            <div class="text-center form-group" style="margin:20px;">
-                                <button type="submit" class="btn btn-success">Editar Manual</button>
-                            </div>
-                        }
-                    </div>
                 </div>
+
+
             </div>
-
-
         </div>
-    </div>
-</section>
-<!--FIN: Page Content-->
+    </section>
+    <!--FIN: Page Content-->

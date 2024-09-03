@@ -1,12 +1,12 @@
-﻿using API_Dehvi.Areas.HelpPage.ModelDescriptions;
-using API_Dehvi.Entities;
+﻿using API_Dehvi.Entities;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
+using System.Threading.Tasks;
+
 
 namespace API_Dehvi.Controllers
 {
@@ -231,5 +231,34 @@ namespace API_Dehvi.Controllers
 
         }// fin del DropDown de departamentos
 
+        //------------------- Coteo de Usuarios y Procedimientos por Departa -------------------
+        [HttpGet]
+        [Route("Conteo")]
+        public IHttpActionResult Conteo()
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities()) // Conexion a la base de datos
+                {
+                    var stats = from d in con.Departamento
+                                join u in con.Usuario on d.idDepartamento equals u.idDepartamento into userGroup
+                                join p in con.Procedimiento on d.idDepartamento equals p.idDepartamento into procGroup
+                                select new
+                                {
+                                    IdDepartamento = d.idDepartamento,
+                                    Nombre = d.nombre,
+                                    CantidadEmpleados = userGroup.Count(),
+                                    CantidadProcedimientos = procGroup.Count()
+                                };
+
+                    var result = stats.ToList();
+                    return Ok(result); // Devuelve los resultados en formato JSON
+                }
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex); // Devuelve error en caso de excepción 
+            }
+        }// fin del conteo
     } // fin de la clase
 } // fin del namespace
