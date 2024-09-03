@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -92,6 +93,7 @@ namespace Fundacion_Dehvi.Controllers
             ViewBag.listaDepartamentos = DM.LItemDepartamento();
             ViewBag.listaRoles = UM.LItemRol();
             //ViewBag.listaDepartamentos 
+            ViewBag.mensaje = TempData["mensaje"];
             return View();
 
 
@@ -102,8 +104,24 @@ namespace Fundacion_Dehvi.Controllers
         {
             try
             {
+                // Validar que el correo electrónico pertenezca al dominio @dehvi.org
+                if (!Regex.IsMatch(usuario.correo, @"^[a-zA-Z0-9._%+-]+@dehvi\.org$"))
+                {
+                    ModelState.AddModelError("correo", "El correo electrónico debe pertenecer al dominio @dehvi.org");
+                }
+
                 if (usuario.cedulaFisica != null && usuario.nombre != null && usuario.apellido1 != null && usuario.apellido2 != null && usuario.idDepartamento != 0 && usuario.idRol != 0)
                 {
+                    if (!ModelState.IsValid)
+                    {
+                        // Mantener los datos introducidos en caso de error de validación
+                        ViewBag.listaDepartamentos = DM.LItemDepartamento();
+                        ViewBag.listaRoles = UM.LItemRol();
+                        
+                        ViewBag.mensaje = "El correo electrónico debe pertenecer al dominio @dehvi.org";
+                        return View(usuario);
+                    }
+
                     ViewBag.listaDepartamentos = DM.LItemDepartamento();
                     ViewBag.listaRoles = UM.LItemRol();
                     var user = UM.registrarUsuario(usuario);
@@ -111,23 +129,26 @@ namespace Fundacion_Dehvi.Controllers
                     switch (user)
                     {
                         case 1:
-                            ViewBag.mensaje = "Ya existe un usuario con la cedula fisica digitada!";
-                            return View();
+                            ViewBag.mensaje = "¡Ya existe un usuario con la cédula física digitada!";
+                            return View(usuario); // Devolver los datos introducidos en caso de error
                         case 2:
                             return RedirectToAction("ListaUsuariosAdmin", "Usuario");
                         default:
-                            return View();
+                            return View(usuario); // Devolver los datos introducidos en caso de error
                     }
                 }
                 else
                 {
                     ViewBag.mensaje = "Debe rellenar los espacios requeridos!";
-                    return View();
+                    ViewBag.listaDepartamentos = DM.LItemDepartamento();
+                    ViewBag.listaRoles = UM.LItemRol();
+                    return View(usuario); // Devolver los datos introducidos en caso de error
                 }
             }
             catch (Exception e)
             {
-                return View(e);
+                ViewBag.mensaje = "Ocurrió un error al procesar la solicitud.";
+                return View(usuario); // Devolver los datos introducidos en caso de excepción
             }
         }
 
@@ -160,12 +181,28 @@ namespace Fundacion_Dehvi.Controllers
         {
             try
             {
+                // Validar que el correo electrónico pertenezca al dominio @dehvi.org
+                if (!Regex.IsMatch(usuario.correo, @"^[a-zA-Z0-9._%+-]+@dehvi\.org$"))
+                {
+                    ModelState.AddModelError("correo", "El correo electrónico debe pertenecer al dominio @dehvi.org");
+                }
+
+                // Mantener las listas de departamentos y roles para la vista
                 ViewBag.listaDepartamentos = DM.LItemDepartamento();
                 ViewBag.listaRoles = UM.LItemRol();
+
+                // Si la validación falla, regresar a la vista con los datos actuales
+                if (!ModelState.IsValid)
+                {
+                    ViewBag.mensaje = "El correo electrónico debe pertenecer al dominio @dehvi.org";
+                    return View(usuario);
+                }
+
                 var user = UM.ActualizarUsuario(usuario);
+
                 if (user != 500)
                 {
-                    ViewBag.mensaje = "Usuario editado con exito";
+                    ViewBag.mensaje = "Usuario editado con éxito";
                     return RedirectToAction("ListaUsuariosAdmin", "Usuario");
                 }
 
@@ -174,7 +211,8 @@ namespace Fundacion_Dehvi.Controllers
             }
             catch (Exception e)
             {
-                return View(e);
+                ViewBag.mensaje = "Ocurrió un error al procesar la solicitud.";
+                return View(usuario); // Devolver los datos introducidos en caso de excepción
             }
         }
 

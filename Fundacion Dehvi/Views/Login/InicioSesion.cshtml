@@ -30,7 +30,7 @@
                         }
                         <div class="form-group">
                             <label class="sr-only">Correo Electronico</label>
-                            @Html.TextBoxFor(model => model.correo, new { @class = "form-control", placeholder = "Correo", required = "required" })
+                            @Html.TextBoxFor(model => model.correo, new {@class = "form-control", placeholder = "Correo", required = "required", @type = "email", pattern = @"[a-zA-Z0-9._%+-]+@dehvi.org", title = "El correo electrónico debe pertenecer al dominio @dehvi.org"})
                         </div>
                         <div class="form-group m-b-5">
                             <label class="sr-only">Contraseña</label>
@@ -57,17 +57,17 @@
         overflow: hidden;
     }
 
-    .fullscreen::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('/Src/video/backgroundninos.mp4') no-repeat center center/cover;
-        filter: blur(10px);
-        z-index: -1;
-    }
+        .fullscreen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('/Src/video/backgroundninos.mp4') no-repeat center center/cover;
+            filter: blur(10px);
+            z-index: -1;
+        }
 
     .video-overlay {
         position: absolute;

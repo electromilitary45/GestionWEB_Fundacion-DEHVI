@@ -4,6 +4,7 @@ using Fundacion_Dehvi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -29,6 +30,12 @@ namespace Fundacion_Dehvi.Controllers
         {
             try
             {
+                if (!Regex.IsMatch(usuario.correo, @"^[a-zA-Z0-9._%+-]+@dehvi\.org$"))
+                {
+                    TempData["mensaje"] = "El correo electrónico debe pertenecer al dominio @dehvi.org";
+                    return RedirectToAction("InicioSesion", "Login");
+                }
+
                 usuario.contrasena = util.encrpytar(usuario.contrasena);
                 var user = UM.InicioSesion(usuario);
 
@@ -72,6 +79,13 @@ namespace Fundacion_Dehvi.Controllers
         {
             try
             {
+                // Validar que el correo electrónico pertenezca al dominio @dehvi.org
+                if (!Regex.IsMatch(usuario.correo, @"^[a-zA-Z0-9._%+-]+@dehvi\.org$"))
+                {
+                    TempData["mensaje"] = "El correo electrónico debe pertenecer al dominio @dehvi.org";
+                    return View();
+                }
+
                 var resp = UM.RecuperarContrasena(usuario);
                 if (resp != null)
                 {
@@ -80,12 +94,14 @@ namespace Fundacion_Dehvi.Controllers
                 }
                 else
                 {
-                    TempData["mensaje"] = "Correo/Cedula no registrado o encontrado";
+                    TempData["mensaje"] = "Correo/Cédula no registrado o encontrado";
                     return View();
                 }
             }
             catch (Exception ex)
             {
+                // Manejo del error
+                TempData["mensaje"] = "Ocurrió un error al procesar la solicitud.";
                 return View();
             }
         }

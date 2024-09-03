@@ -97,11 +97,11 @@ INSERT INTO Rol VALUES (3, 'Empleado')
 INSERT INTO Rol VALUES (4, 'Externo')
 
 --------------- INSERTS DEPARTAMENTOS---------------
-INSERT INTO Departamento (nombre, estado) VALUES ('Gestión Humana', 1)
+INSERT INTO Departamento (nombre, estado) VALUES ('Gestiï¿½n Humana', 1)
 INSERT INTO Departamento (nombre, estado) VALUES ('Finanzas', 1)
-INSERT INTO Departamento (nombre, estado) VALUES ('Gestión de Calidad', 1)
+INSERT INTO Departamento (nombre, estado) VALUES ('Gestiï¿½n de Calidad', 1)
 INSERT INTO Departamento (nombre, estado) VALUES ('Alianzas', 1)
-INSERT INTO Departamento (nombre, estado) VALUES ('Atención Integral', 1)
+INSERT INTO Departamento (nombre, estado) VALUES ('Atenciï¿½n Integral', 1)
 INSERT INTO Departamento (nombre, estado) VALUES ('Centros Infantiles', 1)
 INSERT INTO Departamento (nombre, estado) VALUES ('Operaciones', 1)
 INSERT INTO Departamento (nombre, estado) VALUES ('Publicidad', 1)
@@ -113,3 +113,5 @@ VALUES ('Derek Sebastian', 'Leiva', 'Villalobos', '305400042', 'dleiva00042@ufid
 INSERT INTO Usuario (nombre, apellido1, apellido2, cedulaFisica, correo, contrasena, idRol, idDepartamento, estado, fechaCreacion) 
 VALUES ('Marianne', 'von Herold', 'Hering', '118870134', 'hvon70134@ufide.ac.cr', 'd1901ca699a6eec6b2086c101f18702aca87a4475efbc81c0662f436bcf13e12', 1, 1, 1, GETDATE())
 
+INSERT INTO Usuario (nombre, apellido1, apellido2, cedulaFisica, correo, contrasena, idRol, idDepartamento, estado, fechaCreacion) 
+VALUES ('USUARIOADMIN', 'ADMIN', 'ADMIN', '999999999', 'adminusser@dehvi.org','bb421fa35db885ce507b0ef5c3f23cb09c62eb378fae3641c165bdf4c0272949',1,1,1,GETDATE())
