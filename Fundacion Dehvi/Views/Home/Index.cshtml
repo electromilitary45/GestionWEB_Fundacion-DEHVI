@@ -120,6 +120,41 @@
         </div>
     </div>
 </section>
+@*Script para las imagenes*@
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var imagenes = [
+            '/Src/image/imagenes/1.png',
+            '/Src/image/imagenes/2.png',
+            '/Src/image/imagenes/3.png',
+            '/Src/image/imagenes/4.png',
+            '/Src/image/imagenes/5.png',
+            '/Src/image/imagenes/6.png',
+            '/Src/image/imagenes/7.png',
+            '/Src/image/imagenes/8.png',
+            '/Src/image/imagenes/9.png',
+            '/Src/image/imagenes/10.png'
+        ];
+
+        function obtenerImagenAleatoria() {
+            var index = Math.floor(Math.random() * imagenes.length);
+            console.log('Imagen seleccionada:', imagenes[index]); // Verifica la imagen seleccionada
+            return imagenes[index];
+        }
+
+        // Selecciona todas las imágenes con la clase 'team-image img'
+        var imagenesElementos = document.querySelectorAll('.team-image img');
+
+        // Aplica una imagen aleatoria a cada elemento
+        imagenesElementos.forEach(function (img) {
+            img.src = obtenerImagenAleatoria();
+        });
+    });
+</script>
+
+
+@*Script para las imagenes*@
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var startYear = 2000;
