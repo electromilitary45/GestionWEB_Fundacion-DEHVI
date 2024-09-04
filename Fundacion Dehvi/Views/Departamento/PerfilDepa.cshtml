@@ -4,10 +4,12 @@
     ViewBag.Title = "Perfil del Departamento";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 
+
     var idRol = byte.Parse(Session["idRol"].ToString());
 
     if (Session["idUsuario"] != null)
     {
+
         switch (idRol)
         {
             case 1: //admin
@@ -31,7 +33,7 @@
             <ul>
                 <li><a href="@Url.Action("Index","Home")">Home</a> </li>
                 <li><a href="@Url.Action("ListaDeparta","Departamento")">Departamentos</a> </li>
-                <li class="active"><a href="#">Listado Admin</a> </li>
+                <li class="active"><a href="#">Listado Procedimientos</a> </li>
             </ul>
         </div>
         <div class="page-title">
@@ -59,7 +61,7 @@
                                         <div class="col-md-4">
                                             <div class="team-member" onclick="location.href='@Url.Action("PerfilProce", "Procedimiento", new { q = item.idProcedimiento })';" style="cursor: pointer;">
                                                 <div class="team-image">
-                                                    <img src="~/Src/image/1.png" style="object-fit: cover; height: 180px; width: 100%;">
+                                                    <img src="~/Src/image/imagenes/3.png" style="object-fit: cover; height: 180px; width: 100%;">
                                                 </div>
                                                 <div class="team-desc">
                                                     <div class="item-container">
