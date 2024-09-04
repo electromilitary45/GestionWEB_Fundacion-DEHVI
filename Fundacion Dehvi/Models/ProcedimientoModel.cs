@@ -94,6 +94,17 @@ namespace Fundacion_Dehvi.Models
 
             }
         }//fin consulta procedimiento
+         //------------ Buscar Procedimiento ------------
+        public List<ProcedimientosEnt> BuscarProcedimientos(string term)
+        {
+            using (var client = new HttpClient())
+            {
+                var url = urlApi + "BuscarProcedimientos?term=" + term;
+                var resp = client.GetAsync(url).Result;
+                return resp.Content.ReadFromJsonAsync<List<ProcedimientosEnt>>().Result;
+            }
+        }
+
 
     }// fin de la clase
 }// fin del namespace

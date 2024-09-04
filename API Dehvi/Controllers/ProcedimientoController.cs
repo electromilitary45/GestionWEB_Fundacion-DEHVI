@@ -297,5 +297,43 @@ namespace API_Dehvi.Controllers
                 return null; // Error al consultar
             }// fin del catch
         }// fin de la consulta de la empresa
-    }
-}
+
+        //------------------- Buscar Procedimientos -------------------
+        [HttpGet]
+        [Route("BuscarProcedimientos")]
+        public List<ProcedimientosEnt> BuscarProcedimientos(string term)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities()) //conexion a la base de datos
+                {
+                    var data = (
+                        from p in con.Procedimiento
+                        join d in con.Departamento on p.idDepartamento equals d.idDepartamento
+                        join u in con.Usuario on p.idUsuarioCreador equals u.idUsuario
+                        where p.nombre.Contains(term)
+                        orderby p.nombre descending
+                        select new ProcedimientosEnt
+                        {
+                            idProcedimiento = p.idProcedimiento,
+                            codProcedimiento = p.codProcedimiento,
+                            nombre = p.nombre,
+                            objetivo = p.objetivo,
+                            descripcion = p.descripcion,
+                            estado = p.estado,
+                            fechaCreacion = p.fechaCreacion,
+                            idDepartamento = p.idDepartamento,
+                            nombreDeparta = d.nombre,
+                            idUsuario = p.idUsuarioCreador,
+                            nombreUsuario = u.nombre + " " + u.apellido1 + " " + u.apellido2
+                        }).ToList();
+                    return data;
+                }
+            }
+            catch (Exception)
+            {
+                return null; // Error al realizar la búsqueda
+            }
+        }// fin de la busqueda de procedimiento
+    }// fin de la clase
+}// fin del namespace

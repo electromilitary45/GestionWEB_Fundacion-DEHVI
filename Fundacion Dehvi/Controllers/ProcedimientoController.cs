@@ -187,7 +187,32 @@ namespace Fundacion_Dehvi.Controllers
             }
 
         }// fin del actualizar estado procedimiento
+         //------------------- Buscar Procedimiento -------------------
+        [HttpGet]
+        public ActionResult Buscar(string term)
+        {
+            if (Session["idUsuario"] == null)
+            {
+                return RedirectToAction("InicioSesion", "Login");
+            }
+            else
+            {
 
+                List<ProcedimientosEnt> resultados = null;
+
+                if (!string.IsNullOrEmpty(term))
+                {
+                    resultados = p.BuscarProcedimientos(term);
+
+                }
+                var datos2 = d.ListaDeparta();
+                var model = new Tuple<IEnumerable<ProcedimientosEnt>, IEnumerable<DepartamentoEnt>>(resultados, datos2);
+                // Retorna la vista y pasa los resultados al modelo
+                return View(model);
+            }
+        }
+
+        //------------------- ???? -------------------
         [HttpGet]
         public ActionResult CrearProcedimientoAdminJefa(long q)
         {

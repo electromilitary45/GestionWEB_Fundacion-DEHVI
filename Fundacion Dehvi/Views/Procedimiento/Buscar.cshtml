@@ -1,6 +1,7 @@
 ﻿@model Tuple<IEnumerable<Fundacion_Dehvi.Entities.ProcedimientosEnt>, IEnumerable<Fundacion_Dehvi.Entities.DepartamentoEnt>>
+
 @{
-    ViewBag.Title = "Lista de Procedimientos";
+    ViewBag.Title = "Busqueda de Procedimientos";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 
     var idRol = byte.Parse(Session["idRol"].ToString());
@@ -33,28 +34,11 @@
             </ul>
         </div>
         <div class="page-title">
-            <h2 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); padding: 12px; text-align: center;">Procedimientos</h2>
+            <h2 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); padding: 12px; text-align: center;">Resultados de la búsqueda...</h2>
         </div>
     </div>
 </section>
 <!--FIN: Page Tittle-->
-<!-- busqueda -->
-
-<section style="padding:15px; display: flex; justify-content: center;">
-    <div class="widget widget-newsletter" style="width: 100%;">
-        <form class="col-12" id="widget-search-form-sidebar" style="max-width: 600px; width: 100%; margin: 0 auto;" action="@Url.Action("Buscar", "Procedimiento")" method="get">
-            <div class="input-group">
-                <input type="search" name="term" class="form-control widget-search-form" placeholder="Buscar procedimientos..." style="width: 100%;">
-                <div class="input-group-append">
-                    <button class="btn" type="submit"><i class="fa fa-search"></i></button>
-                </div>
-            </div>
-        </form>
-    </div>
-</section>
-
-<!-- fin de la busqueda -->
-
 <!--INICIO: Page Content-->
 <section id="page-content">
     <div class="container">
@@ -76,9 +60,10 @@
             @foreach (var item in Model.Item1)
             {
                 <div class="portfolio-item no-overlay img-zoom ct-@item.idDepartamento">
+                    <br />
+                    <h6>@item.nombreDeparta</h6>
                     <div class="portfolio-item-wrap">
                         <div class="row team-members team-members-shadow m-b-40">
-
                             <div class="col-md-9">
                                 <div class="team-member" onclick="location.href='@Url.Action("PerfilProce", "Procedimiento", new { q = item.idProcedimiento })';" style="cursor: pointer;">
                                     <div class="team-image">

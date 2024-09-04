@@ -650,6 +650,7 @@
     <Content Include="Views\Procedimiento\CrearProcedimientoAdminJefa.cshtml" />
     <Content Include="Views\Usuario\ListaUsuariosDep.cshtml" />
     <Content Include="Views\Shared\_LayoutEmpleado.cshtml" />
+    <Content Include="Views\Procedimiento\Buscar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -37,6 +37,15 @@
                         </a>
                     </div>
                     <!--End: Logo-->
+                    <!-- Search -->
+                    <div id="search">
+                        <a id="btn-search-close" class="btn-search-close" aria-label="Cerrar busqueda"><i class="icon-x"></i></a>
+                        <form class="col-12, search-form" id="widget-search-form-sidebar" style="max-width: 600px; width: 100%; margin: 0 auto;" action="@Url.Action("Buscar", "Procedimiento")" method="get">
+                            <input class="form-control" name="term" type="text" placeholder="Buscar procedimientos..." />
+                            <span class="text-muted">Presiona "Enter" para buscar o "ESC" para cerrar esta pantalla</span>
+                        </form>
+                    </div>
+                    <!-- end: search -->
                     <!--Header Extras-->
                     <div class="header-extras">
                         <ul>
