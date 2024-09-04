@@ -69,17 +69,19 @@
                                                 </div>
                                                 <span>@Session["nombre"] @Session["apellido1"] @Session["apellido2"]</span>
                                             }
-                                            <ul class="text-center">
-                                                @if (Session["idUsuario"] == null)
-                                                {
-                                                    <li><a href="@Url.Action("InicioSesion","Login")"><i class="icon-log-in"></i>Inicio de Sesion</a></li>
-                                                }
-                                                else
-                                                {
-                                                    <li><a href="@Url.Action("PerfilUsuario","Usuario")"><i class="icon-user"></i>Mi perfil</a></li>
-                                                    <li><a href="@Url.Action("CerrarSesion","Login")"><i class="icon-log-out"></i>Cerrar Sesion</a></li>
-                                                }
-                                            </ul>
+                                        <ul class="text-center">
+                                            @if (Session["idUsuario"] == null)
+                                            {
+                                                <li><a href="@Url.Action("InicioSesion","Login")"><i class="icon-log-in"></i>Inicio de Sesion</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a href="@Url.Action("PerfilUsuario","Usuario")"><i class="icon-user"></i>Mi perfil</a></li>
+                                                <li><a href="@Url.Action("CerrarSesion","Login")"><i class="icon-log-out"></i>Cerrar Sesion</a></li>
+                                                <li><hr class="divider" /> </li>
+                                                <li><a href=""><i class="fa fa-cloud-download-alt"></i> Video Empleado</a></li>
+                                            }
+                                        </ul>
                                         </div>
                                     </div>
                                 </div>
