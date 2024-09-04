@@ -19,6 +19,8 @@
                 break;
         }
     }
+    var procedimientos = Model.Item1 ?? Enumerable.Empty<Fundacion_Dehvi.Entities.ProcedimientosEnt>();
+
 }
 
 <link href="~/Src/css/custom.css" rel="stylesheet">
@@ -57,38 +59,51 @@
         <!--FIN: Filtro-->
         <!--INICIO: PORTFOLIO-->
         <div id="portfolio" class="grid-layout portfolio-3-columns">
-            @foreach (var item in Model.Item1)
+
+            @if (!procedimientos.Any())
             {
-                <div class="portfolio-item no-overlay img-zoom ct-@item.idDepartamento">
-                    <br />
-                    <h6>@item.nombreDeparta</h6>
-                    <div class="portfolio-item-wrap">
-                        <div class="row team-members team-members-shadow m-b-40">
-                            <div class="col-md-9">
-                                <div class="team-member" onclick="location.href='@Url.Action("PerfilProce", "Procedimiento", new { q = item.idProcedimiento })';" style="cursor: pointer;">
-                                    <div class="team-image">
-                                        <img src="~/Src/image/imagenes/1.png" style="object-fit: cover; height: 180px; width: 100%;">
-                                    </div>
-                                    <div class="team-desc">
-                                        <div class="item-container">
-                                            <span>@item.codProcedimiento</span>
-                                            @if (Session["idRol"] != null)
-                                            {
-                                                <a href="@Url.Action("ActualizarProce", "Procedimiento", new { q = item.idProcedimiento })">
-                                                    <i class="icon-edit"></i>
-                                                </a>
-                                            }
+                <div class="alert-container" style="display: flex; align-items: center; justify-content: center; padding: 20px; background-color: #f0f8ff; border: 1px solid #b8daff; border-radius: 10px;">
+                    <img src="~/Src/image/imagenes/a.png" style="width: 200px; height: auto; margin-right: 20px;">
+                    <div role="alert" class="alert alert-info" style="flex: 1; background-color: #d1ecf1; color: #0c5460; border-color: #bee5eb; padding: 20px; border-radius: 10px;">
+                        <h4 style="text-align:center;  margin-top: 0; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">¡Oops! No se encontró ningún procedimiento</h4>
+                    </div>
+                </div>
+            }
+            else
+            {
+                foreach (var item in Model.Item1)
+                {
+                    <div class="portfolio-item no-overlay img-zoom ct-@item.idDepartamento">
+                        <br />
+                        <h6>@item.nombreDeparta</h6>
+                        <div class="portfolio-item-wrap">
+                            <div class="row team-members team-members-shadow m-b-40">
+                                <div class="col-md-9">
+                                    <div class="team-member" onclick="location.href='@Url.Action("PerfilProce", "Procedimiento", new { q = item.idProcedimiento })';" style="cursor: pointer;">
+                                        <div class="team-image">
+                                            <img src="~/Src/image/imagenes/1.png" style="object-fit: cover; height: 180px; width: 100%;">
                                         </div>
-                                        <h7>@item.nombre</h7>
-                                        <p style="font-size:13px">@item.descripcion</p>
-                                        <span>Fecha de Creación</span>
-                                        <p>@item.fechaCreacion.ToString("dd/MM/yyyy")</p>
+                                        <div class="team-desc">
+                                            <div class="item-container">
+                                                <span>@item.codProcedimiento</span>
+                                                @if (Session["idRol"] != null)
+                                                {
+                                                    <a href="@Url.Action("ActualizarProce", "Procedimiento", new { q = item.idProcedimiento })">
+                                                        <i class="icon-edit"></i>
+                                                    </a>
+                                                }
+                                            </div>
+                                            <h7>@item.nombre</h7>
+                                            <p style="font-size:13px">@item.descripcion</p>
+                                            <span>Fecha de Creación</span>
+                                            <p>@item.fechaCreacion.ToString("dd/MM/yyyy")</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
             }
         </div>
         <!--FIN: PORTFOLIO-->

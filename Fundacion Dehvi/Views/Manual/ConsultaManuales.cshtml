@@ -18,6 +18,8 @@
                 break;
         }
     }
+    var manuales = Model.Item1?.Count() ?? 0;
+
 }
 
 <!--INICIO: Page Tittle-->
@@ -56,38 +58,50 @@
         <!--FIN: Filtro-->
         <!--INICIO: PORTFOLIO-->
         <div id="portfolio" class="grid-layout portfolio-4-columns">
-            @foreach (var man in Model.Item1)
+            @if (manuales >= 1)
             {
-                <div class="portfolio-item no-overlay img-zoom ct-@man.idDepartamento">
-                    <div class="portfolio-item-wrap">
-                        <div class="row team-members team-members-shadow m-b-40">
+                foreach (var man in Model.Item1)
+                {
+                    <div class="portfolio-item no-overlay img-zoom ct-@man.idDepartamento">
+                        <div class="portfolio-item-wrap">
+                            <div class="row team-members team-members-shadow m-b-40">
 
-                            <div class="col-md-9">
-                                <div class="team-member" style="cursor: pointer;">
-                                    <div class="team-image">
-                                        @if (idRol == 1 && idRol == 2)
-                                        {
-                                            <a href="@Url.Action("PerfilManual", "Manual", new { q = man.idManual })"><img src="~/Src/image/Archivos/archivo-predeterminado.png" alt="" style="object-fit: cover; height: 180px; width: 100%;"></a>
-                                        }
-                                        else
-                                        {
-                                            <a href="@Url.Action("PerfilManualAdmin", "Manual", new { q = man.idManual })"><img src="~/Src/image/Archivos/archivo-predeterminado.png" alt="" style="object-fit: cover; height: 180px; width: 100%;"></a>
+                                <div class="col-md-9">
+                                    <div class="team-member" style="cursor: pointer;">
+                                        <div class="team-image">
+                                            @if (idRol == 1 && idRol == 2)
+                                            {
+                                                <a href="@Url.Action("PerfilManual", "Manual", new { q = man.idManual })"><img src="~/Src/image/Archivos/archivo-predeterminado.png" alt="" style="object-fit: cover; height: 180px; width: 100%;"></a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("PerfilManualAdmin", "Manual", new { q = man.idManual })"><img src="~/Src/image/Archivos/archivo-predeterminado.png" alt="" style="object-fit: cover; height: 180px; width: 100%;"></a>
 
-                                        }
-                                        
-                                    </div>
-                                    <div class="team-desc">
-                                        <div class="item-container">
-                                            <a href="portfolio-page-grid-gallery.html">
-                                                <h6>@man.nombre</h6>
-                                                <span>Creacion: @man.fechaCreacion</span>
-                                            </a>
+                                            }
+
                                         </div>
-                                        
+                                        <div class="team-desc">
+                                            <div class="item-container">
+                                                <a href="portfolio-page-grid-gallery.html">
+                                                    <h6>@man.nombre</h6>
+                                                    <span>Creacion: @man.fechaCreacion</span>
+                                                </a>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                }
+            }
+          else
+            {
+                <div class="alert-container" style="display: flex; align-items: center; justify-content: center; padding: 20px; background-color: #f0f8ff; border: 1px solid #b8daff; border-radius: 10px;">
+                    <img src="~/Src/image/imagenes/a.png" style="width: 200px; height: auto; margin-right: 20px;">
+                    <div role="alert" class="alert alert-info" style="flex: 1; background-color: #d1ecf1; color: #0c5460; border-color: #bee5eb; padding: 20px; border-radius: 10px;">
+                        <h4 style="text-align:center;  margin-top: 0; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">¡Oops! No se encontraron manuales</h4>
                     </div>
                 </div>
             }
