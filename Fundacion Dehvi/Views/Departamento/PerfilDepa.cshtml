@@ -66,13 +66,22 @@
                                                 <div class="team-desc">
                                                     <div class="item-container">
                                                         <span>@item.codProcedimiento</span>
-                                                        @if (Session["idRol"] != null)
+                                                        @if (Session["idRol"] != null && idRol == 1)
                                                         {
                                                             <a href="@Url.Action("ActualizarProce", "Procedimiento", new { q = item.idProcedimiento })">
                                                                 <i class="icon-edit"></i>
                                                             </a>
+                                                            if (item.estado == true)
+                                                            {
+                                                                <a class="ml-2" href="@Url.Action("EstadoProce", "Procedimiento", new { q = item.idProcedimiento })" data-toggle="tooltip" data-original-title="Desactivar"><i class="icon-toggle-right"></i></a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a class="ml-2" href="@Url.Action("EstadoProce", "Procedimiento", new { q = item.idProcedimiento })" data-toggle="tooltip" data-original-title="Activar"><i class="icon-toggle-left"></i></a>
+
+                                                            }
                                                         }
-                                                    </div>
+                                                        </div>
                                                     <h5>@item.nombre</h5>
                                                     <p style="font-size:13px">@item.descripcion</p>
                                                     <span>Fecha de Creación</span>
