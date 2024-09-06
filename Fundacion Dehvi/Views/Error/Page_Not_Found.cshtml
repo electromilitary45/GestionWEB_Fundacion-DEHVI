@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Page_Not_Found";
+
+    if (Session["idUsuario"] != null)
+    {
+        var idRol = byte.Parse(Session["idRol"].ToString());
+
+        switch (idRol)
+        {
+            case 1: //admin
+                Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+                break;
+
+            default: //empleaods
+                Layout = "~/Views/Shared/_LayoutEmpleado.cshtml";
+                break;
+        }
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<!-- 404 PAGE -->
+<section class="" style="display: flex; align-items: center; justify-content: center; min-height: 85vh;">
+    <div class="container text-center">
+        <div class="row">
+            <!-- Imagen centrada -->
+            <div class="col-12 mb-4">
+                <img src="~/Src/image/imagenes/404.png" width="650" alt="Página No Encontrada" style="max-width: 100%; height: auto; display: block; margin: 0 auto;" />
+            </div>
+            <!-- Botón centrado -->
+            <div class="col-12">
+                <a class="btn btn-success btn-lg" href="javascript:history.back()">Retroceder</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end: 404 PAGE -->
