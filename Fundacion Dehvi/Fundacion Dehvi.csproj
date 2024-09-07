@@ -210,6 +210,10 @@
     <Content Include="Src\css\theme.css" />
     <Content Include="Src\funciones\FuncionesUsuarios.js" />
     <Content Include="Src\image\Archivos\archivo-predeterminado.png" />
+    <Content Include="Src\image\Archivos\excel.jpg" />
+    <Content Include="Src\image\Archivos\pdf.jpg" />
+    <Content Include="Src\image\Archivos\ppt.jpg" />
+    <Content Include="Src\image\Archivos\word.jpg" />
     <Content Include="Src\image\icons\2.png" />
     <Content Include="Src\image\icons\ico-fundacion_v1.png" />
     <Content Include="Src\image\icons\logo-horizontal.png" />

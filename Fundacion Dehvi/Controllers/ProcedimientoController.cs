@@ -57,7 +57,7 @@ namespace Fundacion_Dehvi.Controllers
                     return View();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return RedirectToAction("InternalServer", "Error");
             }
@@ -84,7 +84,7 @@ namespace Fundacion_Dehvi.Controllers
                     return View(model);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return RedirectToAction("InternalServer", "Error");
             }
@@ -158,7 +158,7 @@ namespace Fundacion_Dehvi.Controllers
                     return View();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return RedirectToAction("InternalServer", "Error");
             }

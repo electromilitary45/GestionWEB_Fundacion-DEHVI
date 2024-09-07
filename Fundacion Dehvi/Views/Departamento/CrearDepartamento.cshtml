@@ -2,7 +2,8 @@
 @{
     ViewBag.Title = "Agregar Departamento";
 
-    var idRol = byte.Parse(Session["idRol"].ToString());
+    byte idRol;
+    byte.TryParse(Session["idRol"]?.ToString(), out idRol);
 
     if (Session["idUsuario"] != null)
     {

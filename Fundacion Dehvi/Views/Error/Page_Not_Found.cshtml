@@ -4,7 +4,8 @@
 
     if (Session["idUsuario"] != null)
     {
-        var idRol = byte.Parse(Session["idRol"].ToString());
+        byte idRol;
+        byte.TryParse(Session["idRol"]?.ToString(), out idRol);
 
         switch (idRol)
         {

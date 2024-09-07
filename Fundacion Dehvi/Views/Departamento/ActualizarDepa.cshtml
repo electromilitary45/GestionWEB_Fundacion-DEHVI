@@ -2,7 +2,8 @@
 @{
     ViewBag.Title = "Actualizar Departamento";
 
-    var idRol = byte.Parse(Session["idRol"].ToString());
+    byte idRol;
+    byte.TryParse(Session["idRol"]?.ToString(), out idRol);
 
     if (Session["idUsuario"] != null)
     {
@@ -11,7 +12,7 @@
             case 1: //admin
                 Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
                 break;
-           
+
             default: //empleaods
                 Layout = "~/Views/Shared/_LayoutEmpleado.cshtml";
                 break;

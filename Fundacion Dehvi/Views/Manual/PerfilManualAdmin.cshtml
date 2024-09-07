@@ -5,7 +5,8 @@
     long idProcedimiento = Model.Item1.idProcedimiento;
     var primerItem = Model.Item2.FirstOrDefault();
 
-    var idRol = byte.Parse(Session["idRol"].ToString());
+    byte idRol;
+    byte.TryParse(Session["idRol"]?.ToString(), out idRol);
 
     if (Session["idUsuario"] != null)
     {
@@ -61,7 +62,6 @@
     </div>
 </div>
 <!--FIN: Modal-->
-
 <!--INICIO: PAGE CONTENT-->
 <section id="page-content" class="sidebar-left">
     <div class="container">
@@ -141,9 +141,16 @@
                                             <td>@item.versionDoc</td>
                                             <td>@item.fechaCreacion</td>
                                             <td><i class="fa fa-user"></i> @item.nombreUsuario</td>
-                                            <td>
-                                                <a href="@item.ruta"><i class="fa fa-cloud-download-alt"></i></a>
-                                            </td>
+                                            @if (item.ruta != "-")
+                                            {
+                                                <td>
+                                                    <a href="@Url.Action("LimpiarDocManual", "Manual", new {idDocManual=item.idDocManual, rutaDocM=item.ruta, idManual=item.idManual})"><i class="fa fa-recycle"></i></a>
+                                                </td>
+                                            }
+                                            else
+                                            {
+
+                                            }
                                         </tr>
                                     }
                                 }
@@ -160,8 +167,12 @@
                 <div class="widget widget-myaccount p-cb">
                     <ul class="text-left">
                         <li><a><i class="icon-tag"></i> Nombre: @Model.Item1.nombre</a></li>
-                        <li><a><i class="fa fa-flag"></i> Código de Referencia: 
-                               <br />      @Model.Item1.codReferencia</a></li>
+                        <li>
+                            <a>
+                                <i class="fa fa-flag"></i> Código de Referencia:
+                                <br />      @Model.Item1.codReferencia
+                            </a>
+                        </li>
                         <li><hr /></li>
                         <li><a href="@Url.Action("EditarManual", "Manual", new {q=Model.Item1.idManual})"><i class="icon-edit-2"></i> Editar Manual</a></li>
                         @if (Model.Item1.estado == true)

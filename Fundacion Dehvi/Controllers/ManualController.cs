@@ -309,6 +309,39 @@ namespace Fundacion_Dehvi.Controllers
             }
         }// fin de la lista de los manuales
 
+        //---- INICIO: Limpiar DocManual
+        [HttpGet]
+        public ActionResult LimpiarDocManual(long idDocManual, string rutaDocM, long idManual)
+        {
+            try
+            {
+                
+
+                if(MM.LimpiarDocManual(idDocManual) == 1)
+                {
+                    string directorio = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Archivos");
+
+                    string ruta = Path.Combine(directorio, Path.GetFileName(rutaDocM));
+
+                    if (System.IO.File.Exists(ruta))
+                    {
+                        System.IO.File.Delete(ruta);
+                    }
+
+                    return RedirectToAction("PerfilManualAdmin", new { q = idManual });
+
+                }
+                else
+                {
+                    TempData["Mensaje"] = "Error al limpiar el archivo!";
+                    return RedirectToAction("PerfilManualAdmin", new { q = idManual });
+                }
+            }
+            catch (Exception e)
+            {
+                return View(e);
+            }
+        }
 
     }//fin class
 }//fin namespace

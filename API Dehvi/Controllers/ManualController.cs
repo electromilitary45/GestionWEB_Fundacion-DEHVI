@@ -460,6 +460,35 @@ namespace API_Dehvi.Controllers
             }
         }
 
+        //----INICIO: Limpiar donManual
+        [HttpPut]
+        [Route("LimpiarDocManual")]
+        public int LimpiarDocManual(long q)
+        {
+            try
+            {
+                using (var con = new BD_fundacionDehviEntities())
+                {
+                    con.Configuration.LazyLoadingEnabled = false;
+
+                    var doc = (from d in con.DocManual
+                               where d.idDocManual == q
+                               select d
+                               ).FirstOrDefault();
+
+
+                    doc.ruta = "-";
+                    doc.estado = false;
+                    con.SaveChanges();
+
+                    return 1;
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
 
 
     }//fin class

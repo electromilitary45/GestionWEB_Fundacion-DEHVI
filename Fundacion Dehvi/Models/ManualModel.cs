@@ -152,5 +152,16 @@ namespace Fundacion_Dehvi.Models
                 return resp.Content.ReadFromJsonAsync<int>().Result;
             }
         }
+
+        //----INICIO: Limpiar DocManual
+        public int LimpiarDocManual(long q) 
+        {
+            using (var client = new HttpClient())
+            {
+                string url = $"{urlAPI}LimpiarDocManual?q={q}";
+                var resp = client.PutAsync(url, null).Result;
+                return resp.Content.ReadFromJsonAsync<int>().Result;
+            }
+        }
     }//fin class
 }//fin namespace

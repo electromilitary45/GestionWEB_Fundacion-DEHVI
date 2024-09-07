@@ -1,11 +1,14 @@
-﻿@model Tuple<Fundacion_Dehvi.Entities.Manual_Ent, IEnumerable<Fundacion_Dehvi.Entities.DocManual_Ent>>
+﻿@using System.Text.RegularExpressions;
+
+@model Tuple<Fundacion_Dehvi.Entities.Manual_Ent, IEnumerable<Fundacion_Dehvi.Entities.DocManual_Ent>>
 @{
     ViewBag.Title = "PerfilManual";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     var primerItem = Model.Item2.FirstOrDefault();
     long idProcedimiento = ViewBag.idProcedimiento;
 
-    var idRol = byte.Parse(Session["idRol"].ToString());
+    byte idRol;
+    byte.TryParse(Session["idRol"]?.ToString(), out idRol);
 
     if (Session["idUsuario"] != null)
     {
@@ -28,7 +31,6 @@
     <div class="bg-overlay" data-style="1"></div>
 </section>
 <!--FIN: Page Tittle-->
-
 <!--INICIO: Contenido-->
 <section id="page-content">
     <!--INICIO: BTN Retorceder-->
@@ -42,7 +44,33 @@
 
 
             <div class="col-lg-4">
-                <img src="~/Src/image/Archivos/archivo-predeterminado.png" width="250" />
+                @{
+                    Regex regex = new Regex(@"\.(pdf|docx|xlsx|pptx)$", RegexOptions.IgnoreCase);
+
+                    Match match = regex.Match(primerItem.ruta);
+
+                    // Usar switch para determinar la extensión
+                    switch (match.Value.ToLower())
+                    {
+                        case ".pdf":
+                            <a href="@primerItem.ruta"><img src="~/Src/image/Archivos/pdf.jpg" width="250" /></a>
+                            
+                            break;
+                        case ".docx":
+                            <img src="~/Src/image/Archivos/word.jpg" width="250" />
+                            break;
+                        case ".xlsx":
+                            <img src="~/Src/image/Archivos/excel.jpg" width="250" />
+                            break;
+                        case ".pptx":
+                            <img src="~/Src/image/Archivos/ppt.jpg" width="250" />
+                            break;
+                        default:
+                            <img src="~/Src/image/Archivos/archivo-predeterminado.png" width="250" />
+                            break;
+                    }
+                }
+
             </div>
             <div class="col-lg-8">
 

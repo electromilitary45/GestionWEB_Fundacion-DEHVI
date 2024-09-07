@@ -3,7 +3,8 @@
     ViewBag.Title = "Departamentos";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 
-    var idRol = byte.Parse(Session["idRol"].ToString());
+    byte idRol;
+    byte.TryParse(Session["idRol"]?.ToString(), out idRol);
 
     if (Session["idUsuario"] != null)
     {

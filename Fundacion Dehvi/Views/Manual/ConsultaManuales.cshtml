@@ -3,7 +3,8 @@
     ViewBag.Title = "Manuales";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 
-    var idRol = byte.Parse(Session["idRol"].ToString());
+    byte idRol;
+    byte.TryParse(Session["idRol"]?.ToString(), out idRol);
 
     if (Session["idUsuario"] != null)
     {
@@ -71,11 +72,11 @@
                                         <div class="team-image">
                                             @if (idRol == 1 && idRol == 2)
                                             {
-                                                <a href="@Url.Action("PerfilManual", "Manual", new { q = man.idManual })"><img src="~/Src/image/Archivos/archivo-predeterminado.png" alt="" style="object-fit: cover; height: 180px; width: 100%;"></a>
+                                                <a href="@Url.Action("PerfilManualManual", "Manual", new { q = man.idManual })"><img src="~/Src/image/Archivos/archivo-predeterminado.png" alt="" style="object-fit: cover; height: 180px; width: 100%;"></a>
                                             }
                                             else
                                             {
-                                                <a href="@Url.Action("PerfilManualAdmin", "Manual", new { q = man.idManual })"><img src="~/Src/image/Archivos/archivo-predeterminado.png" alt="" style="object-fit: cover; height: 180px; width: 100%;"></a>
+                                                <a href="@Url.Action("PerfilManual", "Manual", new { q = man.idManual })"><img src="~/Src/image/Archivos/archivo-predeterminado.png" alt="" style="object-fit: cover; height: 180px; width: 100%;"></a>
 
                                             }
 
