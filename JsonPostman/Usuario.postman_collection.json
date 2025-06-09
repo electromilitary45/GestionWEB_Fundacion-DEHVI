@@ -1,0 +1,246 @@
+{
+	"info": {
+		"_postman_id": "d4dbbd34-80b4-4f79-a8b2-21de9a3a514d",
+		"name": "Usuario",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29629009",
+		"_collection_link": "https://planetary-robot-345144.postman.co/workspace/TCU-Dehvi~f53376fc-56c0-49f8-aa92-eea307fd9cb0/collection/29629009-d4dbbd34-80b4-4f79-a8b2-21de9a3a514d?action=share&source=collection_link&creator=29629009"
+	},
+	"item": [
+		{
+			"name": "ListaUsuarios",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{baseUrl}}/ListaUsuarios"
+			},
+			"response": []
+		},
+		{
+			"name": "ConsultaUsuarioID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/ConsultaUsuarioID?q=1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"ConsultaUsuarioID"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ConsultaUsuarioCedula",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/ConsultaUsuarioCedula?q=305400042",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"ConsultaUsuarioCedula"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "305400042"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RegistroUsuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cedulaFisica\": \"305400043\",\r\n  \"nombre\": \"Derek Sebastian\",\r\n  \"apellido1\": \"Leiva\",\r\n  \"apellido2\": \"Villalobos\",\r\n\r\n  \"correo\": \"dereklevilla45@gmail.com\",\r\n  \"idDepartamento\": 1,\r\n  \"idRol\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}/CrearUsuario"
+			},
+			"response": []
+		},
+		{
+			"name": "Desactivar Usuario",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/DesactivarUsuario?q",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"DesactivarUsuario"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Activar Usuario",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/ActivarUsuario?q=1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"ActivarUsuario"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inicio de Sesion",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}/InicioSesion"
+			},
+			"response": []
+		},
+		{
+			"name": "RecuperacionContrasena",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cedulaFisica\": \"305400042\",\r\n  \"correo\": \"dleiva00042@ufide.ac.cr\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}/RecuperacionContrasena"
+			},
+			"response": []
+		},
+		{
+			"name": "Cambio de Contraseña Usuario",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idUsuario\":1,\r\n    \"contrasenaActual\":\"ce7906237f2d632ad7f6619c6b966e9b3521095cc3a78ef09e59b7294b0d15f0\",\r\n    \"contrasenaNueva\":\"c9a9899fdd99ae5fb9a3f2e15bbef7df69bcb0b603811ad246316086f89f366f\",\r\n    \"contrasenaRepetida\":\"c9a9899fdd99ae5fb9a3f2e15bbef7df69bcb0b603811ad246316086f89f366f\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baserul}}/CambioContrasena"
+			},
+			"response": []
+		},
+		{
+			"name": "{{baserul}}/ActualizarUsuario",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"idUsuario\": 1,\r\n  \"nombre\": \"sample string 3\",\r\n  \"apellido1\": \"sample string 4\",\r\n  \"apellido2\": \"sample string 5\",\r\n  \"correo\": \"sample string 6\",\r\n  \"idDepartamento\": 8,\r\n  \"idRol\": 64\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baserul}}/ActualizarUsuario"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://localhost:44376",
+			"type": "string"
+		}
+	]
+}

@@ -1,0 +1,180 @@
+{
+	"info": {
+		"_postman_id": "c4868c1a-9e6f-4089-ba9b-6fb601d24564",
+		"name": "Procesos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29629009",
+		"_collection_link": "https://planetary-robot-345144.postman.co/workspace/TCU-Dehvi~f53376fc-56c0-49f8-aa92-eea307fd9cb0/collection/29576711-c4868c1a-9e6f-4089-ba9b-6fb601d24564?action=share&source=collection_link&creator=29629009"
+	},
+	"item": [
+		{
+			"name": "CrearProce",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"idDepartamento\": 7,\r\n  \"codProcedimiento\": \"PR-CP-01\",\r\n  \"nombre\": \"Procedimiento de compras\",\r\n  \"descripcion\": \"Establece cómo se solicitan, cotizan, ordenan, reciben y pagan los productos y servicios necesarios para las operaciones de la organización. Se detallan responsabilidades,\",\r\n  \"objetivo\": \"Establecer las actividades y los controles que se deben realizar para la gestión de compras de\",\r\n  \"idUsuario\": 2 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BaseUrl}}/CrearProce"
+			},
+			"response": []
+		},
+		{
+			"name": "Lista de Procedimientos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{BaseUrl}}/ListaProces"
+			},
+			"response": []
+		},
+		{
+			"name": "Lista por Sector",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/ListaProcesSector?q=1",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"ListaProcesSector"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Perfil del Procedimiento",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/PerfilProce?q=1",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"PerfilProce"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar Procedimiento",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"idProcedimiento\": 2,\r\n        \"codProcedimiento\": \"PR-FC-03\",\r\n        \"nombre\": \"Procedimiento de Pago a Proveedores \",\r\n        \"descripcion\": \"Este documento establece un procedimiento para el pago a proveedores, cubriendo desde la recepción de facturas hasta el proceso de pago. Incluye la verificación de documentos, registro contable, aprobación de órdenes de pago y la emisión de cheques o transferencias bancarias.\",\r\n        \"objetivo\": \"Reglamentar la implementación, funcionamiento, control, registro, reintegro y supervisión del pago de proveedores, que por su naturaleza y monto, para efectos de un mejor control y pago eficiente se recomienda el pago por medio de transferencia bancaria.\",\r\n        \"fechaCreacion\": \"2024-06-03T22:20:11.183\",\r\n        \"estado\": true,\r\n        \"idDepartamento\": 7,\r\n        \"idUsuario\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BaseUrl}}/ActualizarProce"
+			},
+			"response": []
+		},
+		{
+			"name": "Editar Estado del Procedimiento",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idProcedimiento\": 1,\r\n        \"codProcedimiento\": \"ola\",\r\n        \"nombre\": \"Procedimiento de solicitud\",\r\n        \"descripcion\": \"El procedimiento proporciona instrucciones detalladas sobre el llenado del formulario de solicitud de diseño, los docum\",\r\n        \"objetivo\": \"Contar con un proceso claro, definido y ordenado para la solicitud de trabajos de diseño. \",\r\n        \"fechaCreacion\": \"2024-06-03T22:20:11.183\",\r\n        \"estado\": false,\r\n        \"idDepartamento\": 8,\r\n        \"idUsuario\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BaseUrl}}/EstadoProce"
+			},
+			"response": []
+		},
+		{
+			"name": "Codigo Existente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/CodigoExistente?codigo=PR-CP-01",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"CodigoExistente"
+					],
+					"query": [
+						{
+							"key": "codigo",
+							"value": "PR-CP-01"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busqueda de proces",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{BaseUrl}}/BuscarProcedimientos"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseUrl",
+			"value": "https://localhost:44376/"
+		}
+	]
+}

@@ -1,0 +1,101 @@
+{
+	"info": {
+		"_postman_id": "dff9d5ac-17d9-46a7-b47d-ae1458a509ea",
+		"name": "Departamentos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29629009",
+		"_collection_link": "https://planetary-robot-345144.postman.co/workspace/TCU-Dehvi~f53376fc-56c0-49f8-aa92-eea307fd9cb0/collection/29576711-dff9d5ac-17d9-46a7-b47d-ae1458a509ea?action=share&source=collection_link&creator=29629009"
+	},
+	"item": [
+		{
+			"name": "CrearDepartamento",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"alo\",\r\n    \"estado\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:44376/CrearDepartamento"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Lista Completa",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://localhost:44376/ListaDeparta"
+			},
+			"response": []
+		},
+		{
+			"name": "Put Departamento",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idDepartamento\": 1,\r\n    \"nombre\": \"Publicidad\",\r\n    \"estado\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:44376/ActualizarDepa"
+			},
+			"response": []
+		},
+		{
+			"name": "Put Estado",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idDepartamento\": 1,\r\n    \"estado\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:44376/EstadoDepartamento"
+			},
+			"response": []
+		},
+		{
+			"name": "DropDown",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://localhost:44376/DropDownDeparta"
+			},
+			"response": []
+		},
+		{
+			"name": "Conteo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://localhost:44376/Conteo"
+			},
+			"response": []
+		},
+		{
+			"name": "Lista Departamentos Admin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://localhost:44376/ListaDepartasAdmin"
+			},
+			"response": []
+		}
+	]
+}

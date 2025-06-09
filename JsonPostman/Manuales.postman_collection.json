@@ -1,0 +1,134 @@
+{
+	"info": {
+		"_postman_id": "2f6a39ae-f749-41fa-a9a5-e6480d902c2b",
+		"name": "Manuales",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29629009",
+		"_collection_link": "https://planetary-robot-345144.postman.co/workspace/TCU-Dehvi~f53376fc-56c0-49f8-aa92-eea307fd9cb0/collection/29576711-2f6a39ae-f749-41fa-a9a5-e6480d902c2b?action=share&source=collection_link&creator=29629009"
+	},
+	"item": [
+		{
+			"name": "Crear Manual",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "{{baserul}}/CrearManual"
+			},
+			"response": []
+		},
+		{
+			"name": "Lista de Manuales por Procedimientos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baserul}}/ListaManProcedimiento?q=1",
+					"host": [
+						"{{baserul}}"
+					],
+					"path": [
+						"ListaManProcedimiento"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Manual en Especifico",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baserul}}/ConsultaManualId?q=15",
+					"host": [
+						"{{baserul}}"
+					],
+					"path": [
+						"ConsultaManualId"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "15"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista de Manuales",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{baserul}}/ConsultaManuales"
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar Manual",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idManual\": 15,\r\n    \"idProcedimiento\": 1,\r\n    \"idUsuarioCreador\": 1,\r\n    \"fechaCreacion\": \"2024-06-17T13:55:42.877\",\r\n    \"nombre\": \"pablito\",\r\n    \"codReferencia\": \"asd\",\r\n    \"estado\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baserul}}/ActualizarManual"
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar Estado",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idManual\": 15,\r\n    \"estado\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baserul}}/EstadoManual"
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Manuales X Usuario",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baserul}}/ConsultaManualesXUsuario?q=1",
+					"host": [
+						"{{baserul}}"
+					],
+					"path": [
+						"ConsultaManualesXUsuario"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
