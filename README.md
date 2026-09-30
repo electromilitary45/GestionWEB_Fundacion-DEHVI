@@ -84,9 +84,6 @@ Nuestro objetivo principal es desarrollar una aplicación web que atienda de man
 
 <ul dir=""auto>
   <li>
-    <a href="https://github.com/marivonherold">👩🏻‍💻 @marivonherold</a>
-  </li>
-  <li>
     <a href="https://github.com/electromilitary45">🧑🏾‍💻 @electromilitary45</a>
   </li>
 </ul>
